@@ -3,7 +3,32 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.37216.2 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinance.Mobile", "PersonalFinance.Mobile\PersonalFinance.Mobile.csproj", "{AACA5B78-430D-4956-9982-68AA1BF30C31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinance.API", "PersonalFinance.API\PersonalFinance.API.csproj", "{28135B97-B47C-4E3D-931C-C9DF57F9640C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinance.Shared", "PersonalFinance.Shared\PersonalFinance.Shared.csproj", "{1C95A037-0FD1-42D6-A8A5-AC00980088F5}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AACA5B78-430D-4956-9982-68AA1BF30C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AACA5B78-430D-4956-9982-68AA1BF30C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AACA5B78-430D-4956-9982-68AA1BF30C31}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AACA5B78-430D-4956-9982-68AA1BF30C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AACA5B78-430D-4956-9982-68AA1BF30C31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28135B97-B47C-4E3D-931C-C9DF57F9640C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28135B97-B47C-4E3D-931C-C9DF57F9640C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28135B97-B47C-4E3D-931C-C9DF57F9640C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28135B97-B47C-4E3D-931C-C9DF57F9640C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C95A037-0FD1-42D6-A8A5-AC00980088F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C95A037-0FD1-42D6-A8A5-AC00980088F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C95A037-0FD1-42D6-A8A5-AC00980088F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C95A037-0FD1-42D6-A8A5-AC00980088F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
