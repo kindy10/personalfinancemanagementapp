@@ -72,5 +72,5 @@ namespace PersonalFinance.API.Data
 
 
 
-    }
+    
 }
