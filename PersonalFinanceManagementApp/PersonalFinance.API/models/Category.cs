@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PersonalFinance.Shared.DTOs.Enums;
 
 namespace PersonalFinance.API.Models
 {
@@ -25,9 +26,5 @@ namespace PersonalFinance.API.Models
         public List<Budget> Budgets { get; set; } = new();
 
     }
-    public enum CategoryType
-    {
-        Income = 0,
-        Expense = 1
-    }
+    
 }
