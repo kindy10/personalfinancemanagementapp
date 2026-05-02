@@ -1,6 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
 using PersonalFinance.API.Data;
+using PersonalFinance.API.Services.Implementations;
+using PersonalFinance.API.Services.Interfaces;
 
 
 namespace PersonalFinance.API
@@ -53,6 +55,7 @@ namespace PersonalFinance.API
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddScoped<IAuthService, AuthService>();
 
             var app = builder.Build();
             app.MapGet("/", () => "Welcome");
