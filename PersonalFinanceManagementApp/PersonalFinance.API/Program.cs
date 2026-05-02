@@ -1,4 +1,8 @@
 
+using Microsoft.EntityFrameworkCore;
+using PersonalFinance.API.Data;
+
+
 namespace PersonalFinance.API
 {
     public class Program
@@ -8,7 +12,7 @@ namespace PersonalFinance.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddAuthorization();
+            /*builder.Services.AddAuthorization();
 
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
@@ -44,7 +48,16 @@ namespace PersonalFinance.API
             })
             .WithName("GetWeatherForecast");
 
+            app.Run();*/
+
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            var app = builder.Build();
+            app.MapGet("/", () => "Welcome");
             app.Run();
+
         }
     }
 }

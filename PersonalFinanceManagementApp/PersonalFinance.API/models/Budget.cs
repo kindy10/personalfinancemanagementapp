@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonalFinance.Shared.models
+namespace PersonalFinance.API.Models
 {
     public  class Budget
     {
