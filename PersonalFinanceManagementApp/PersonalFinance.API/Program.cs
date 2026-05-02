@@ -55,7 +55,12 @@ namespace PersonalFinance.API
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<ITransactionService, TransactionService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IBudgetService, BudgetService>(); ;
+
 
             var app = builder.Build();
             app.MapGet("/", () => "Welcome");
