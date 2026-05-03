@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Transactions;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace PersonalFinance.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TransactionController:ControllerBase
@@ -17,11 +20,14 @@ namespace PersonalFinance.API.Controllers
 
         //For now we pass userId manually
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetAll(Guid userId)
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
             try
             {
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userIdClaim == null) return Unauthorized("Invalid token");
+                var userId = Guid.Parse(userIdClaim.Value);
                 var result = await _transactionService.GetAllAsync(userId);
                 return Ok(result);
             }
@@ -31,11 +37,12 @@ namespace PersonalFinance.API.Controllers
             }
         }
 
-        [HttpPost("{userId}")]
-        public async Task <IActionResult> Create(Guid userId, [FromBody] CreateTransactionRequestDto request)
+        [HttpPost]
+        public async Task <IActionResult> Create([FromBody] CreateTransactionRequestDto request)
         {
             try
             {
+                var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var result = await _transactionService.CreateAsync(userId, request);
                 return Ok(result);
             }
