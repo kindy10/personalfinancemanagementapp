@@ -7,7 +7,7 @@ using PersonalFinance.Shared.DTOs.Auth;
 namespace PersonalFinance.API.Controllers
 {
     [ApiController]
-    [Route ("api/[Controller]")]
+    [Route ("api/auth")]
     public class AuthController :ControllerBase
     {
         private readonly IAuthService _authService;

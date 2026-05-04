@@ -6,6 +6,7 @@ namespace PersonalFinance.API.Services.Interfaces
     {
         Task<List<TransactionDto>> GetAllAsync(Guid userId);
         Task<TransactionDto> CreateAsync(Guid userId, CreateTransactionRequestDto request);
-        Task<bool> DeleteAsync(Guid id,  Guid userId);
+        Task  DeleteAsync(Guid id,  Guid userId);
+        Task<TransactionDto> UpdateAsync(Guid id, Guid userId, UpdateTransactionRequestDto request);
     }
 }

@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Categories;
+using System.Security.Claims;
 
 namespace PersonalFinance.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/categories")]
     public class CategoryController:ControllerBase
     {
         private readonly ICategoryService _categoryService;
@@ -14,11 +15,12 @@ namespace PersonalFinance.API.Controllers
                _categoryService = categoryService;
         }
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetAll(Guid userId)
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
             //try
             //{
+                var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var result = await _categoryService.GetAllAsync(userId);
                 return Ok(result);
             /*}
@@ -28,11 +30,13 @@ namespace PersonalFinance.API.Controllers
             }*/
         }
 
-        [HttpPost("{userId}")]
-        public async Task<IActionResult> Create(Guid userId, [FromBody] CreateCategoryRequestDto request)
+        //------------------------------------------------------------CREATE-------------------------------//
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateCategoryRequestDto request)
         {
             //try
             //{
+                var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var result = await _categoryService.CreateAsync(userId, request);
                 return Ok(result);
            /* }
@@ -40,6 +44,29 @@ namespace PersonalFinance.API.Controllers
             {
                 return BadRequest(new {message = ex.Message});
             }*/
+
+        }
+
+        //----------------------------------------------UPDATE------------------------------------//
+        [HttpPut("{id}")]
+        public async Task <IActionResult> Update(Guid id, UpdateCategoryRequestDto  request)
+        {
+            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var result = await _categoryService.UpdateAsync(id, userId, request);
+            return Ok(result);
+
+
+        }
+
+        //----------------------------------DELETE----------------------------------------------//
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+             await _categoryService.DeleteAsync(id, userId);
+
+            return NoContent();
 
         }
     }

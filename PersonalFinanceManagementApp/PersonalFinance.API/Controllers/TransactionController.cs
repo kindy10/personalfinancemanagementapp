@@ -8,7 +8,7 @@ namespace PersonalFinance.API.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/transactions")]
     public class TransactionController:ControllerBase
     {
         private readonly ITransactionService _transactionService;
@@ -37,6 +37,7 @@ namespace PersonalFinance.API.Controllers
             }*/
         }
 
+        //---------------------------------------------------------CREATE--------------------------///
         [HttpPost]
         public async Task <IActionResult> Create([FromBody] CreateTransactionRequestDto request)
         {
@@ -51,19 +52,34 @@ namespace PersonalFinance.API.Controllers
                 return BadRequest(new {message = ex.Message});
             }*/
         }
-        [HttpDelete("{id}/{userId}")]
-        public async Task<IActionResult> Delete(Guid id, Guid userId)
+
+        //---------------------------------------------------------UPDATE-----------------------------------//
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateTransactionRequestDto request)
+        {
+            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var result = await _transactionService.UpdateAsync(id, userId, request);
+            return Ok(result);
+        }
+
+
+        //--------------------------------------------DELETE----------------------------------//
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
         {
             //try
             //{
-                var success = await _transactionService.DeleteAsync(id, userId);
-                if (!success) return NotFound();
-                return Ok();
+            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                 await _transactionService.DeleteAsync(id, userId);
+
+                return NoContent();
            /* }
             catch(Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
             }*/
         }
+
     }
 }
