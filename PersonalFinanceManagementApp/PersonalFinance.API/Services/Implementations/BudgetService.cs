@@ -1,4 +1,5 @@
 ﻿using PersonalFinance.API.Data;
+using PersonalFinance.API.Exceptions;
 using PersonalFinance.API.Models;
 using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Budgets;
@@ -13,7 +14,7 @@ namespace PersonalFinance.API.Services.Implementations
             _context = context;
         }
 
-        public async Task<List<BudgetDto>> GetAllAsync(Guid userId)
+        public  async Task<List<BudgetDto>>  GetAllAsync(Guid userId)
         {
             return _context.Budgets
                 .Where(b=> b.UserId == userId)
@@ -30,6 +31,13 @@ namespace PersonalFinance.API.Services.Implementations
         }
         public async Task<BudgetDto> CreateAsync(Guid userId,CreateBudgetRequestDto request)
         {
+            //Check Month
+            if (request.Month < 1 || request.Month > 12)
+                throw new AppException("Invalid month");
+
+            //Check Year
+            if (request.Year < 2000)
+                throw new AppException("Invalid year");
             var budget = new Budget
             {
                 Id = Guid.NewGuid(),

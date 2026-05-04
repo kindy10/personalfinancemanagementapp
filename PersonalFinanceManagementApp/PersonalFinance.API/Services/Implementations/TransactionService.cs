@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersonalFinance.API.Data;
+using PersonalFinance.API.Exceptions;
 using PersonalFinance.API.Models;
 using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Transactions;
@@ -34,7 +35,16 @@ namespace PersonalFinance.API.Services.Implementations
 
         public async Task<TransactionDto> CreateAsync(Guid userId, CreateTransactionRequestDto request)
         {
+            //Check Amount  constraint
+            if (request.Amount <= 0)
+                throw new AppException("Amount must be greater than zero");
 
+            //Check category
+            var categoryExists = await _context.Categories
+                .AnyAsync(c => c.Id == request.CategoryId && c.UserId == userId);
+            if (!categoryExists)
+                throw new AppException("Invalid category");
+            
             //Create the transaction
             var transaction = new Transaction
             {

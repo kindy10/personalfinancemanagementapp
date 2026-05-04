@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using PersonalFinance.API.Middleware;
 
 
 namespace PersonalFinance.API
@@ -116,6 +117,9 @@ namespace PersonalFinance.API
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            //Global exception
+            app.UseMiddleware<ExceptionMiddleware>();
 
 
             //  MAP CONTROLLERS
