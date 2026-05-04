@@ -20,30 +20,30 @@ namespace PersonalFinance.API.Controllers
         [HttpPost ("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
         {
-            try
-            {
+            //try
+            //{
                 var result = await _authService.RegisterAsync(request);
                 return Ok(result);
-            }
-            catch(Exception ex)
+            //}
+            /*catch(Exception ex)
             {
                 return BadRequest(new {message = ex.Message});
-            }
+            }*/
             
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
-            try
-            {
+            //try
+            //{
                 var result = await _authService.LoginAsync(request);
                 return Ok(result);
-            }
+            /*}
             catch(Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
-            }
+            }*/
             
         }
 

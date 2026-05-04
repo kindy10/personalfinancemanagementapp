@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using PersonalFinance.API.Exceptions;
 namespace PersonalFinance.API.Services.Implementations
 {
     public class AuthService: IAuthService
@@ -26,7 +27,7 @@ namespace PersonalFinance.API.Services.Implementations
                 .FirstOrDefaultAsync(u => u.Email == request.Email);
 
             if (existingUser != null)
-                throw new Exception("Email already exists");
+                throw new AppException("Email already exists");
 
             //2 . Hash password
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
@@ -70,12 +71,10 @@ namespace PersonalFinance.API.Services.Implementations
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == request.Email);
 
-            if (user == null) throw new Exception("Invalid credentials");
-
             //2 .Verify password
             var isPasswordValid = BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash);
 
-            if (!isPasswordValid) throw new Exception("Invalid credentials");
+            if (!isPasswordValid  || user is null ) throw new AppException("Email or password is incorrect");
 
             //3 return response
             var token = GenerateToken(user);

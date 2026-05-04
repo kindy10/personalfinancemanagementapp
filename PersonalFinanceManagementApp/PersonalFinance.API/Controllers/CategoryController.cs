@@ -17,29 +17,29 @@ namespace PersonalFinance.API.Controllers
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetAll(Guid userId)
         {
-            try
-            {
+            //try
+            //{
                 var result = await _categoryService.GetAllAsync(userId);
                 return Ok(result);
-            }
+            /*}
             catch(Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
-            }
+            }*/
         }
 
         [HttpPost("{userId}")]
         public async Task<IActionResult> Create(Guid userId, [FromBody] CreateCategoryRequestDto request)
         {
-            try
-            {
+            //try
+            //{
                 var result = await _categoryService.CreateAsync(userId, request);
                 return Ok(result);
-            }
+           /* }
             catch(Exception ex)
             {
                 return BadRequest(new {message = ex.Message});
-            }
+            }*/
 
         }
     }

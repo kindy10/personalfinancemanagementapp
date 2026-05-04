@@ -18,28 +18,28 @@ namespace PersonalFinance.API.Controllers
         [HttpDelete("{userId}")]
         public async Task<IActionResult>GetAll(Guid userId)
         {
-            try
-            {
+            //try
+            //{
                 var result = await _budgetService.GetAllAsync(userId);
                 return Ok(result);
-            }
+            /*}
             catch (Exception ex) { 
                 return BadRequest(new {message = ex.Message});
-            }
+            }*/
         }
 
         [HttpPost("{userId}")]
         public async Task<IActionResult> Create(Guid userId, [FromBody] CreateBudgetRequestDto request)
         {
-            try
-            {
+            //try
+            //{
                 var result = await _budgetService.CreateAsync(userId, request);
                 return Ok(result);
-            }
+            /*}
             catch (Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
-            }
+            }*/
 
         }
     }

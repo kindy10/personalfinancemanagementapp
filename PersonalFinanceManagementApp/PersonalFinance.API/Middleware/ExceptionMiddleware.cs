@@ -1,0 +1,31 @@
+﻿using PersonalFinance.API.Exceptions;
+
+namespace PersonalFinance.API.Middleware
+{
+    public class ExceptionMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public ExceptionMiddleware(RequestDelegate next) { _next = next; }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            try
+            {
+                await _next(context);
+
+            }
+            catch (Exception ex)
+            {
+                context.Response.StatusCode = ex is AppException ? 400 : 500;
+                context.Response.ContentType = "application/json";
+
+                var response = new
+                {
+                    message = ex.Message
+                };
+                await context.Response.WriteAsJsonAsync(response);
+            }
+        }
+    }
+}
