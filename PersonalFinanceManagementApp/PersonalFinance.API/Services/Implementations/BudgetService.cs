@@ -1,4 +1,5 @@
-﻿using PersonalFinance.API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PersonalFinance.API.Data;
 using PersonalFinance.API.Exceptions;
 using PersonalFinance.API.Models;
 using PersonalFinance.API.Services.Interfaces;
@@ -29,6 +30,8 @@ namespace PersonalFinance.API.Services.Implementations
                 })
                 .ToList();
         }
+
+        //----------------------------CREATE --------------------------//
         public async Task<BudgetDto> CreateAsync(Guid userId,CreateBudgetRequestDto request)
         {
             //Check Month
@@ -60,6 +63,41 @@ namespace PersonalFinance.API.Services.Implementations
                 Year = budget.Year,
                 CategoryId = budget.CategoryId,
             };
+        }
+
+        //------------------------------UPDATE---------------------------------------------//
+        public async Task<BudgetDto> UpdateAsync(Guid id, Guid userId, UpdateBudgetRequestDto request)
+        {
+            var budget =await  _context.Budgets
+                .FirstOrDefaultAsync(b => b.Id == id && b.UserId == userId);
+            if (budget is null)
+                throw new AppException("Budget not found ");
+
+            budget.MonthlyLimit = request.MonthlyLimit;
+            budget.Month = request.Month;
+            budget.Year = request.Year;
+            budget.CategoryId = request.CategoryId;
+
+            await _context.SaveChangesAsync();
+            return new BudgetDto { 
+                Id = budget.Id,
+                MonthlyLimit = budget.MonthlyLimit,
+                Year= budget.Year,
+                CategoryId = budget.CategoryId,
+            };
+        }
+
+        //-------------------------DELETE -----------------------------------------------------//
+        public async Task DeleteAsync(Guid id, Guid userId)
+        {
+            var budget = await _context.Budgets
+                .FirstOrDefaultAsync(b => b.Id == id && b.UserId == userId);
+            if (budget is null)
+                throw new AppException("Budget not found");
+
+            _context.Budgets .Remove(budget);
+            await _context.SaveChangesAsync();
+           
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using PersonalFinance.API.Data;
 using PersonalFinance.API.Exceptions;
 using PersonalFinance.API.Models;
@@ -33,6 +34,7 @@ namespace PersonalFinance.API.Services.Implementations
                 .ToList();
         }
 
+        //--------------------------CREATE ----------------------------///
         public async Task<TransactionDto> CreateAsync(Guid userId, CreateTransactionRequestDto request)
         {
             //Check Amount  constraint
@@ -72,16 +74,47 @@ namespace PersonalFinance.API.Services.Implementations
 
         }
 
-        public async Task<bool> DeleteAsync(Guid id, Guid userId)
+       //------------------------------------DELETE----------------------------//
+        public async Task  DeleteAsync(Guid id, Guid userId)
         {
             var transaction = await _context.Transactions
                 .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
-            if (transaction == null) return false;
+            if (transaction == null) 
+                throw new AppException("Transaction not found");
 
             _context.Transactions.Remove(transaction);
             await _context.SaveChangesAsync();
-            return true;
+           
         }
 
+        //----------------------------------UPDATE--------------------------------//
+        public async Task<TransactionDto> UpdateAsync(Guid id, Guid userId, UpdateTransactionRequestDto request)
+            {
+                var transaction = await _context.Transactions
+                    .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
+
+                if (transaction is null)
+                    throw new AppException("Transaction not found");
+
+                if (request.Amount <= 0)
+                    throw new AppException("Amount must be greater than zero");
+
+                transaction.Amount = request.Amount;
+                transaction.Date = request.Date;
+                transaction.Description = request.Description;
+                transaction.CategoryId = request.CategoryId;
+
+                await _context.SaveChangesAsync();
+
+                return new TransactionDto
+                {
+                    Id = transaction.Id,
+                    Amount = transaction.Amount,
+                    Description = transaction.Description,
+                    Date = transaction.Date,
+                    CategoryId = transaction.CategoryId,
+                }; 
+        }
     }
+        
 }
