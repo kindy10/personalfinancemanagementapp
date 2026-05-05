@@ -22,14 +22,21 @@ namespace PersonalFinance.API
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
             // Register services
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<ITransactionService, TransactionService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IBudgetService, BudgetService>();
 
+
             // Controllers
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                    .AddJsonOptions(options =>
+                    {
+                        options.JsonSerializerOptions.Converters.Add(
+                            new System.Text.Json.Serialization.JsonStringEnumConverter());
+                    });
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();

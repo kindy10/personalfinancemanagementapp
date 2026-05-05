@@ -11,8 +11,8 @@ namespace PersonalFinance.API.Models
         public Guid Id { get; set; }
 
         public decimal Amount { get; set; }
-        public DateTime Date { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime Date { get; set; } //business
+        public DateTime CreatedAt { get; set; } //system
 
         public string Description { get; set; }
 

@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Shared.DTOs.Reports
 {
-    public  class MonthlyReportDto
+    public  class SummaryDto
     {
-        public int Month { get; set; }
-        public int Year { get; set; }
         public decimal TotalIncome { get; set; }
-        public decimal TotalExpenses { get; set; }
-
+        public decimal TotalExpense { get; set; }
         public decimal Balance { get; set; }
-        
     }
 }

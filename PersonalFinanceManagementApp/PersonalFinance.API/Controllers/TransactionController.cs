@@ -3,6 +3,7 @@ using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Transactions;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using PersonalFinance.Shared.DTOs.Common;
 
 namespace PersonalFinance.API.Controllers
 {
@@ -28,8 +29,10 @@ namespace PersonalFinance.API.Controllers
                 var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
                 if (userIdClaim == null) return Unauthorized("Invalid token");
                 var userId = Guid.Parse(userIdClaim.Value);
+            
                 var result = await _transactionService.GetAllAsync(userId);
-                return Ok(result);
+                return Ok(ApiResponse<object>.SuccessResponse(result,"Success"));
+          
             /*}
             catch(Exception ex)
             {
@@ -45,7 +48,7 @@ namespace PersonalFinance.API.Controllers
             //{
                 var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var result = await _transactionService.CreateAsync(userId, request);
-                return Ok(result);
+                return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));  
             /*}
             catch(Exception ex)
             {
@@ -60,7 +63,7 @@ namespace PersonalFinance.API.Controllers
         {
             var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var result = await _transactionService.UpdateAsync(id, userId, request);
-            return Ok(result);
+            return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));
         }
 
 

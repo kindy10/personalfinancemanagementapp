@@ -8,5 +8,7 @@ namespace PersonalFinance.API.Services.Interfaces
         Task<BudgetDto> CreateAsync(Guid userId, CreateBudgetRequestDto request);
         Task<BudgetDto> UpdateAsync(Guid id, Guid userId, UpdateBudgetRequestDto request);
         Task  DeleteAsync(Guid id,Guid userId);
+
+        
     }
 }

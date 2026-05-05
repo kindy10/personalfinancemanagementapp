@@ -4,6 +4,7 @@ using PersonalFinance.API.Exceptions;
 using PersonalFinance.API.Models;
 using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Categories;
+using PersonalFinance.Shared.DTOs.Enums;
 
 namespace PersonalFinance.API.Services.Implementations
 {
@@ -32,15 +33,22 @@ namespace PersonalFinance.API.Services.Implementations
         //-------------------------------------CREATE-----------------------------//
         public async Task<CategoryDto> CreateAsync(Guid userid, CreateCategoryRequestDto request)
         {
+
+            if (string.IsNullOrWhiteSpace(request.Name))
+                throw new AppException("Category name is required");
+
+            if (!Enum.IsDefined(typeof(CategoryType), request.Type))
+                throw new AppException("Invalid category type");
             var category = new Category
             {
                 Id = Guid.NewGuid(),
                 Name = request.Name,
-                Type = request.Type,
                 UserId = userid,
                 CreatedAt = DateTime.UtcNow,
+                Type = request.Type
 
             };
+            
 
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
@@ -49,7 +57,7 @@ namespace PersonalFinance.API.Services.Implementations
             {
                 Id = category.Id,
                 Name = category.Name,
-                Type = category.Type
+                Type = category.Type 
             };
         }
         //----------------------------------UPDATE--------------------------------------------//
@@ -59,11 +67,17 @@ namespace PersonalFinance.API.Services.Implementations
                 .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
             if (category is null)
                 throw  new AppException("Category not found");
+
+            if (string.IsNullOrWhiteSpace(request.Name))
+                throw new AppException("Category name is required");
+
+            if (!Enum.IsDefined(typeof(CategoryType), request.Type))
+                throw new AppException("Invalid category type");
+
             category.Name = request.Name;
-            category.Type = request.Type;
             category.UserId = userId;
             category.CreatedAt = DateTime.UtcNow;
-
+            category.Type = request.Type;
             await _context.SaveChangesAsync();
 
             return new CategoryDto
@@ -73,6 +87,7 @@ namespace PersonalFinance.API.Services.Implementations
                 Type = category.Type
 
             };
+
 
         }
 
