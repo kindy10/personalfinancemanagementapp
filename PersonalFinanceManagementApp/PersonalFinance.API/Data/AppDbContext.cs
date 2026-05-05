@@ -32,6 +32,10 @@ namespace PersonalFinance.API.Data
                 modelBuilder.Entity<Transaction>()
                     .HasCheckConstraint("CK_Transaction_Amount", "[Amount] > 0");
 
+            //CategoryType
+            modelBuilder.Entity<Category>()
+                .HasCheckConstraint("CK_Category_Type", "[Type] IN (0,1)");
+
                 modelBuilder.Entity<Transaction>()
                     .HasOne(t => t.User)
                     .WithMany(u => u.Transactions)

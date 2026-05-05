@@ -30,6 +30,7 @@ namespace PersonalFinance.API.Services.Implementations
                 })
                 .ToList();
         }
+        //private void checkBugetConstraint()
 
         //----------------------------CREATE --------------------------//
         public async Task<BudgetDto> CreateAsync(Guid userId,CreateBudgetRequestDto request)
@@ -41,6 +42,9 @@ namespace PersonalFinance.API.Services.Implementations
             //Check Year
             if (request.Year < 2000)
                 throw new AppException("Invalid year");
+            //check MonthlyLimit
+            if (request.MonthlyLimit <= 0)
+                throw new AppException("Budget must be grater than zero");
             var budget = new Budget
             {
                 Id = Guid.NewGuid(),

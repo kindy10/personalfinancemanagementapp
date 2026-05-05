@@ -29,6 +29,13 @@ namespace PersonalFinance.API.Services.Implementations
             if (existingUser != null)
                 throw new AppException("Email already exists");
 
+            //Check constraints
+            if (string.IsNullOrWhiteSpace(request.Email))
+                throw new Exception("Email is required");
+
+            if (string.IsNullOrWhiteSpace(request.Password))
+                throw new Exception("Password is required");
+
             //2 . Hash password
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 

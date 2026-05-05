@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Auth;
+using PersonalFinance.Shared.DTOs.Common;
 
 namespace PersonalFinance.API.Controllers
 {
@@ -23,13 +24,13 @@ namespace PersonalFinance.API.Controllers
             //try
             //{
                 var result = await _authService.RegisterAsync(request);
-                return Ok(result);
+                return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));
             //}
             /*catch(Exception ex)
             {
                 return BadRequest(new {message = ex.Message});
             }*/
-            
+
         }
 
         [HttpPost("login")]
@@ -38,13 +39,13 @@ namespace PersonalFinance.API.Controllers
             //try
             //{
                 var result = await _authService.LoginAsync(request);
-                return Ok(result);
+                return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));
             /*}
             catch(Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
             }*/
-            
+
         }
 
     }

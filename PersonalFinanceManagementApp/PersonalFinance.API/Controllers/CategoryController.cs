@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Categories;
+using PersonalFinance.Shared.DTOs.Common;
 using System.Security.Claims;
 
 namespace PersonalFinance.API.Controllers
@@ -22,7 +23,7 @@ namespace PersonalFinance.API.Controllers
             //{
                 var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var result = await _categoryService.GetAllAsync(userId);
-                return Ok(result);
+                return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));
             /*}
             catch(Exception ex)
             {
@@ -38,12 +39,12 @@ namespace PersonalFinance.API.Controllers
             //{
                 var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
                 var result = await _categoryService.CreateAsync(userId, request);
-                return Ok(result);
-           /* }
-            catch(Exception ex)
-            {
-                return BadRequest(new {message = ex.Message});
-            }*/
+                return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));
+            /* }
+             catch(Exception ex)
+             {
+                 return BadRequest(new {message = ex.Message});
+             }*/
 
         }
 
@@ -53,7 +54,7 @@ namespace PersonalFinance.API.Controllers
         {
             var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var result = await _categoryService.UpdateAsync(id, userId, request);
-            return Ok(result);
+            return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));
 
 
         }

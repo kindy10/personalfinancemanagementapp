@@ -1,4 +1,5 @@
 ﻿using PersonalFinance.API.Exceptions;
+using PersonalFinance.Shared.DTOs.Common;
 
 namespace PersonalFinance.API.Middleware
 {
@@ -20,10 +21,7 @@ namespace PersonalFinance.API.Middleware
                 context.Response.StatusCode = ex is AppException ? 400 : 500;
                 context.Response.ContentType = "application/json";
 
-                var response = new
-                {
-                    message = ex.Message
-                };
+                var response = ApiResponse<string>.FailResponse(ex.Message);
                 await context.Response.WriteAsJsonAsync(response);
             }
         }

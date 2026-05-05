@@ -41,6 +41,13 @@ namespace PersonalFinance.API.Services.Implementations
             if (request.Amount <= 0)
                 throw new AppException("Amount must be greater than zero");
 
+            //check category
+            if (request.CategoryId == Guid.Empty)
+                throw new AppException("Category is required");
+
+            //check description
+            if (string.IsNullOrWhiteSpace(request.Description))
+                throw new AppException("Description is required");
             //Check category
             var categoryExists = await _context.Categories
                 .AnyAsync(c => c.Id == request.CategoryId && c.UserId == userId);
@@ -52,11 +59,11 @@ namespace PersonalFinance.API.Services.Implementations
             {
                 Id = Guid.NewGuid(),
                 Amount = request.Amount,
-                Date = request.Date,
+                Date = DateTime.UtcNow,  //real life event  ( when the transaction actually happened
                 Description = request.Description,
                 CategoryId = request.CategoryId,
                 UserId = userId,
-                CreatedAt = DateTime.UtcNow,
+                CreatedAt = DateTime.UtcNow, // when the record was created in the system
             };
             //Add it to the database
             _context.Transactions.Add(transaction);
