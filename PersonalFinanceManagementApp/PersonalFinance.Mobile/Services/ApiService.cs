@@ -77,6 +77,7 @@ namespace PersonalFinance.Mobile.Services
             var response = await _httpClient.PutAsync(endpoint, content);
 
             var result = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(result);
 
             if (!response.IsSuccessStatusCode)
                 throw new Exception(result);
