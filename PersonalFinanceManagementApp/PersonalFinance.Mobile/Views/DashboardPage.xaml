@@ -1,12 +1,76 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PersonalFinance.Mobile.Views.DashboardPage"
-             Title="DashboardPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to Personal Finance Management!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="PersonalFinance.Mobile.Views.DashboardPage">
+
+
+    <ScrollView>
+                <VerticalStackLayout Padding="20" Spacing="20">
+        
+                    <!---Page Title-->
+                    <Label 
+                        Text= "Financial Dasboard"
+                        FontSize="28"
+                        FontAttributes="Bold" 
+                        HorizontalOptions="Center"/>
+        
+        
+                    <!--total Income -->
+                    <Frame Padding="15">
+                        <VerticalStackLayout>
+                
+                            <Label
+                                Text="Total Income"
+                                FontSize="18"/>
+                
+                            <Label
+                                Text=" {Binding TotalIncome}"
+                                FontSize ="24"
+                                FontAttributes="Bold"/>
+
+                        </VerticalStackLayout>
+                    </Frame>
+        
+        
+        
+                    <!---TotalExpense -->
+                    <Frame Padding="15">
+            
+                        <VerticalStackLayout>
+                
+                            <Label
+                                Text="Total Expense"
+                                FontSize="18"/>
+                
+                            <Label
+                                Text=" {Binding TotalExpense}"
+                                FontSize ="24"
+                                FontAttributes="Bold"/> 
+
+                        </VerticalStackLayout>
+            
+                    </Frame>
+        
+        
+                    <!--Balance-->
+
+                    <Frame Padding="15">
+
+                        <VerticalStackLayout>
+
+                            <Label
+                                Text="Balance"
+                                FontSize="18"/>
+
+                            <Label
+                                Text=" {Binding Balance}"
+                                FontSize ="24"
+                                FontAttributes="Bold"/>
+
+                        </VerticalStackLayout>
+
+                    </Frame>
+                </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

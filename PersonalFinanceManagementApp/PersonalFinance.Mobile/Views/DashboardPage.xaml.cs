@@ -1,3 +1,5 @@
+using PersonalFinance.Mobile.ViewModels;
+
 namespace PersonalFinance.Mobile.Views;
 
 public partial class DashboardPage : ContentPage
@@ -5,5 +7,8 @@ public partial class DashboardPage : ContentPage
 	public DashboardPage()
 	{
 		InitializeComponent();
+
+		//Connect ViewModel to page
+		BindingContext = new DashboardViewModel();
 	}
 }
