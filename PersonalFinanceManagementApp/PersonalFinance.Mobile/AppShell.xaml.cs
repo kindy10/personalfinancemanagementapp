@@ -5,6 +5,7 @@
         public AppShell()
         {
             InitializeComponent();
+            //await Shell.Current.GoToAsync("//login");
         }
     }
 }
