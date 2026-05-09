@@ -5,9 +5,9 @@
 
 
     <ScrollView>
-                <VerticalStackLayout Padding="20" Spacing="20">
+                <!--<VerticalStackLayout Padding="20" Spacing="20">
         
-                    <!---Page Title-->
+                    --><!---Page Title--><!--
                     <Label 
                         Text= "Financial Dasboard"
                         FontSize="28"
@@ -15,7 +15,7 @@
                         HorizontalOptions="Center"/>
         
         
-                    <!--total Income -->
+                    --><!--total Income --><!--
                     <Frame Padding="15">
                         <VerticalStackLayout>
                 
@@ -33,7 +33,7 @@
         
         
         
-                    <!---TotalExpense -->
+                    --><!---TotalExpense --><!--
                     <Frame Padding="15">
             
                         <VerticalStackLayout>
@@ -52,7 +52,7 @@
                     </Frame>
         
         
-                    <!--Balance-->
+                    --><!--Balance--><!--
 
                     <Frame Padding="15">
 
@@ -70,7 +70,71 @@
                         </VerticalStackLayout>
 
                     </Frame>
+                </VerticalStackLayout>-->
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="20">
+
+            <!-- Header -->
+            <Label
+                Text="Dashboard"
+                Style="{StaticResource PageTitleStyle}" />
+
+            <!-- Income Card -->
+            <Frame Style="{StaticResource DashboardCardStyle}">
+
+                <VerticalStackLayout>
+
+                    <Label
+                        Text="Total Income"
+                        Style="{StaticResource SectionTitleStyle}" />
+
+                    <Label
+                        Text="{Binding TotalIncome}"
+                        Style="{StaticResource CardValueStyle}"
+                        TextColor="{StaticResource SuccessColor}" />
+
                 </VerticalStackLayout>
+
+            </Frame>
+
+            <!-- Expense Card -->
+            <Frame Style="{StaticResource DashboardCardStyle}">
+
+                <VerticalStackLayout>
+                    <Label
+                        Text="Total Expense"
+                        Style="{StaticResource SectionTitleStyle}" />
+
+                    <Label
+                        Text="{Binding TotalExpense}"
+                        Style="{StaticResource CardValueStyle}"
+                        TextColor="{StaticResource DangerColor}" />
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!-- Balance Card -->
+            <Frame Style="{StaticResource DashboardCardStyle}">
+
+                <VerticalStackLayout>
+
+                    <Label
+                        Text="Balance"
+                        Style="{StaticResource SectionTitleStyle}" />
+
+                    <Label
+                        Text="{Binding Balance}"
+                        Style="{StaticResource CardValueStyle}" />
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+        </VerticalStackLayout>
+
+
     </ScrollView>
 
 </ContentPage>

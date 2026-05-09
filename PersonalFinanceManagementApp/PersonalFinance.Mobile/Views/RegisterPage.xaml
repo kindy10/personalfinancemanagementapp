@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PersonalFinance.Mobile.Views.RegisterPage"
+             Title="RegisterPage">
+    <ScrollView>
+        <VerticalStackLayout 
+            Padding="30"
+            Spacing="20"
+            VerticalOptions="Center">
+            
+            <!--Title -->
+            <Label 
+                Text="Create Account"
+                Style="{StaticResource PageTitleStyle}"
+                HorizontalOptions="Center"/>
+            
+            <!--Subtitle-->
+            <Label 
+                Text=" Start managing your fincances"
+                FontSize="16"
+                TextColor="{StaticResource SecondaryText}"
+                HorizontalOptions="Center"/>
+            
+            <!---Name-->
+            <Entry 
+                Placeholder="Name"
+                Text="{Binding Name}" />
+            
+            <!---Surname-->
+            <Entry 
+                Placeholder="Surname"
+                Text="{Binding SurName}" />
+            
+            <!-- Email -->
+            <Entry
+                Placeholder="Email"
+                Text="{Binding Email}" />
+
+            <!---Password-->
+            <Entry
+                Placeholder="Password"
+                IsPassword="True"
+                Text="{Binding Password}" />
+            
+            <!---Register Button-->
+            <Button
+                Text="Create Account"
+                Command="{Binding RegisterCommand}"/>
+            
+            <!---Navigate to Login-->
+            <Button
+                Text="Already have an account ? Login"
+                BackgroundColor="Transparent"
+                TextColor="{StaticResource PrimaryColor}"
+                Command=" {Binding GoToLogincommand}"/>
+
+        </VerticalStackLayout>
+        
+    </ScrollView>
+    
+</ContentPage>
