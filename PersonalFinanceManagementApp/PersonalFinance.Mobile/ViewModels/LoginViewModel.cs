@@ -16,11 +16,15 @@ namespace PersonalFinance.Mobile.ViewModels
         public string Password { get; set; } = string.Empty;
 
         public ICommand LoginCommand { get; }
-        
+
+        public ICommand GoToRegisterCommand { get; }
+
         public LoginViewModel()
         {
             _authService = new AuthService();
             LoginCommand = new Command(async () => await Login());
+            GoToRegisterCommand =new Command(async () =>
+                                    await Shell.Current.GoToAsync("//register"));
         }
 
         private async Task Login()

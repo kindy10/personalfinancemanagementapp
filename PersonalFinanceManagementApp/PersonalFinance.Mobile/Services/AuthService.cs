@@ -44,5 +44,25 @@ namespace PersonalFinance.Mobile.Services
 
             return response.Data;
         }
+
+        //Register 
+
+        public async Task<AuthResponseDto> RegisterAsync(RegisterRequestDto request)
+        {
+            //Call backend register endpoint
+
+            var response = await _apiService
+                .PostAsync<ApiResponse<AuthResponseDto>>("auth/register", request);
+
+            //Valide response
+            if (response.Data is null)
+                throw new Exception("Registration failed");
+
+            //Save JWT token
+            await SecureStorage.SetAsync("auth_token", response.Data.Token);
+
+            return response.Data;
+        }
+
     }
 }

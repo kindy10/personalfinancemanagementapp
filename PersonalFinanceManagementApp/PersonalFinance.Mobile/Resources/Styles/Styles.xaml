@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <?xaml-comp compile="true" ?>
-<ResourceDictionary 
+<!--<ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
@@ -382,7 +382,7 @@
         </Setter>
     </Style>
   
-    <!--
+    --><!--
     <Style TargetType="TitleBar">
         <Setter Property="MinimumHeightRequest" Value="32"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
@@ -404,7 +404,7 @@
             </VisualStateGroupList>
         </Setter>
     </Style>
-    -->
+    --><!--
 
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
@@ -435,6 +435,75 @@
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+    </Style>
+
+</ResourceDictionary>-->
+    
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Global page style -->
+    <Style TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{StaticResource PageBackground}" />
+    </Style>
+
+    <!-- Title labels -->
+    <Style x:Key="PageTitleStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryText}" />
+    </Style>
+
+    <!-- Section labels -->
+    <Style x:Key="SectionTitleStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="{StaticResource SecondaryText}" />
+    </Style>
+
+    <!-- Card value labels -->
+    <Style x:Key="CardValueStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryText}" />
+    </Style>
+
+    <!-- Buttons -->
+    
+    <Style TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <!-- Entry fields -->
+    
+    <Style TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="White" />
+        
+        <Setter Property="TextColor" Value="Black" />
+        
+        <!-- Placeholder text color -->
+        <Setter Property="PlaceholderColor" Value="#9CA3AF" />
+        
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="Margin" Value="0,5" />
+    </Style>
+
+    <!-- Dashboard cards -->
+    
+    <Style x:Key="DashboardCardStyle" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{StaticResource CardBackground}" />
+        
+        <Setter Property="CornerRadius" Value="18" />
+        
+        <Setter Property="Padding" Value="20" />
+        
+        <Setter Property="HasShadow" Value="True" />
+        
+        <Setter Property="Margin" Value="0,5" />
     </Style>
 
 </ResourceDictionary>
