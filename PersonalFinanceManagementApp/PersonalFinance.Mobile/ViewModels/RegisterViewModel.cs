@@ -26,7 +26,7 @@ namespace PersonalFinance.Mobile.ViewModels
             set
             {
                 _name = value;
-                OnpropertyChanged();
+                OnPropertyChanged();
             }
         }
         public string SurnName
@@ -35,7 +35,7 @@ namespace PersonalFinance.Mobile.ViewModels
             set
             {
                 _surName = value;
-                OnpropertyChanged();
+                OnPropertyChanged();
             }
         }
         public string Email
@@ -44,7 +44,7 @@ namespace PersonalFinance.Mobile.ViewModels
             set
             {
                 _email = value;
-                OnpropertyChanged();
+                OnPropertyChanged();
             }
         }
         public string Password
@@ -53,7 +53,7 @@ namespace PersonalFinance.Mobile.ViewModels
             set
             {
                 _password = value;
-                OnpropertyChanged();
+                OnPropertyChanged();
             }
         }
 
