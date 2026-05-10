@@ -55,36 +55,65 @@ namespace PersonalFinance.Mobile.Services
             var json = JsonSerializer.Serialize(data);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+            //Get saved JWT token
+            var token = await SecureStorage.GetAsync("auth_token");
+
+            //Attach JWT token
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            //Send Post request 
             var response = await  _httpClient.PostAsync(endpoint, content);
 
-            var result = await response.Content.ReadAsStringAsync();
+            
+            // Read response body
+            var result =
+                await response.Content.ReadAsStringAsync();
 
+            // Throw detailed error if failed
             if (!response.IsSuccessStatusCode)
-                throw new Exception(result);
+            {
+                throw new Exception(
+                    $"Status: {response.StatusCode}\n\n{result}");
+            }
 
-            return JsonSerializer.Deserialize<T>(result,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            // Deserialize JSON
+            return JsonSerializer.Deserialize<T>(
+                result,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
         }
 
         //---------------------------------------------Put
-        public async Task<T> PutAsync<T>(string endpoint,object data)
+        public async Task PutAsync(string endpoint,object data)
         {
+            //Convert object  to json
             await AddAuthHeader();
 
             var json = JsonSerializer.Serialize(data);
+
             var content = new StringContent(json,Encoding.UTF8, "application/json");
 
+            //Add JWT token
+
+            var token = await SecureStorage.GetAsync("auth_token");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            //Send PUT request
             var response = await _httpClient.PutAsync(endpoint, content);
 
+
+            //Read backend response
             var result = await response.Content.ReadAsStringAsync();
             Console.WriteLine(result);
 
+
+            //Throw error if failed
             if (!response.IsSuccessStatusCode)
                 throw new Exception(result);
-
-
-            return JsonSerializer.Deserialize<T>(result,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         //---------------------------------------------Delete

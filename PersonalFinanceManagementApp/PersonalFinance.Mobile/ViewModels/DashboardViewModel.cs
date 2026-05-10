@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PersonalFinance.Mobile.ViewModels
 {
@@ -23,7 +24,7 @@ namespace PersonalFinance.Mobile.ViewModels
             {
                 _totalIncome = value;
                 //Notify UI
-                OnpropertyChanged();
+                OnPropertyChanged();
             }
         }
         private decimal _totalExpense { get; set; }
@@ -34,7 +35,7 @@ namespace PersonalFinance.Mobile.ViewModels
             {
                 _totalExpense = value;
                 //Notify UI
-                OnpropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -48,14 +49,19 @@ namespace PersonalFinance.Mobile.ViewModels
                 _balance = value;
 
                 //Notify UI
-                OnpropertyChanged();
+                OnPropertyChanged();
             }
         }
+
+        //Link to transactions
+        public ICommand GoToTransactionsCommand { get; }
         public DashboardViewModel() { 
             _reportService = new ReportService();
 
             //Load dashboard data automatically
             LoadSummary();
+
+            GoToTransactionsCommand = new Command(async () => await Shell.Current.GoToAsync("//transactions"));
         }
 
         public async void LoadSummary()

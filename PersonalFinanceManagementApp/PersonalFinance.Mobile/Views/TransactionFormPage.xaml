@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PersonalFinance.Mobile.Views.TransactionFormPage"
+             Title="TransactionFormPage">
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20" Margin="20">
+            
+            <!---Title-->
+            <Label Text="{Binding PageTitle}"
+                   Style="{StaticResource PageTitleStyle}"/>
+            
+            <!--Amount -->
+            <Entry
+                Placeholder="Amount"
+                Keyboard="Numeric"
+                Text="{Binding Amount}" />
+            
+            
+            <!---Description-->
+            <Entry
+                Placeholder="Description"
+                Text="{Binding Description}"/>
+
+            <!--Date -->
+            <DatePicker
+                Date="{Binding Date}"/>
+            
+            <!--Category Picker-->
+            <Picker
+                Title=" Select Category "
+                ItemsSource="{Binding Categories}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedCategory}"/>
+            
+            <!---Save Button-->
+            <Button
+                Text="Save Transaction"
+                Command="{Binding SaveCommand}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

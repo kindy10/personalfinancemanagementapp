@@ -16,7 +16,7 @@ namespace PersonalFinance.Mobile.ViewModels
 
         //Helper method to notify UI
 
-        protected void OnpropertyChanged([CallerMemberName] string propertyName = "")
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

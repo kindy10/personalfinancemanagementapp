@@ -12,5 +12,10 @@
 
     <ShellContent Route="dashboard"
                   ContentTemplate="{DataTemplate views:DashboardPage}" />
+    <ShellContent Route="transactions"
+                  ContentTemplate="{DataTemplate views:TransactionsPage}"/>
+    <ShellContent
+                   Route="transaction-form"
+                   ContentTemplate="{DataTemplate views:TransactionFormPage}" />   
 
 </Shell>

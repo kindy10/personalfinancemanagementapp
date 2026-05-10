@@ -130,6 +130,10 @@
 
                 </VerticalStackLayout>
 
+
+                <Button Text="View Transactions"
+                        Command="{Binding GoToTransactionsCommand}"/>
+
             </Frame>
 
         </VerticalStackLayout>
