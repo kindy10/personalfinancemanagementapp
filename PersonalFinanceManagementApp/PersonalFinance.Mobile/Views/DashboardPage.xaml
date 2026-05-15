@@ -138,6 +138,9 @@
                     Text=" Manage Categories"
                     Command="{Binding GoToCategoriesCommand}"/>
 
+            <Button Text="Manage Budgets"
+                    Command="{Binding GoToBudgetCommand}"/>
+
         </VerticalStackLayout>
 
 
