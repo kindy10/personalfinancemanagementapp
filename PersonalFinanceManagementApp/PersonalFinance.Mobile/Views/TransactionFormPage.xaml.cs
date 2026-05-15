@@ -11,12 +11,12 @@ public partial class TransactionFormPage : ContentPage
 		var vm = new TransactionFormViewModel();
 
 		//check if editing existing transaction
-		if(TemporaryData.selectedTranaction != null)
+		if(TemporaryData.selectedTransaction != null)
 		{
-			vm.LoadTransaction(TemporaryData.selectedTranaction);
+			vm.LoadTransaction(TemporaryData.selectedTransaction);
 
 			//Clear tmeporary state
-			TemporaryData.selectedTranaction = null;
+			TemporaryData.selectedTransaction = null;
 		}
 		BindingContext = vm;
 	}

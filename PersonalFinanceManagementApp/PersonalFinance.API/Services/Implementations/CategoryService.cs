@@ -25,7 +25,7 @@ namespace PersonalFinance.API.Services.Implementations
                 {
                     Id = c.Id,
                     Name = c.Name,
-                    Type = c.Type
+                    Type = c.Type.ToString()
                 })
                 .ToList();
         }
@@ -57,7 +57,7 @@ namespace PersonalFinance.API.Services.Implementations
             {
                 Id = category.Id,
                 Name = category.Name,
-                Type = category.Type 
+                Type = category.Type.ToString()
             };
         }
         //----------------------------------UPDATE--------------------------------------------//
@@ -84,7 +84,7 @@ namespace PersonalFinance.API.Services.Implementations
             {
                 Id = category.Id,
                 Name = category.Name,
-                Type = category.Type
+                Type = category.Type.ToString()
 
             };
 
@@ -99,7 +99,16 @@ namespace PersonalFinance.API.Services.Implementations
             if (category is null) 
                 throw new AppException("Category not found");
 
-             _context.Categories.Remove(category);
+            var hasTransactions = await _context.Transactions
+                    .AnyAsync(t => t.CategoryId == id);
+
+            if (hasTransactions)
+            {
+                throw new AppException(
+                    "Cannot delete category because transactions use it");
+            }
+
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
            
         }

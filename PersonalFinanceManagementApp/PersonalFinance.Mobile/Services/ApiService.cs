@@ -122,10 +122,17 @@ namespace PersonalFinance.Mobile.Services
         {
             await AddAuthHeader();
 
-            var response = await _httpClient.DeleteAsync(endpoint);
+            var response =
+                await _httpClient.DeleteAsync(endpoint);
+
+            var result =
+                await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception("Delete failed");
+            {
+                throw new Exception(
+                    $"Status: {response.StatusCode}\n\n{result}");
+            }
         }
     }
 

@@ -10,6 +10,6 @@ namespace PersonalFinance.Mobile.Helpers
     public  class TemporaryData
     {
         //Stroes selected transaction temporarily
-        public static TransactionDto selectedTranaction { get; set; }
+        public static TransactionDto selectedTransaction { get; set; }
     }
 }

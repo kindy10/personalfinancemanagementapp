@@ -52,11 +52,14 @@
     <Color x:Key="PrimaryColor">#2563EB</Color>
     <Color x:Key="PrimaryDark">#1E40AF</Color>
 
+
     <!-- Backgrounds -->
     <Color x:Key="PageBackground">#F5F7FA</Color>
     <Color x:Key="CardBackground">#FFFFFF</Color>
 
     <!-- Text -->
+    <!--<Color x:Key="PrimaryText">White</Color>
+    <Color x:Key="SecondaryText">#BBBBBB</Colo-->r>
     <Color x:Key="PrimaryText">#111827</Color>
     <Color x:Key="SecondaryText">#6B7280</Color>
 

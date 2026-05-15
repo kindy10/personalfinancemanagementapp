@@ -22,8 +22,11 @@ namespace PersonalFinance.API.Middleware
                 context.Response.ContentType = "application/json";
 
                 var response = ApiResponse<string>.FailResponse(ex.Message);
+
                 await context.Response.WriteAsJsonAsync(response);
+
             }
+            
         }
     }
 }
