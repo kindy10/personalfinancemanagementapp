@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PersonalFinance.Mobile.Views.BudgetsPage"
+             Title="BudgetsPage">
+
+
+    <VerticalStackLayout Padding="20">
+        
+        <!---Title-->
+        <Label Text="Budgets"
+               Style="{StaticResource PageTitleStyle}"/>
+        
+        <!--AddButton-->
+        <Button
+            Text="Add Budget"
+            Command="{Binding AddCommand}"/>
+        
+        <!---Budgets List -->
+        <CollectionView ItemsSource="{Binding Budgets}">
+
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate>
+
+                    <Frame Style="{StaticResource DashboardCardStyle}">
+
+                        <VerticalStackLayout>
+                            <!--Category-->
+                            <Label Text="{Binding CategoryName}"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource PrimaryText}"/>
+                            
+                            <!---Amount-->
+                            <Label Text="{Binding Amount}"/>
+                            
+                            <!--Edit-->
+                            <Button Text="Edit"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BindingContext.EditCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            
+                            <!--Delete-->
+                            <Button Text="Delete"
+                                    BackgroundColor="{StaticResource DangerColor}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BindingContext.DeleteCommand}"
+                                    CommandParameter="{Binding Id}" />
+
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+
+</ContentPage>
