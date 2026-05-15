@@ -17,5 +17,6 @@ public partial class TransactionsPage : ContentPage
 
 		//Reload transactions every time page appears
 		await _viewModel.LoadTransactions();
+
 	}
 }

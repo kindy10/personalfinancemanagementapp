@@ -55,6 +55,12 @@ namespace PersonalFinance.Mobile.ViewModels
 
         //Link to transactions
         public ICommand GoToTransactionsCommand { get; }
+
+
+        //-------------LINK TO CATEGORIES
+        public ICommand GoToCategoriesCommand { get; }
+
+        //---------------Constructor
         public DashboardViewModel() { 
             _reportService = new ReportService();
 
@@ -62,7 +68,11 @@ namespace PersonalFinance.Mobile.ViewModels
             LoadSummary();
 
             GoToTransactionsCommand = new Command(async () => await Shell.Current.GoToAsync("//transactions"));
+
+            GoToCategoriesCommand = new Command(async () => await Shell.Current.GoToAsync("//categories"));
+
         }
+
 
         public async void LoadSummary()
         {

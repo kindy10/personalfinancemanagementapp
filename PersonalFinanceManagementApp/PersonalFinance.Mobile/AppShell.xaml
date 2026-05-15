@@ -16,6 +16,13 @@
                   ContentTemplate="{DataTemplate views:TransactionsPage}"/>
     <ShellContent
                    Route="transaction-form"
-                   ContentTemplate="{DataTemplate views:TransactionFormPage}" />   
+                   ContentTemplate="{DataTemplate views:TransactionFormPage}" />
+
+    <ShellContent
+                   Route="categories"
+                   ContentTemplate="{DataTemplate views:CategoriesPage}"/>
+    <ShellContent
+                    Route="category-form"
+                    ContentTemplate="{DataTemplate views:CategoryFormPage}"/>
 
 </Shell>

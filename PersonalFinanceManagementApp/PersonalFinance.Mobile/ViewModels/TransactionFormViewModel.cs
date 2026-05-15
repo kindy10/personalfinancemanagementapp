@@ -14,7 +14,7 @@ namespace PersonalFinance.Mobile.ViewModels
     public class TransactionFormViewModel : BaseViewModel
     {
         private readonly TransactionService _transactionService;
-
+        private readonly CategoryService _categoryService;
         // Transaction ID (used only in edit mode)
         private Guid _transactionId;
 
@@ -92,8 +92,9 @@ namespace PersonalFinance.Mobile.ViewModels
 
         public TransactionFormViewModel()
         {
-            _transactionService =
-                new TransactionService();
+            _transactionService = new TransactionService();
+
+            _categoryService = new CategoryService();
 
             Categories =
                 new ObservableCollection<CategoryDto>();
@@ -101,19 +102,10 @@ namespace PersonalFinance.Mobile.ViewModels
             SaveCommand =
                 new Command(async () => await Save());
 
-            // Temporary fake categories
-            // Later we load from API
-            Categories.Add(new CategoryDto
-            {
-                Id = Guid.NewGuid(),
-                Name = "Food"
-            });
 
-            Categories.Add(new CategoryDto
-            {
-                Id = Guid.NewGuid(),
-                Name = "Transport"
-            });
+            LoadCategories();
+
+            
         }
 
         // Used for edit mode
@@ -129,6 +121,30 @@ namespace PersonalFinance.Mobile.ViewModels
             Description = transaction.Description;
 
             Date = transaction.Date;
+            PageTitle = "Edit Transaction";
+        }
+        public async Task LoadCategories()
+        {
+            try
+            {
+                //Get categories from backend
+                var categories = await _categoryService.GetCategoriesAsync();
+
+                //Clear existing items
+                Categories.Clear();
+
+                //Add categories to observable collection
+                foreach (var category in categories)
+                    Categories.Add(category);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                    .DisplayAlert(
+                        "Error",
+                        ex.Message,
+                        "OK");
+            }
         }
 
         // Save transaction

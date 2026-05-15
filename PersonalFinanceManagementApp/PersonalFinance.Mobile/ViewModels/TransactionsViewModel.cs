@@ -87,7 +87,7 @@ namespace PersonalFinance.Mobile.ViewModels
        private async Task EditTransaction(TransactionDto transaction)
         {
             //Store selected transaction
-            TemporaryData.selectedTranaction = transaction;
+            TemporaryData.selectedTransaction = transaction;
 
             //Navigate to form page
             await Shell.Current.GoToAsync("//transaction-form");

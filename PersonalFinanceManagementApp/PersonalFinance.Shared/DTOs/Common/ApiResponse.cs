@@ -8,7 +8,7 @@ namespace PersonalFinance.Shared.DTOs.Common
 {
     public class ApiResponse<T>
     {
-        public bool Succes { get; set; }
+        public bool Success { get; set; }
         public string Message { get; set; }
         public T Data { get; set; }
     
@@ -17,7 +17,7 @@ namespace PersonalFinance.Shared.DTOs.Common
         {
                 return new ApiResponse<T>
                 {
-                    Succes = true,
+                    Success = true,
                     Message = message,
                     Data = data
                 };
@@ -27,7 +27,7 @@ namespace PersonalFinance.Shared.DTOs.Common
         {
             return new ApiResponse<T>
             {
-                Succes = false,
+                Success = false,
                 Message = message,
                 Data = default
 

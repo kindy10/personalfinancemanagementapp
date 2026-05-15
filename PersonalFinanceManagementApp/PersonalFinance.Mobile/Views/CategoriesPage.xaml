@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PersonalFinance.Mobile.Views.CategoriesPage"
+             Title="CategoriesPage">
+
+    <VerticalStackLayout Padding="20">
+        
+        <!---Title-->
+        <Label Text="Categories"
+               Style="{StaticResource PageTitleStyle}"/>
+        
+        <!---Add Button-->
+        <Button Text=" Add Category"
+                Command="{Binding AddCommand}" />
+        
+        <!---Categories List-->
+        <CollectionView
+            ItemsSource ="{Binding Categories }">
+
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate>
+                    <Frame Style="{StaticResource DashboardCardStyle}">
+
+                        <VerticalStackLayout>
+                            <!---Name-->
+                            <Label Text="{Binding Name}"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource PrimaryText}"/>
+                            
+                            <!--Type-->
+                            <Label Text="{Binding Type}"
+                                   TextColor="{StaticResource SecondaryText}"/>
+                            
+                            <!--Edit-->
+                            <Button
+                                Text=" Edit"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BindingContext.EditCommand}"
+                                CommandParameter="{Binding .}"/>
+                            
+                            <!---Delete-->
+                            <Button
+                                Text="Delete"
+                                BackgroundColor="{StaticResource DangerColor}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
+                                CommandParameter="{Binding Id}"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                           
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+
+
+
+    </VerticalStackLayout>
+</ContentPage>

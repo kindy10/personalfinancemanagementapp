@@ -128,13 +128,15 @@
                         Text="{Binding Balance}"
                         Style="{StaticResource CardValueStyle}" />
 
-                </VerticalStackLayout>
-
-
-                <Button Text="View Transactions"
+                    <Button Text="View Transactions"
                         Command="{Binding GoToTransactionsCommand}"/>
 
+                </VerticalStackLayout>
+
             </Frame>
+            <Button
+                    Text=" Manage Categories"
+                    Command="{Binding GoToCategoriesCommand}"/>
 
         </VerticalStackLayout>
 
