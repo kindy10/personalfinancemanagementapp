@@ -25,4 +25,8 @@
                     Route="category-form"
                     ContentTemplate="{DataTemplate views:CategoryFormPage}"/>
 
+    <ShellContent
+                    Route="budgets"
+                    ContentTemplate="{DataTemplate views:BudgetsPage}"/>
+
 </Shell>
