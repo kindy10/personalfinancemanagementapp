@@ -15,29 +15,35 @@
             <Entry
                 Placeholder="Amount"
                 Keyboard="Numeric"
-                Text="{Binding Amount}" />
-            
-            
+                Text="{Binding Amount}"
+                Style="{StaticResource AppEntry}" />
+
+
             <!---Description-->
             <Entry
                 Placeholder="Description"
-                Text="{Binding Description}"/>
+                Text="{Binding Description}"
+                Style="{StaticResource AppEntry}" />
+
 
             <!--Date -->
             <DatePicker
-                Date="{Binding Date}"/>
+                Date="{Binding Date}"
+                Style="{StaticResource AppDatePicker}" />
             
             <!--Category Picker-->
             <Picker
                 Title=" Select Category "
                 ItemsSource="{Binding Categories}"
                 ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedCategory}"/>
+                SelectedItem="{Binding SelectedCategory}"
+                Style="{StaticResource AppPicker}" />
             
             <!---Save Button-->
             <Button
                 Text="Save Transaction"
-                Command="{Binding SaveCommand}"/>
+                Command="{Binding SaveCommand}"
+                Style="{StaticResource PrimaryButton}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

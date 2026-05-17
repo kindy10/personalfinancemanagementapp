@@ -1,65 +1,120 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PersonalFinance.Mobile.Views.BudgetsPage"
-             Title="BudgetsPage">
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PersonalFinance.Mobile.Views.BudgetsPage"
+    Title="Budgets">
+
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="20">
+
+        <!-- PAGE TITLE -->
+
+        <Label
+            Text="Budgets"
+            Style="{StaticResource TitleLabel}" />
 
 
-    <VerticalStackLayout Padding="20">
-        
-        <!---Title-->
-        <Label Text="Budgets"
-               Style="{StaticResource PageTitleStyle}"/>
-        
-        <!--AddButton-->
+
+        <!-- ADD BUTTON -->
+
         <Button
-            Text="Add Budget"
-            Command="{Binding AddCommand}"/>
-        
-        <!---Budgets List -->
-        <CollectionView ItemsSource="{Binding Budgets}">
+            Text="+ Add Budget"
+            Command="{Binding AddCommand}"
+            Style="{StaticResource PrimaryButton}" />
+
+
+
+        <!-- BUDGET LIST -->
+
+        <CollectionView
+            ItemsSource="{Binding Budgets}">
 
             <CollectionView.ItemTemplate>
 
                 <DataTemplate>
 
-                    <Frame Style="{StaticResource DashboardCardStyle}">
+                    <!-- BUDGET CARD -->
 
-                        <VerticalStackLayout>
-                            <!--Category-->
-                            <Label Text="{Binding CategoryName}"
-                                   FontSize="20"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource PrimaryText}"/>
-                            
-                            <!---Amount-->
+                    <Frame
+                        Style="{StaticResource CardFrame}">
+
+                        <VerticalStackLayout
+                            Spacing="14">
+
+                            <!-- CATEGORY -->
+
                             <Label
-                                    Text="{Binding MonthlyLimit,
-                                           StringFormat='{0:C}'}"
-                                    FontSize="28"
-                                    FontAttributes="Bold"
-                                    TextColor="#16A34A" />  
-
-                            <Label Text="{Binding Month,StringFormat= 'Month: {0:MMMM yyyy'}"
-                                   FontSize="16"/>
+                                Text="{Binding CategoryName}"
+                                FontSize="22"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource TextColor}" />
 
 
-                            <!--Edit-->
-                            <Button Text="Edit"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BindingContext.EditCommand}"
-                                    CommandParameter="{Binding .}"/>
-                            
-                            <!--Delete-->
-                            <Button Text="Delete"
-                                    BackgroundColor="{StaticResource DangerColor}"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BindingContext.DeleteCommand}"
+
+                            <!-- AMOUNT -->
+
+                            <Label
+                                Text="{Binding MonthlyLimit,
+                                       StringFormat='{0:C}'}"
+                                Style="{StaticResource MetricValueLabel}"
+                                TextColor="{StaticResource SuccessColor}" />
+
+
+
+                            <!-- MONTH -->
+
+                            <Label
+                                Text="{Binding Month,
+                                       StringFormat='Month: {0:MMMM yyyy}'}"
+                                Style="{StaticResource NormalLabel}" />
+
+
+
+                            <!-- ACTION BUTTONS -->
+
+                            <Grid
+                                ColumnDefinitions="*,*"
+                                ColumnSpacing="10">
+
+                                <!-- EDIT -->
+
+                                <Button
+                                    Grid.Column="0"
+                                    Text="Edit"
+                                    Style="{StaticResource PrimaryButton}"
+                                    HeightRequest="45"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                      Path=BindingContext.EditCommand}"
+                                    CommandParameter="{Binding .}" />
+
+
+
+                                <!-- DELETE -->
+
+                                <Button
+                                    Grid.Column="1"
+                                    Text="Delete"
+                                    Style="{StaticResource DangerButton}"
+                                    HeightRequest="45"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                      Path=BindingContext.DeleteCommand}"
                                     CommandParameter="{Binding Id}" />
 
+                            </Grid>
+
                         </VerticalStackLayout>
+
                     </Frame>
+
                 </DataTemplate>
+
             </CollectionView.ItemTemplate>
+
         </CollectionView>
+
     </VerticalStackLayout>
 
 </ContentPage>

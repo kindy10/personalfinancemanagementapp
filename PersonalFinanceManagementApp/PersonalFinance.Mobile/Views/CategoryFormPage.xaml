@@ -1,33 +1,65 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PersonalFinance.Mobile.Views.CategoryFormPage"
-             Title="CategoryFormPage">
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PersonalFinance.Mobile.Views.CategoryFormPage"
+    Title="Category">
 
     <ScrollView>
 
-        <VerticalStackLayout Padding="20" Spacing="20">
-            
-            <!---Title -->
-            <Label Text="{Binding PageTitle}"
-                   Style="{ StaticResource PageTitleStyle}" />
-            
-            <!---Name-->
-            <Entry
-                Placeholder="Category Name"
-                Text="{Binding Name}" />
-            
-            <!---Type Picker-->
-            <Picker Title="Select Type"
-                    ItemsSource="{Binding Types}"
-                    SelectedItem="{Binding SelectedType}"/>
-            
-            <!---Save Button-->
-            <Button Text="Save category"
-                    Command=" {Binding SaveCommand}"/>
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="20">
+
+            <!-- PAGE TITLE -->
+
+            <Label
+                Text="{Binding PageTitle}"
+                Style="{StaticResource TitleLabel}" />
+
+
+
+            <!-- FORM CARD -->
+
+            <Frame
+                Style="{StaticResource CardFrame}">
+
+                <VerticalStackLayout
+                    Spacing="18">
+
+                    <!-- CATEGORY NAME -->
+
+                    <Entry
+                        Placeholder="Category Name"
+                        Text="{Binding Name}"
+                        Style="{StaticResource AppEntry}" />
+
+
+
+                    <!-- CATEGORY TYPE -->
+
+                    <Picker
+                        Title="Select Type"
+                        ItemsSource="{Binding Types}"
+                        SelectedItem="{Binding SelectedType}"
+                        Style="{StaticResource AppPicker}" />
+
+
+
+                    <!-- SAVE BUTTON -->
+
+                    <Button
+                        Text="Save Category"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource PrimaryButton}" />
+
+                </VerticalStackLayout>
+
+            </Frame>
+
         </VerticalStackLayout>
-        
+
     </ScrollView>
-    
 
 </ContentPage>

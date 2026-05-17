@@ -12,31 +12,88 @@
             Padding="20"
             Spacing="20">
 
-            <!-- Title -->
+            <!-- PAGE TITLE -->
+
             <Label
                 Text="My Profile"
-                Style="{StaticResource PageTitleStyle}" />
+                Style="{StaticResource TitleLabel}" />
 
-            <!-- Name -->
-            <Entry
-                Placeholder="Name"
-                Text="{Binding Name}" />
 
-            <!-- Surname -->
-            <Entry
-                Placeholder="Surname"
-                Text="{Binding SurName}" />
 
-            <!-- Email -->
-            <Entry
-                Placeholder="Email"
-                Keyboard="Email"
-                Text="{Binding Email}" />
+            <!-- PROFILE CARD -->
 
-            <!-- Save -->
-            <Button
-                Text="Save Changes"
-                Command="{Binding SaveCommand}" />
+            <Frame
+                Style="{StaticResource CardFrame}">
+
+                <VerticalStackLayout
+                    Spacing="18">
+
+                    <!-- NAME -->
+
+                    <VerticalStackLayout
+                        Spacing="6">
+
+                        <Label
+                            Text="Name"
+                            Style="{StaticResource NormalLabel}" />
+
+                        <Entry
+                            Placeholder="Enter your name"
+                            Text="{Binding Name}"
+                            Style="{StaticResource AppEntry}" />
+
+                    </VerticalStackLayout>
+
+
+
+                    <!-- SURNAME -->
+
+                    <VerticalStackLayout
+                        Spacing="6">
+
+                        <Label
+                            Text="Surname"
+                            Style="{StaticResource NormalLabel}" />
+
+                        <Entry
+                            Placeholder="Enter your surname"
+                            Text="{Binding SurName}"
+                            Style="{StaticResource AppEntry}" />
+
+                    </VerticalStackLayout>
+
+
+
+                    <!-- EMAIL -->
+
+                    <VerticalStackLayout
+                        Spacing="6">
+
+                        <Label
+                            Text="Email"
+                            Style="{StaticResource NormalLabel}" />
+
+                        <Entry
+                            Placeholder="Enter your email"
+                            Keyboard="Email"
+                            Text="{Binding Email}"
+                            Style="{StaticResource AppEntry}" />
+
+                    </VerticalStackLayout>
+
+
+
+                    <!-- SAVE BUTTON -->
+
+                    <Button
+                        Text="Save Changes"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource PrimaryButton}"
+                        Margin="0,10,0,0" />
+
+                </VerticalStackLayout>
+
+            </Frame>
 
         </VerticalStackLayout>
 

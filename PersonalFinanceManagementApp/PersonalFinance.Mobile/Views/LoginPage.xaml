@@ -1,67 +1,87 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PersonalFinance.Mobile.Views.LoginPage"
-             Title="LoginPage">
-    <!--<VerticalStackLayout Padding="20" Spacing="15" >
-        
-        <Entry Placeholder="Email"
-               Text="{Binding Email}"/>
-        
-        <Entry Placeholder="Password"
-               IsPassword="True"
-               Text=" {Binding Password}"/>
-        
-        <Button Text="Login"
-                Command="{Binding LoginCommand}"/>
-        
-    </VerticalStackLayout>-->
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PersonalFinance.Mobile.Views.LoginPage"
+    Title="Login">
+
     <ScrollView>
 
         <VerticalStackLayout
             Padding="30"
-            Spacing="20"
+            Spacing="25"
             VerticalOptions="Center">
 
-            <!-- App Title -->
+            <!-- APP TITLE -->
+
             <Label
                 Text="Personal Finance"
-                Style="{StaticResource PageTitleStyle}"
+                Style="{StaticResource TitleLabel}"
                 HorizontalOptions="Center" />
 
-            <!-- Subtitle -->
+
+
+            <!-- SUBTITLE -->
+
             <Label
                 Text="Track your money professionally"
-                FontSize="16"
-                TextColor="{StaticResource SecondaryText}"
+                Style="{StaticResource NormalLabel}"
                 HorizontalOptions="Center" />
 
-            <!-- Email -->
-            <Entry
-                Placeholder="Email"
-                Text="{Binding Email}" />
 
-            <!-- Password -->
-            <Entry
-                Placeholder="Password"
-                IsPassword="True"
-                Text="{Binding Password}" />
 
-            <!-- Login Button -->
+            <!-- LOGIN CARD -->
+
+            <Frame
+                Style="{StaticResource CardFrame}">
+
+                <VerticalStackLayout
+                    Spacing="18">
+
+                    <!-- EMAIL -->
+
+                    <Entry
+                        Placeholder="Email"
+                        Text="{Binding Email}"
+                        Style="{StaticResource AppEntry}" />
+
+
+
+                    <!-- PASSWORD -->
+
+                    <Entry
+                        Placeholder="Password"
+                        IsPassword="True"
+                        Text="{Binding Password}"
+                        Style="{StaticResource AppEntry}" />
+
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <Button
+                        Text="Login"
+                        Command="{Binding LoginCommand}"
+                        Style="{StaticResource PrimaryButton}" />
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+
+
+            <!-- REGISTER NAVIGATION -->
+
             <Button
-                Text="Login"
-                Command="{Binding LoginCommand}" />
-            
-            
-            <!---Navigation to registr-->
-            <Button
-                Text="Dont't have an account ? Register"
+                Text="Don't have an account? Register"
                 BackgroundColor="Transparent"
                 TextColor="{StaticResource PrimaryColor}"
-                 Command="{Binding GoToRegisterCommand}"/>
-              
+                FontAttributes="Bold"
+                Command="{Binding GoToRegisterCommand}" />
 
         </VerticalStackLayout>
-        
+
     </ScrollView>
+
 </ContentPage>

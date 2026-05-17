@@ -1,40 +1,60 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PersonalFinance.Mobile.Views.TransactionsPage"
-             Title="TransactionsPage">
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PersonalFinance.Mobile.Views.TransactionsPage"
+    Title="Transactions">
+
     <ScrollView>
-        <VerticalStackLayout>
-            
-       
+
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="15">
+
+            <!-- PAGE TITLE -->
+
             <Label
-                Text="Transactins"
-                Style="{StaticResource PageTitleStyle}"/>
-        
-            <!--Transactions List -->
-            <CollectionView ItemsSource ="{Binding Transactions}">
+                Text="Transactions"
+                Style="{StaticResource TitleLabel}" />
+
+
+
+            <!-- ADD TRANSACTION BUTTON -->
+
+            <Button
+                Text="+ Add Transaction"
+                Style="{StaticResource PrimaryButton}"
+                Command="{Binding GoToAddTransactionCommand}" />
+
+
+
+            <!-- TRANSACTIONS LIST -->
+
+            <CollectionView
+                ItemsSource="{Binding Transactions}">
 
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate>
 
+                        <!-- TRANSACTION CARD -->
+
                         <Frame
-            CornerRadius="20"
-            Padding="15"
-            Margin="0,8"
-            HasShadow="True"
-            BackgroundColor="White">
+                            Style="{StaticResource CardFrame}">
 
                             <VerticalStackLayout
-                Spacing="12">
-                         <!-- TOP ROW -->
+                                Spacing="14">
+
+                                <!-- TOP SECTION -->
 
                                 <Grid
-                    ColumnDefinitions="*,Auto">
+                                    ColumnDefinitions="*,Auto">
 
-                                    <!-- LEFT -->
+                                    <!-- LEFT SIDE -->
 
-                                    <VerticalStackLayout Spacing="2">
+                                    <VerticalStackLayout
+                                        Spacing="4">
 
                                         <!-- CATEGORY -->
 
@@ -42,35 +62,38 @@
                                             Text="{Binding Category.Name}"
                                             FontSize="20"
                                             FontAttributes="Bold"
-                                            TextColor="#111827" />
+                                            TextColor="{StaticResource TextColor}" />
+
+
 
                                         <!-- DESCRIPTION -->
 
                                         <Label
                                             Text="{Binding Description}"
-                                            FontSize="14"
-                                            TextColor="#6B7280" />
+                                            Style="{StaticResource NormalLabel}" />
 
                                     </VerticalStackLayout>
 
 
 
-                                    <!-- RIGHT -->
+                                    <!-- RIGHT SIDE -->
 
                                     <VerticalStackLayout
-                                            Grid.Column="1"
-                                            HorizontalOptions="End"
-                                            Spacing="2">
+                                        Grid.Column="1"
+                                        HorizontalOptions="End"
+                                        Spacing="4">
 
                                         <!-- AMOUNT -->
 
                                         <Label
                                             Text="{Binding Amount,
                                                    StringFormat='-{0:C}'}"
-                                            FontSize="22"
+                                            FontSize="24"
                                             FontAttributes="Bold"
-                                            TextColor="#DC2626"
+                                            TextColor="{StaticResource DangerColor}"
                                             HorizontalTextAlignment="End" />
+
+
 
                                         <!-- DATE -->
 
@@ -78,8 +101,8 @@
                                             Text="{Binding Date,
                                                    StringFormat='{0:dd MMM yyyy}'}"
                                             FontSize="13"
-                                            TextColor="#9CA3AF"
-                                            HorizontalTextAlignment="End" />    
+                                            TextColor="{StaticResource SecondaryTextColor}"
+                                            HorizontalTextAlignment="End" />
 
                                     </VerticalStackLayout>
 
@@ -91,34 +114,28 @@
 
                                 <Grid
                                     ColumnDefinitions="*,*"
-                                    ColumnSpacing="10"> 
+                                    ColumnSpacing="10">
 
-                                    <!-- EDIT -->
+                                    <!-- EDIT BUTTON -->
 
                                     <Button
                                         Grid.Column="0"
                                         Text="Edit"
-                                        CornerRadius="15"
+                                        Style="{StaticResource PrimaryButton}"
                                         HeightRequest="45"
-                                        FontAttributes="Bold"
-                                        BackgroundColor="#2563EB"
-                                        TextColor="White"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
                                                           Path=BindingContext.EditCommand}"
                                         CommandParameter="{Binding .}" />
 
 
 
-                                    <!-- DELETE -->
+                                    <!-- DELETE BUTTON -->
 
                                     <Button
                                         Grid.Column="1"
                                         Text="Delete"
-                                        CornerRadius="15"
+                                        Style="{StaticResource DangerButton}"
                                         HeightRequest="45"
-                                        FontAttributes="Bold"
-                                        BackgroundColor="#DC2626"
-                                        TextColor="White"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
                                                           Path=BindingContext.DeleteCommand}"
                                         CommandParameter="{Binding .}" />
@@ -132,8 +149,11 @@
                     </DataTemplate>
 
                 </CollectionView.ItemTemplate>
+
             </CollectionView>
+
         </VerticalStackLayout>
 
     </ScrollView>
+
 </ContentPage>
