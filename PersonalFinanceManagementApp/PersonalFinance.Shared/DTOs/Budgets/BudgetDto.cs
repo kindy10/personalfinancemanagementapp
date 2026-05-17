@@ -10,8 +10,8 @@ namespace PersonalFinance.Shared.DTOs.Budgets
     {
         public Guid Id { get; set; }
         public decimal MonthlyLimit { get; set; }
-        public int Month { get; set; }
-        public int Year { get; set; }
+        public DateTime Month { get; set; }
+        //public int Year { get; set; }
 
         public Guid CategoryId { get; set; }
         public string CategoryName { get; set; }

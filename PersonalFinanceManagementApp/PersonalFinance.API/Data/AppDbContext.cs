@@ -57,7 +57,7 @@ namespace PersonalFinance.API.Data
 
                 // Budget rules
                 modelBuilder.Entity<Budget>()
-                    .HasIndex(b => new { b.UserId, b.CategoryId, b.Month, b.Year })
+                    .HasIndex(b => new { b.UserId, b.CategoryId, b.Month })
                     .IsUnique();
 
                 modelBuilder.Entity<Budget>()

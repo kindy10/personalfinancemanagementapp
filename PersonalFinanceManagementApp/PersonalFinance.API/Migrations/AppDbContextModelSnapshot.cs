@@ -34,8 +34,8 @@ namespace PersonalFinance.API.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Month")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("MonthlyLimit")
                         .HasColumnType("decimal(18,2)");
@@ -43,14 +43,11 @@ namespace PersonalFinance.API.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserId", "CategoryId", "Month", "Year")
+                    b.HasIndex("UserId", "CategoryId", "Month")
                         .IsUnique();
 
                     b.ToTable("Budgets", (string)null);
@@ -79,7 +76,10 @@ namespace PersonalFinance.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Category_Type", "[Type] IN (0,1)");
+                        });
                 });
 
             modelBuilder.Entity("PersonalFinance.API.Models.Transaction", b =>
