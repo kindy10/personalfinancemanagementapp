@@ -54,6 +54,7 @@ namespace PersonalFinance.API.Controllers
                         "Summary retrieved"));
         }
 
+        //Budget Usage
         [HttpGet("budget-usage")]
         public async Task<IActionResult> GetBudgetUsage()
         {
@@ -63,6 +64,36 @@ namespace PersonalFinance.API.Controllers
 
             return Ok(
                 ApiResponse<List<BudgetUsageDto>>
+                    .SuccessResponse(
+                        result,
+                        "Success"));
+        }
+
+        //EXpense category
+        [HttpGet("expense-categories")]
+        public async Task<IActionResult> GetExpenseCategories()
+        {
+            var userId = Guid.Parse( User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            var result = await _reportService .GetExpenseByCategoryAsync(userId);
+
+            return Ok(
+                ApiResponse<List<ExpenseCategoryDto>>
+                    .SuccessResponse(
+                        result,
+                        "Success"));
+        }
+
+        //Monthly Trend
+        [HttpGet("monthly-trends")]
+        public async Task<IActionResult> GetMonthlyTrends()
+        {
+            var userId = Guid.Parse( User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            var result =await _reportService.GetMonthlyTrendsAsync(userId);
+
+            return Ok(
+                ApiResponse<List<MonthlyTrendDto>>
                     .SuccessResponse(
                         result,
                         "Success"));

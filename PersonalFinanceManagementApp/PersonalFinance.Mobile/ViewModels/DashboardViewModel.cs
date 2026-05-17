@@ -2,6 +2,10 @@
 using PersonalFinance.Shared.DTOs.Reports;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using LiveChartsCore;
+
+using LiveChartsCore.SkiaSharpView;
+
 
 namespace PersonalFinance.Mobile.ViewModels
 {
@@ -66,6 +70,67 @@ namespace PersonalFinance.Mobile.ViewModels
         //Budget usage
         public ObservableCollection<BudgetUsageDto> BudgetUsages { get; set; }
 
+
+        // Expense serie  (Live Chart)
+        private IEnumerable<ISeries> _expenseSeries;
+
+        public IEnumerable<ISeries> ExpenseSeries
+        {
+            get => _expenseSeries;
+
+            set
+            {
+                _expenseSeries = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+
+        //Trend Series
+        private IEnumerable<ISeries> _trendSeries;
+
+        public IEnumerable<ISeries> TrendSeries
+        {
+            get => _trendSeries;
+
+            set
+            {
+                _trendSeries = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        private string[] _months;
+
+        public string[] Months
+        {
+            get => _months;
+
+            set
+            {
+                _months = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        //---------XAxes property
+        private Axis[] _xAxes;
+
+        public Axis[] XAxes
+        {
+            get => _xAxes;
+
+            set
+            {
+                _xAxes = value;
+
+                OnPropertyChanged();
+            }
+        }
+
         //---------------Constructor
         public DashboardViewModel() { 
             _reportService = new ReportService();
@@ -73,6 +138,8 @@ namespace PersonalFinance.Mobile.ViewModels
             //Load dashboard data automatically
             LoadSummary();
             _ = LoadBudgetUsage();
+            _ = LoadExpenseChart();
+            _ = LoadTrendChart();
 
             GoToTransactionsCommand = new Command(async () => await Shell.Current.GoToAsync("//transactions"));
 
@@ -132,6 +199,101 @@ namespace PersonalFinance.Mobile.ViewModels
                     .DisplayAlert(
                         "Error",
                         ex.Message,
+                        "OK");
+            }
+        }
+
+        //Lod  Expense Chart 
+        private async Task LoadExpenseChart()
+        {
+            try
+            {
+                var data =
+                    await _reportService
+                        .GetExpenseCategoriesAsync();
+
+                ExpenseSeries =
+                    data.Select(x =>
+                        new PieSeries<decimal>
+                        {
+                            Values =
+                                new[] { x.TotalAmount },
+
+                            Name =
+                                x.CategoryName,
+
+                            DataLabelsSize = 14,
+
+                            DataLabelsPosition =
+                                LiveChartsCore.Measure
+                                    .PolarLabelsPosition
+                                    .Middle,
+
+                            DataLabelsFormatter =
+                                            point =>
+                                                $"{point.Context.Series.Name}\n{point.Coordinate.PrimaryValue:C}"
+                        })
+                    .ToArray();
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                    .DisplayAlert(
+                        "Chart Error",
+                        ex.ToString(),
+                        "OK");
+            }
+        }
+
+        //Load trend
+        private async Task LoadTrendChart()
+        {
+            try
+            {
+                var trends = await _reportService.GetMonthlyTrendsAsync();
+
+                Months =
+                    trends
+                        .Select(x => x.Month)
+                        .ToArray();
+
+                XAxes =
+                [
+                    new Axis
+                    {
+                        Labels = Months
+                    }
+                ];
+
+                TrendSeries =
+                [
+                    new LineSeries<decimal>
+            {
+                Name = "Income",
+
+                Values =
+                    trends
+                        .Select(x => x.Income)
+                        .ToArray()
+            },
+
+            new LineSeries<decimal>
+            {
+                Name = "Expense",
+
+                Values =
+                    trends
+                        .Select(x => x.Expense)
+                        .ToArray()
+            }
+                ];
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                    .DisplayAlert(
+                        "Trend Error",
+                        ex.ToString(),
                         "OK");
             }
         }

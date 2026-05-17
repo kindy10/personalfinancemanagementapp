@@ -1,165 +1,345 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PersonalFinance.Mobile.Views.DashboardPage">
 
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui" 
+    x:Class="PersonalFinance.Mobile.Views.DashboardPage"
+    BackgroundColor="#111827">
 
-    <Grid Padding="20">
+    <ScrollView>
 
-        <CollectionView
-        ItemsSource="{Binding BudgetUsages}">
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="20">
 
-            <CollectionView.Header>
+            <!-- HEADER -->
 
-                <VerticalStackLayout
-                Spacing="20">
-
-                    <!-- Header -->
             <Label
                 Text="Dashboard"
-                Style="{StaticResource PageTitleStyle}" />
+                FontSize="34"
+                FontAttributes="Bold"
+                TextColor="White" />
 
-            <!-- Income Card -->
-            <Frame Style="{StaticResource DashboardCardStyle}">
 
-                <VerticalStackLayout>
+
+            <!-- INCOME CARD -->
+
+            <Frame
+                CornerRadius="25"
+                Padding="20"
+                BackgroundColor="White"
+                HasShadow="True">
+
+                <VerticalStackLayout
+                    Spacing="8">
 
                     <Label
                         Text="Total Income"
-                        Style="{StaticResource SectionTitleStyle}" />
+                        FontSize="18"
+                        TextColor="#6B7280" />
 
                     <Label
-                        Text="{Binding TotalIncome}"
-                        Style="{StaticResource CardValueStyle}"
-                        TextColor="{StaticResource SuccessColor}" />
+                        Text="{Binding TotalIncome,
+                               StringFormat='{0:C}'}"
+                        FontSize="32"
+                        FontAttributes="Bold"
+                        TextColor="#16A34A" />
 
                 </VerticalStackLayout>
 
             </Frame>
 
-            <!-- Expense Card -->
-            <Frame Style="{StaticResource DashboardCardStyle}">
 
-                <VerticalStackLayout>
+
+            <!-- EXPENSE CARD -->
+
+            <Frame
+                CornerRadius="25"
+                Padding="20"
+                BackgroundColor="White"
+                HasShadow="True">
+
+                <VerticalStackLayout
+                    Spacing="8">
+
                     <Label
                         Text="Total Expense"
-                        Style="{StaticResource SectionTitleStyle}" />
+                        FontSize="18"
+                        TextColor="#6B7280" />
 
                     <Label
-                        Text="{Binding TotalExpense}"
-                        Style="{StaticResource CardValueStyle}"
-                        TextColor="{StaticResource DangerColor}" />
+                        Text="{Binding TotalExpense,
+                               StringFormat='{0:C}'}"
+                        FontSize="32"
+                        FontAttributes="Bold"
+                        TextColor="#DC2626" />
 
                 </VerticalStackLayout>
 
             </Frame>
 
-            <!-- Balance Card -->
-            <Frame Style="{StaticResource DashboardCardStyle}">
 
-                <VerticalStackLayout>
+
+            <!-- BALANCE CARD -->
+
+            <Frame
+                CornerRadius="25"
+                Padding="20"
+                BackgroundColor="White"
+                HasShadow="True">
+
+                <VerticalStackLayout
+                    Spacing="8">
 
                     <Label
                         Text="Balance"
-                        Style="{StaticResource SectionTitleStyle}" />
+                        FontSize="18"
+                        TextColor="#6B7280" />
 
                     <Label
-                        Text="{Binding Balance}"
-                        Style="{StaticResource CardValueStyle}" />
-
+                        Text="{Binding Balance,
+                               StringFormat='{0:C}'}"
+                        FontSize="32"
+                        FontAttributes="Bold"
+                        TextColor="#2563EB" />
 
                 </VerticalStackLayout>
 
             </Frame>
-            <Button Text="View Transactions"
-                        Command="{Binding GoToTransactionsCommand}"/>
-            <Button
-                    Text=" Manage Categories"
-                    Command="{Binding GoToCategoriesCommand}"/>
+            <!-- EXPENSE CHART -->
 
-            <Button Text="Manage Budgets"
-                    Command="{Binding GoToBudgetCommand}"/>
-            <Button
-                    Text="My Profile"
-                    Command="{Binding GoToProfileCommand}" />
+            <Label
+                  Text="Expense Analytics"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   Margin="0,20,0,10" />
+
+            <Frame
+                     BackgroundColor="White"
+                     CornerRadius="25"
+                      Padding="20"
+                      HasShadow="True">
+
+                <VerticalStackLayout>
+
+                    <lvc:PieChart
+                              Series="{Binding ExpenseSeries}"
+                              HeightRequest="300" />
+
+                </VerticalStackLayout>
+
+            </Frame>
 
 
-            <!-- Budget Usage Section -->
+            <!-- MONTHLY TRENDS -->
+
+            <Label
+                Text="Monthly Trends"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="White"
+                Margin="0,20,0,10" />
+
+            <Frame
+                BackgroundColor="White"
+                CornerRadius="25"
+                Padding="20"
+                HasShadow="True">
+
+                <VerticalStackLayout>
+
+                    <lvc:CartesianChart
+                        Series="{Binding TrendSeries}"
+                        XAxes="{Binding XAxes}"
+                        HeightRequest="300" />
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <Label
+                Text="Quick Actions"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="White"
+                Margin="0,10,0,5" />
+
+            <Grid
+                ColumnDefinitions="*,*"
+                RowDefinitions="Auto,Auto"
+                ColumnSpacing="10"
+                RowSpacing="10">
+
+                <!-- TRANSACTIONS -->
+
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="Transactions"
+                    Command="{Binding GoToTransactionsCommand}"
+                    CornerRadius="20"
+                    HeightRequest="60"
+                    FontAttributes="Bold"
+                    BackgroundColor="#2563EB"
+                    TextColor="White" />
+
+
+
+                <!-- CATEGORIES -->
+
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="Categories"
+                    Command="{Binding GoToCategoriesCommand}"
+                    CornerRadius="20"
+                    HeightRequest="60"
+                    FontAttributes="Bold"
+                    BackgroundColor="#7C3AED"
+                    TextColor="White" />
+
+
+
+                <!-- BUDGETS -->
+
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Budgets"
+                    Command="{Binding GoToBudgetCommand}"
+                    CornerRadius="20"
+                    HeightRequest="60"
+                    FontAttributes="Bold"
+                    BackgroundColor="#059669"
+                    TextColor="White" />
+
+
+
+                <!-- PROFILE -->
+
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="Profile"
+                    Command="{Binding GoToProfileCommand}"
+                    CornerRadius="20"
+                    HeightRequest="60"
+                    FontAttributes="Bold"
+                    BackgroundColor="#EA580C"
+                    TextColor="White" />
+
+            </Grid>
+
+
+
+            <!-- BUDGET USAGE -->
 
             <Label
                 Text="Budget Usage"
-                FontSize="22"
+                FontSize="28"
                 FontAttributes="Bold"
+                TextColor="White"
                 Margin="0,20,0,10" />
 
-             <CollectionView ItemsSource="{Binding BudgetUsages}">
 
-                  <CollectionView.ItemTemplate>
 
-                     <DataTemplate>
+            <CollectionView
+                HeightRequest="350"
+                ItemsSource="{Binding BudgetUsages}">
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
 
                         <Frame
-                                CornerRadius="20"
-                                Padding="15"
-                                Margin="0,5"
-                                HasShadow="True"
-                                BackgroundColor="White">
+                            CornerRadius="25"
+                            Padding="20"
+                            Margin="0,8"
+                            HasShadow="True"
+                            BackgroundColor="White">
 
-                                <VerticalStackLayout Spacing="10">
+                            <VerticalStackLayout
+                                Spacing="12">
 
-                                <!-- Category -->
-                                         <Label
-                                                Text="{Binding CategoryName}"
-                                                FontSize="18"
-                                                FontAttributes="Bold" />
+                                <!-- CATEGORY NAME -->
 
-                                 <!-- Spent / Limit -->
-                                         <Label FontSize="16">
+                                <Label
+                                    Text="{Binding CategoryName}"
+                                    FontSize="22"
+                                    FontAttributes="Bold"
+                                    TextColor="#111827" />
 
-                                                <Label.FormattedText>
 
-                                                    <FormattedString>
 
-                                                        <Span
-                                                Text="{Binding Spent}" />
+                                <!-- SPENT / LIMIT -->
 
-                                                        <Span
-                                                Text=" / " />
+                                <Grid
+                                    ColumnDefinitions="*,Auto">
 
-                                                        <Span
-                                                Text="{Binding Limit}" />
+                                    <Label
+                                        Text="{Binding Spent,
+                                               StringFormat='Spent: {0:C}'}"
+                                        FontSize="16"
+                                        TextColor="#6B7280" />
 
-                                                    </FormattedString>
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding Limit,
+                                               StringFormat='Limit: {0:C}'}"
+                                        FontSize="16"
+                                        TextColor="#6B7280" />
 
-                                                </Label.FormattedText>
+                                </Grid>
 
-                                         </Label>
 
-                                            <!-- Progress Bar -->
-                                         <ProgressBar
-                                                   Progress="{Binding PercentageUsed}" />
 
-                                            <!-- Percentage -->
-                                         <Label
-                                                Text="{Binding DisplayPercentage,
-                                                       StringFormat='{0:F0}% used'}"
-                                                FontSize="14"
-                                                TextColor="Gray" />
+                                <!-- PROGRESS BAR -->
 
-                                </VerticalStackLayout>
+                                <ProgressBar
+                                    Progress="{Binding PercentageUsed}"
+                                    HeightRequest="10"
+                                    BackgroundColor="#E5E7EB"
+                                    ProgressColor="#2563EB" />
 
-                         </Frame>
 
-                      </DataTemplate>
 
-                  </CollectionView.ItemTemplate>
+                                <!-- REMAINING -->
 
-             </CollectionView>
-                </VerticalStackLayout>
+                                <Grid
+                                    ColumnDefinitions="*,Auto">
 
-            </CollectionView.Header>
-    </CollectionView>
+                                    <Label
+                                        Text="{Binding Remaining,
+                                               StringFormat='Remaining: {0:C}'}"
+                                        FontSize="15"
+                                        TextColor="#16A34A" />
 
-</Grid>
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding PercentageUsed,
+                                               StringFormat='{0:P0}'}"
+                                        FontSize="15"
+                                        FontAttributes="Bold"
+                                        TextColor="#DC2626" />
+
+                                </Grid>
+                            </VerticalStackLayout>
+
+                        </Frame>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
 
 </ContentPage>

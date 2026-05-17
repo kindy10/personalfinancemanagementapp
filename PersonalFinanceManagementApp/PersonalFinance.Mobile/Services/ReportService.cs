@@ -44,5 +44,26 @@ namespace PersonalFinance.Mobile.Services
 
             return response.Data;
         }
+
+        //---------GET CATEGORY FROM API
+        public async Task<List<ExpenseCategoryDto>>GetExpenseCategoriesAsync()
+        {
+            var response =await _apiService .GetAsync<ApiResponse<List<ExpenseCategoryDto>>>("reports/expense-categories");
+
+            return response.Data;
+        }
+
+
+        //-------Monthly trend 
+        public async Task<List<MonthlyTrendDto>>GetMonthlyTrendsAsync()
+        {
+            var response =
+                await _apiService
+                    .GetAsync<
+                        ApiResponse<List<MonthlyTrendDto>>>(
+                            "reports/monthly-trends");
+
+            return response.Data;
+        }
     }
 }
