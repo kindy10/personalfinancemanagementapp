@@ -4,78 +4,17 @@
              x:Class="PersonalFinance.Mobile.Views.DashboardPage">
 
 
-    <ScrollView>
-                <!--<VerticalStackLayout Padding="20" Spacing="20">
-        
-                    --><!---Page Title--><!--
-                    <Label 
-                        Text= "Financial Dasboard"
-                        FontSize="28"
-                        FontAttributes="Bold" 
-                        HorizontalOptions="Center"/>
-        
-        
-                    --><!--total Income --><!--
-                    <Frame Padding="15">
-                        <VerticalStackLayout>
-                
-                            <Label
-                                Text="Total Income"
-                                FontSize="18"/>
-                
-                            <Label
-                                Text=" {Binding TotalIncome}"
-                                FontSize ="24"
-                                FontAttributes="Bold"/>
+    <Grid Padding="20">
 
-                        </VerticalStackLayout>
-                    </Frame>
-        
-        
-        
-                    --><!---TotalExpense --><!--
-                    <Frame Padding="15">
-            
-                        <VerticalStackLayout>
-                
-                            <Label
-                                Text="Total Expense"
-                                FontSize="18"/>
-                
-                            <Label
-                                Text=" {Binding TotalExpense}"
-                                FontSize ="24"
-                                FontAttributes="Bold"/> 
+        <CollectionView
+        ItemsSource="{Binding BudgetUsages}">
 
-                        </VerticalStackLayout>
-            
-                    </Frame>
-        
-        
-                    --><!--Balance--><!--
+            <CollectionView.Header>
 
-                    <Frame Padding="15">
+                <VerticalStackLayout
+                Spacing="20">
 
-                        <VerticalStackLayout>
-
-                            <Label
-                                Text="Balance"
-                                FontSize="18"/>
-
-                            <Label
-                                Text=" {Binding Balance}"
-                                FontSize ="24"
-                                FontAttributes="Bold"/>
-
-                        </VerticalStackLayout>
-
-                    </Frame>
-                </VerticalStackLayout>-->
-        <VerticalStackLayout
-            Padding="20"
-            Spacing="20">
-
-            <!-- Header -->
+                    <!-- Header -->
             <Label
                 Text="Dashboard"
                 Style="{StaticResource PageTitleStyle}" />
@@ -144,9 +83,83 @@
                     Text="My Profile"
                     Command="{Binding GoToProfileCommand}" />
 
-        </VerticalStackLayout>
 
+            <!-- Budget Usage Section -->
 
-    </ScrollView>
+            <Label
+                Text="Budget Usage"
+                FontSize="22"
+                FontAttributes="Bold"
+                Margin="0,20,0,10" />
+
+             <CollectionView ItemsSource="{Binding BudgetUsages}">
+
+                  <CollectionView.ItemTemplate>
+
+                     <DataTemplate>
+
+                        <Frame
+                                CornerRadius="20"
+                                Padding="15"
+                                Margin="0,5"
+                                HasShadow="True"
+                                BackgroundColor="White">
+
+                                <VerticalStackLayout Spacing="10">
+
+                                <!-- Category -->
+                                         <Label
+                                                Text="{Binding CategoryName}"
+                                                FontSize="18"
+                                                FontAttributes="Bold" />
+
+                                 <!-- Spent / Limit -->
+                                         <Label FontSize="16">
+
+                                                <Label.FormattedText>
+
+                                                    <FormattedString>
+
+                                                        <Span
+                                                Text="{Binding Spent}" />
+
+                                                        <Span
+                                                Text=" / " />
+
+                                                        <Span
+                                                Text="{Binding Limit}" />
+
+                                                    </FormattedString>
+
+                                                </Label.FormattedText>
+
+                                         </Label>
+
+                                            <!-- Progress Bar -->
+                                         <ProgressBar
+                                                   Progress="{Binding PercentageUsed}" />
+
+                                            <!-- Percentage -->
+                                         <Label
+                                                Text="{Binding DisplayPercentage,
+                                                       StringFormat='{0:F0}% used'}"
+                                                FontSize="14"
+                                                TextColor="Gray" />
+
+                                </VerticalStackLayout>
+
+                         </Frame>
+
+                      </DataTemplate>
+
+                  </CollectionView.ItemTemplate>
+
+             </CollectionView>
+                </VerticalStackLayout>
+
+            </CollectionView.Header>
+    </CollectionView>
+
+</Grid>
 
 </ContentPage>
