@@ -143,5 +143,80 @@ namespace PersonalFinance.API.Services.Implementations
                 Balance = income - expense
             };
         }
+
+        //Category Expense
+        public async Task<List<ExpenseCategoryDto>> GetExpenseByCategoryAsync(Guid userId)
+        {
+            var result =
+                await _context.Transactions
+                    .Where(t =>
+                        t.UserId == userId &&
+                        t.Category.Type ==
+                            CategoryType.Expense)
+                    .GroupBy(t =>
+                        t.Category.Name)
+                    .Select(g =>
+                        new ExpenseCategoryDto
+                        {
+                            CategoryName = g.Key,
+
+                            TotalAmount =
+                                g.Sum(t => t.Amount)
+                        })
+                    .ToListAsync();
+
+            return result;
+        }
+
+        //Monthly Trend Async
+        public async Task<List<MonthlyTrendDto>> GetMonthlyTrendsAsync(Guid userId)
+        {
+            var sixMonthsAgo =
+                DateTime.UtcNow.AddMonths(-5);
+
+            var transactions =
+                await _context.Transactions
+                    .Where(t =>
+                        t.UserId == userId &&
+                        t.Date >= sixMonthsAgo)
+                    .Include(t => t.Category)
+                    .ToListAsync();
+
+            var result =
+                transactions
+                    .GroupBy(t =>
+                        new
+                        {
+                            t.Date.Year,
+                            t.Date.Month
+                        })
+                    .OrderBy(g => g.Key.Year)
+                    .ThenBy(g => g.Key.Month)
+                    .Select(g =>
+                        new MonthlyTrendDto
+                        {
+                            Month =
+                                new DateTime(
+                                    g.Key.Year,
+                                    g.Key.Month,
+                                    1)
+                                .ToString("MMM"),
+
+                            Income =
+                                g.Where(t =>
+                                    t.Category.Type ==
+                                    CategoryType.Income)
+                                .Sum(t => t.Amount),
+
+                            Expense =
+                                g.Where(t =>
+                                    t.Category.Type ==
+                                    CategoryType.Expense)
+                                .Sum(t => t.Amount)
+                        })
+                    .ToList();
+
+            return result;
+        }
     }
 }

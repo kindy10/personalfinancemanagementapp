@@ -18,58 +18,119 @@
 
                     <DataTemplate>
 
-                        <!--Transaction Card-->
-                        <Frame Style=" {StaticResource DashboardCardStyle}">
+                        <Frame
+            CornerRadius="20"
+            Padding="15"
+            Margin="0,8"
+            HasShadow="True"
+            BackgroundColor="White">
 
-                            <VerticalStackLayout>
-                                <!--Description-->
-                                <Label
-                                    Text="{Binding Description}"
-                                    FontSize="20"
-                                    FontAttributes="Bold"/>
+                            <VerticalStackLayout
+                Spacing="12">
+                         <!-- TOP ROW -->
 
-                                <!---Amount -->
-                                <Label
-                                    Text="{Binding Amount}"
-                                    FontSize="20"/>
+                                <Grid
+                    ColumnDefinitions="*,Auto">
 
-                                <!---Category-->
-                                <Label
-                                    Text="{Binding CategoryName}"
-                                    TextColor="{StaticResource SecondaryText}"/>
+                                    <!-- LEFT -->
 
-                                <!---Date-->
-                                <Label
-                                    Text="{Binding Date}"
-                                    FontSize="12"
-                                    TextColor="{StaticResource SecondaryText}"/>
+                                    <VerticalStackLayout Spacing="2">
 
-                                <!--Delete button-->
-                                <Button
-                                     Text="Delete"
-                                    BackgroundColor="{StaticResource DangerColor}"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
-                                    CommandParameter="{Binding Id}" />
+                                        <!-- CATEGORY -->
 
-                                <!-- Create  button-->
-                                <Button
-                                    Text="Add Transaction"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.GoToAddCommand}" />
+                                        <Label
+                                            Text="{Binding Category.Name}"
+                                            FontSize="20"
+                                            FontAttributes="Bold"
+                                            TextColor="#111827" />
 
-                                <!--Edit button-->
-                                <Button
-                                    Text="Edit"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditCommand}"
-                                    CommandParameter="{Binding .}" />
+                                        <!-- DESCRIPTION -->
+
+                                        <Label
+                                            Text="{Binding Description}"
+                                            FontSize="14"
+                                            TextColor="#6B7280" />
+
+                                    </VerticalStackLayout>
 
 
+
+                                    <!-- RIGHT -->
+
+                                    <VerticalStackLayout
+                                            Grid.Column="1"
+                                            HorizontalOptions="End"
+                                            Spacing="2">
+
+                                        <!-- AMOUNT -->
+
+                                        <Label
+                                            Text="{Binding Amount,
+                                                   StringFormat='-{0:C}'}"
+                                            FontSize="22"
+                                            FontAttributes="Bold"
+                                            TextColor="#DC2626"
+                                            HorizontalTextAlignment="End" />
+
+                                        <!-- DATE -->
+
+                                        <Label
+                                            Text="{Binding Date,
+                                                   StringFormat='{0:dd MMM yyyy}'}"
+                                            FontSize="13"
+                                            TextColor="#9CA3AF"
+                                            HorizontalTextAlignment="End" />    
+
+                                    </VerticalStackLayout>
+
+                                </Grid>
+
+
+
+                                <!-- ACTION BUTTONS -->
+
+                                <Grid
+                                    ColumnDefinitions="*,*"
+                                    ColumnSpacing="10"> 
+
+                                    <!-- EDIT -->
+
+                                    <Button
+                                        Grid.Column="0"
+                                        Text="Edit"
+                                        CornerRadius="15"
+                                        HeightRequest="45"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="#2563EB"
+                                        TextColor="White"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                          Path=BindingContext.EditCommand}"
+                                        CommandParameter="{Binding .}" />
+
+
+
+                                    <!-- DELETE -->
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Text="Delete"
+                                        CornerRadius="15"
+                                        HeightRequest="45"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="#DC2626"
+                                        TextColor="White"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                          Path=BindingContext.DeleteCommand}"
+                                        CommandParameter="{Binding .}" />
+
+                                </Grid>
 
                             </VerticalStackLayout>
-
 
                         </Frame>
 
                     </DataTemplate>
+
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </VerticalStackLayout>

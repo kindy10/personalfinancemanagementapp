@@ -9,5 +9,7 @@ namespace PersonalFinance.API.Services.Interfaces
         Task<SummaryDto> GetSummaryAsync(Guid userId);
 
         Task<MonthlyReportDto> GetMonthlyReportAsync(Guid userId, int month,int year);
+        Task<List<ExpenseCategoryDto>>GetExpenseByCategoryAsync(Guid userId);
+        Task<List<MonthlyTrendDto>> GetMonthlyTrendsAsync(Guid userId);
     }
 }
