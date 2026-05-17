@@ -11,8 +11,8 @@ namespace PersonalFinance.API.Models
         public Guid Id { get; set; }
         public decimal MonthlyLimit { get; set; }
         public DateTime CreatedAt { get; set ; }
-        public int  Month {  get; set; }
-        public int Year { get; set; }
+        public DateTime  Month {  get; set; }
+        //public int Year { get; set; }
 
         //Foreign keys
         public Guid CategoryId { get; set; }

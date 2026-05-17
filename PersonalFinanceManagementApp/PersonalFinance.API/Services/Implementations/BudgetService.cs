@@ -24,7 +24,7 @@ namespace PersonalFinance.API.Services.Implementations
                     Id = b.Id,
                     MonthlyLimit = b.MonthlyLimit,
                     Month = b.Month,
-                    Year = b.Year,
+                    //Year = b.Year,
                     CategoryId = b.CategoryId,
                     CategoryName = b.Category.Name,
                 })
@@ -36,12 +36,12 @@ namespace PersonalFinance.API.Services.Implementations
         public async Task<BudgetDto> CreateAsync(Guid userId,CreateBudgetRequestDto request)
         {
             //Check Month
-            if (request.Month < 1 || request.Month > 12)
-                throw new AppException("Invalid month");
+            //if (request.Month < 1 || request.Month > 12)
+            //    throw new AppException("Invalid month");
 
             //Check Year
-            if (request.Year < 2000)
-                throw new AppException("Invalid year");
+            //if (request.Year < 2000)
+            //    throw new AppException("Invalid year");
             //check MonthlyLimit
             if (request.MonthlyLimit <= 0)
                 throw new AppException("Budget must be grater than zero");
@@ -50,7 +50,7 @@ namespace PersonalFinance.API.Services.Implementations
                 Id = Guid.NewGuid(),
                 MonthlyLimit = request.MonthlyLimit,
                 Month = request.Month,
-                Year = request.Year,
+                //Year = request.Year,
                 CategoryId = request.CategoryId,
                 UserId = userId,
                 CreatedAt = DateTime.UtcNow
@@ -64,7 +64,7 @@ namespace PersonalFinance.API.Services.Implementations
                 Id = budget.Id,
                 MonthlyLimit = budget.MonthlyLimit,
                 Month = budget.Month,
-                Year = budget.Year,
+                //Year = budget.Year,
                 CategoryId = budget.CategoryId,
             };
         }
@@ -79,14 +79,14 @@ namespace PersonalFinance.API.Services.Implementations
 
             budget.MonthlyLimit = request.MonthlyLimit;
             budget.Month = request.Month;
-            budget.Year = request.Year;
+            //budget.Year = request.Year;
             budget.CategoryId = request.CategoryId;
 
             await _context.SaveChangesAsync();
             return new BudgetDto { 
                 Id = budget.Id,
                 MonthlyLimit = budget.MonthlyLimit,
-                Year= budget.Year,
+                //Year= budget.Year,
                 CategoryId = budget.CategoryId,
             };
         }

@@ -36,7 +36,7 @@ namespace PersonalFinance.Mobile.Services
         }
 
         //-----------UPDATA BUDGET
-        public async Task UpdataBudgetAsync(Guid id,UpdateBudgetRequestDto request)
+        public async Task UpdateBudgetAsync(Guid id,UpdateBudgetRequestDto request)
         {
 
             await _apiService.PutAsync($"budgets/{id}", request);

@@ -9,8 +9,8 @@ namespace PersonalFinance.Shared.DTOs.Budgets
     public  class CreateBudgetRequestDto
     {
         public decimal MonthlyLimit { get; set; }
-        public int Month { get; set; }
-        public int Year { get; set; }
+        public DateTime Month { get; set; }
+        //public int Year { get; set; }
 
         public Guid CategoryId { get; set; }
         
