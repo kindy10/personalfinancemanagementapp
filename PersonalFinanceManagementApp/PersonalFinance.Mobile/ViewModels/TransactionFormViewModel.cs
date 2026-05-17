@@ -227,7 +227,7 @@ namespace PersonalFinance.Mobile.ViewModels
                         "OK");
 
                 // Return to transactions page
-                await Shell.Current.GoToAsync("//transactions");
+                await Shell.Current.GoToAsync("..");
             }
             catch (Exception ex)
             {

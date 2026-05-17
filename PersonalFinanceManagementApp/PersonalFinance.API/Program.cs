@@ -25,6 +25,7 @@ namespace PersonalFinance.API
 
             // Register services
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IProfileService,ProfileService>();
             builder.Services.AddScoped<ITransactionService, TransactionService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IBudgetService, BudgetService>();
@@ -133,6 +134,17 @@ namespace PersonalFinance.API
             app.MapControllers();
 
             app.MapGet("/", () => "Welcome");
+
+            //Sample data 
+            using (var scope = app.Services.CreateScope())
+            {
+                var context =
+                    scope.ServiceProvider
+                        .GetRequiredService<AppDbContext>();
+
+                DbSeeder.SeedAsync(context).Wait();
+            }
+
 
             app.Run();
         }
