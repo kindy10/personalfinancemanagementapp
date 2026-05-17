@@ -100,6 +100,11 @@ public class BudgetFormViewModel : BaseViewModel
         SaveCommand =
             new Command(async () => await Save());
 
+        //“I intentionally ignore the returned Task.”
+        /*  if Because this call is not awaited,
+            execution continues before the call completes
+         */
+
         _ = LoadCategories();
     }
 

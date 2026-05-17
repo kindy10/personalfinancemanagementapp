@@ -154,7 +154,7 @@ namespace PersonalFinance.Mobile.ViewModels
                         "OK");
 
                 //Navigate back
-                await Shell.Current.GoToAsync("//categories");
+                await Shell.Current.GoToAsync("..");
 
             }
             catch (Exception ex)

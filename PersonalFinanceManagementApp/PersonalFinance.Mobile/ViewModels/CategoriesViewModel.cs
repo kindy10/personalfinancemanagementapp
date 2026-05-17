@@ -32,7 +32,7 @@ namespace PersonalFinance.Mobile.ViewModels
             Categories = new ObservableCollection<CategoryDto>();
 
             //Navigate to dadd form
-            AddCommand = new Command(async () => await Shell.Current.GoToAsync("//category-form"));
+            AddCommand = new Command(async () => await Shell.Current.GoToAsync("category-form"));
 
             //Edit category
             EditCommand = new Command<CategoryDto>(async (category) => await EditCategory(category));
@@ -68,7 +68,7 @@ namespace PersonalFinance.Mobile.ViewModels
         {
             TemporaryCategoryData.SelectedCategory = category;
 
-            await Shell.Current.GoToAsync("//category-form");
+            await Shell.Current.GoToAsync("category-form");
         }
 
         //-----------Delete Category

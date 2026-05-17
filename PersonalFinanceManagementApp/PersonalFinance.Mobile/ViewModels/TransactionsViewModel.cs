@@ -46,7 +46,7 @@ namespace PersonalFinance.Mobile.ViewModels
 
             GoToAddCommand = new Command(async () =>
                 
-                await Shell.Current.GoToAsync("//transaction-form")
+                await Shell.Current.GoToAsync("transaction-form")
            );
                     
             //LoadTransactions();
@@ -90,7 +90,7 @@ namespace PersonalFinance.Mobile.ViewModels
             TemporaryData.selectedTransaction = transaction;
 
             //Navigate to form page
-            await Shell.Current.GoToAsync("//transaction-form");
+            await Shell.Current.GoToAsync("transaction-form");
         }
 
         //--------------------------------Delete transaction  

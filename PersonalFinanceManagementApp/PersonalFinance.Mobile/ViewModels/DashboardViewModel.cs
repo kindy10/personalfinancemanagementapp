@@ -63,6 +63,9 @@ namespace PersonalFinance.Mobile.ViewModels
 
         //----------------LINK TO BUDGET
         public ICommand GoToBudgetCommand { get; }
+
+        //---------------Link to Profile
+        public ICommand GoToProfileCommand { get; }
         //---------------Constructor
         public DashboardViewModel() { 
             _reportService = new ReportService();
@@ -74,6 +77,7 @@ namespace PersonalFinance.Mobile.ViewModels
 
             GoToCategoriesCommand = new Command(async () => await Shell.Current.GoToAsync("//categories"));
             GoToBudgetCommand = new Command(async () => await Shell.Current.GoToAsync("//budgets"));
+            GoToProfileCommand =new Command(async () => await Shell.Current.GoToAsync( "//profile"));
 
         }
 
