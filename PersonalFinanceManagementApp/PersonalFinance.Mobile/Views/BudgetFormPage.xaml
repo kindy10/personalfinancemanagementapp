@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="PersonalFinance.Mobile.Views.BudgetFormPage"
-    Title="Budget Form">
+    Title="Budget">
 
     <ScrollView>
 
@@ -12,32 +12,61 @@
             Padding="20"
             Spacing="20">
 
-            <!-- Title -->
+            <!-- PAGE TITLE -->
+
             <Label
                 Text="{Binding PageTitle}"
-                Style="{StaticResource PageTitleStyle}" />
+                Style="{StaticResource TitleLabel}" />
 
-            <!-- Amount -->
-            <Entry
-                Placeholder="Budget Amount"
-                Keyboard="Numeric"
-                Text="{Binding Amount}" />
 
-            <!-- Month -->
-            <DatePicker
-                Date="{Binding Month}" />
 
-            <!-- Category Picker -->
-            <Picker
-                Title="Select Category"
-                ItemsSource="{Binding Categories}"
-                SelectedItem="{Binding SelectedCategory}"
-                ItemDisplayBinding="{Binding Name}" />
+            <!-- FORM CARD -->
 
-            <!-- Save Button -->
-            <Button
-                Text="Save Budget"
-                Command="{Binding SaveCommand}" />
+            <Frame
+                Style="{StaticResource CardFrame}">
+
+                <VerticalStackLayout
+                    Spacing="18">
+
+                    <!-- AMOUNT -->
+
+                    <Entry
+                        Placeholder="Budget Amount"
+                        Keyboard="Numeric"
+                        Text="{Binding Amount}"
+                        Style="{StaticResource AppEntry}" />
+
+
+
+                    <!-- MONTH -->
+
+                    <DatePicker
+                        Date="{Binding Month}"
+                        Style="{StaticResource AppDatePicker}" />
+
+
+
+                    <!-- CATEGORY -->
+
+                    <Picker
+                        Title="Select Category"
+                        ItemsSource="{Binding Categories}"
+                        SelectedItem="{Binding SelectedCategory}"
+                        ItemDisplayBinding="{Binding Name}"
+                        Style="{StaticResource AppPicker}" />
+
+
+
+                    <!-- SAVE BUTTON -->
+
+                    <Button
+                        Text="Save Budget"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource PrimaryButton}" />
+
+                </VerticalStackLayout>
+
+            </Frame>
 
         </VerticalStackLayout>
 

@@ -1,60 +1,109 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PersonalFinance.Mobile.Views.CategoriesPage"
-             Title="CategoriesPage">
 
-    <VerticalStackLayout Padding="20">
-        
-        <!---Title-->
-        <Label Text="Categories"
-               Style="{StaticResource PageTitleStyle}"/>
-        
-        <!---Add Button-->
-        <Button Text=" Add Category"
-                Command="{Binding AddCommand}" />
-        
-        <!---Categories List-->
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PersonalFinance.Mobile.Views.CategoriesPage"
+    Title="Categories">
+
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="20">
+
+        <!-- PAGE TITLE -->
+
+        <Label
+            Text="Categories"
+            Style="{StaticResource TitleLabel}" />
+
+
+
+        <!-- ADD CATEGORY BUTTON -->
+
+        <Button
+            Text="+ Add Category"
+            Command="{Binding AddCommand}"
+            Style="{StaticResource PrimaryButton}" />
+
+
+
+        <!-- CATEGORIES LIST -->
+
         <CollectionView
-            ItemsSource ="{Binding Categories }">
+            ItemsSource="{Binding Categories}">
 
             <CollectionView.ItemTemplate>
 
                 <DataTemplate>
-                    <Frame Style="{StaticResource DashboardCardStyle}">
 
-                        <VerticalStackLayout>
-                            <!---Name-->
-                            <Label Text="{Binding Name}"
-                                   FontSize="20"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource PrimaryText}"/>
-                            
-                            <!--Type-->
-                            <Label Text="{Binding Type}"
-                                   TextColor="{StaticResource SecondaryText}"/>
-                            
-                            <!--Edit-->
-                            <Button
-                                Text=" Edit"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BindingContext.EditCommand}"
-                                CommandParameter="{Binding .}"/>
-                            
-                            <!---Delete-->
-                            <Button
-                                Text="Delete"
-                                BackgroundColor="{StaticResource DangerColor}"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
-                                CommandParameter="{Binding Id}"/>
+                    <!-- CATEGORY CARD -->
+
+                    <Frame
+                        Style="{StaticResource CardFrame}">
+
+                        <VerticalStackLayout
+                            Spacing="12">
+
+                            <!-- CATEGORY NAME -->
+
+                            <Label
+                                Text="{Binding Name}"
+                                FontSize="22"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource TextColor}" />
+
+
+
+                            <!-- CATEGORY TYPE -->
+
+                            <Label
+                                Text="{Binding Type}"
+                                Style="{StaticResource NormalLabel}" />
+
+
+
+                            <!-- ACTION BUTTONS -->
+
+                            <Grid
+                                ColumnDefinitions="*,*"
+                                ColumnSpacing="10">
+
+                                <!-- EDIT -->
+
+                                <Button
+                                    Grid.Column="0"
+                                    Text="Edit"
+                                    Style="{StaticResource PrimaryButton}"
+                                    HeightRequest="45"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                      Path=BindingContext.EditCommand}"
+                                    CommandParameter="{Binding .}" />
+
+
+
+                                <!-- DELETE -->
+
+                                <Button
+                                    Grid.Column="1"
+                                    Text="Delete"
+                                    Style="{StaticResource DangerButton}"
+                                    HeightRequest="45"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                      Path=BindingContext.DeleteCommand}"
+                                    CommandParameter="{Binding Id}" />
+
+                            </Grid>
+
                         </VerticalStackLayout>
+
                     </Frame>
-                           
+
                 </DataTemplate>
+
             </CollectionView.ItemTemplate>
+
         </CollectionView>
-        
-
-
 
     </VerticalStackLayout>
+
 </ContentPage>

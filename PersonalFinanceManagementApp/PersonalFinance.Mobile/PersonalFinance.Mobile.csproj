@@ -85,6 +85,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Resources\Styles\AppTheme.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\BudgetFormPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

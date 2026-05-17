@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- COLORS -->
+
+    <Color x:Key="BackgroundColor">
+        #0F172A
+    </Color>
+
+    <Color x:Key="CardColor">
+        #1E293B
+    </Color>
+
+    <Color x:Key="PrimaryColor">
+        #3B82F6
+    </Color>
+
+    <Color x:Key="SuccessColor">
+        #22C55E
+    </Color>
+
+    <Color x:Key="DangerColor">
+        #EF4444
+    </Color>
+
+    <Color x:Key="TextColor">
+        White
+    </Color>
+
+    <Color x:Key="SecondaryTextColor">
+        #94A3B8
+    </Color>
+
+    <Color x:Key="BorderColor">
+        #334155
+    </Color>
+
+
+
+    <!-- PAGE STYLE -->
+
+    <Style TargetType="ContentPage">
+
+        <Setter
+            Property="BackgroundColor"
+            Value="{StaticResource BackgroundColor}" />
+
+    </Style>
+
+
+
+    <!-- TITLE LABEL -->
+
+    <Style
+        x:Key="TitleLabel"
+        TargetType="Label">
+
+        <Setter
+            Property="FontSize"
+            Value="32" />
+
+        <Setter
+            Property="FontAttributes"
+            Value="Bold" />
+
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource TextColor}" />
+
+    </Style>
+
+
+
+    <!-- SECTION LABEL -->
+
+    <Style
+        x:Key="SectionLabel"
+        TargetType="Label">
+
+        <Setter
+            Property="FontSize"
+            Value="24" />
+
+        <Setter
+            Property="FontAttributes"
+            Value="Bold" />
+
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource TextColor}" />
+
+    </Style>
+
+
+
+    <!-- NORMAL LABEL -->
+
+    <Style
+        x:Key="NormalLabel"
+        TargetType="Label">
+
+        <Setter
+            Property="FontSize"
+            Value="16" />
+
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource SecondaryTextColor}" />
+
+    </Style>
+
+
+
+    <!-- CARD STYLE -->
+
+    <Style
+        x:Key="CardFrame"
+        TargetType="Frame">
+
+        <Setter
+            Property="BackgroundColor"
+            Value="{StaticResource CardColor}" />
+
+        <Setter
+            Property="CornerRadius"
+            Value="25" />
+
+        <Setter
+            Property="Padding"
+            Value="20" />
+
+        <Setter
+            Property="Margin"
+            Value="0,8" />
+
+        <Setter
+            Property="HasShadow"
+            Value="True" />
+
+        <Setter
+            Property="BorderColor"
+            Value="{StaticResource BorderColor}" />
+
+    </Style>
+
+
+
+    <!-- PRIMARY BUTTON -->
+
+    <Style
+        x:Key="PrimaryButton"
+        TargetType="Button">
+
+        <Setter
+            Property="BackgroundColor"
+            Value="{StaticResource PrimaryColor}" />
+
+        <Setter
+            Property="TextColor"
+            Value="White" />
+
+        <Setter
+            Property="CornerRadius"
+            Value="18" />
+
+        <Setter
+            Property="HeightRequest"
+            Value="55" />
+
+        <Setter
+            Property="FontAttributes"
+            Value="Bold" />
+
+        <Setter
+            Property="FontSize"
+            Value="16" />
+
+    </Style>
+
+
+
+    <!-- DANGER BUTTON -->
+
+    <Style
+        x:Key="DangerButton"
+        TargetType="Button">
+
+        <Setter
+            Property="BackgroundColor"
+            Value="{StaticResource DangerColor}" />
+
+        <Setter
+            Property="TextColor"
+            Value="White" />
+
+        <Setter
+            Property="CornerRadius"
+            Value="18" />
+
+        <Setter
+            Property="HeightRequest"
+            Value="55" />
+
+        <Setter
+            Property="FontAttributes"
+            Value="Bold" />
+
+        <Setter
+            Property="FontSize"
+            Value="16" />
+
+    </Style>
+
+
+    <!-- ENTRY STYLE -->
+
+    <Style
+    x:Key="AppEntry"
+    TargetType="Entry">
+
+        <Setter
+        Property="TextColor"
+        Value="{StaticResource TextColor}" />
+
+        <Setter
+        Property="PlaceholderColor"
+        Value="{StaticResource SecondaryTextColor}" />
+
+        <Setter
+        Property="BackgroundColor"
+        Value="{StaticResource CardColor}" />
+
+        <Setter
+        Property="FontSize"
+        Value="18" />
+
+        <Setter
+        Property="HeightRequest"
+        Value="55" />
+
+        <Setter
+        Property="Margin"
+        Value="0,5" />
+        <!--<Setter
+            Property="Padding"
+            Value="15,0" />-->
+
+    </Style>
+
+
+    <!-- PICKER STYLE -->
+
+    <Style
+        x:Key="AppPicker"
+        TargetType="Picker">
+
+        <Setter
+        Property="TextColor"
+        Value="{StaticResource TextColor}" />
+
+        <Setter
+        Property="TitleColor"
+        Value="{StaticResource SecondaryTextColor}" />
+
+        <Setter
+        Property="BackgroundColor"
+        Value="{StaticResource CardColor}" />
+
+        <Setter
+        Property="HeightRequest"
+        Value="55" />
+
+        <Setter
+        Property="Margin"
+        Value="0,5" />
+
+        <!--<Setter
+            Property="Padding"
+            Value="15,0" />-->
+
+    </Style>
+
+    <!-- DATE PICKER STYLE -->
+
+    <Style
+        x:Key="AppDatePicker"
+        TargetType="DatePicker">
+
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource TextColor}" />
+
+        <Setter
+            Property="BackgroundColor"
+            Value="{StaticResource CardColor}" />
+
+        <Setter
+            Property="HeightRequest"
+            Value="55" />
+
+        <Setter
+            Property="Margin"
+            Value="0,5" />
+
+        <!--<Setter
+            Property="Padding"
+            Value="15,0" />-->
+
+    </Style>
+    <!-- METRIC VALUE -->
+
+    <Style
+        x:Key="MetricValueLabel"
+        TargetType="Label">
+
+        <Setter
+        Property="FontSize"
+        Value="32" />
+
+        <Setter
+        Property="FontAttributes"
+        Value="Bold" />
+
+    </Style>
+    
+    
+    <!-- ANALYTICS CARD -->
+
+    <Style
+        x:Key="AnalyticsCard"
+        TargetType="Frame">
+
+        <Setter
+        Property="BackgroundColor"
+        Value="{StaticResource CardColor}" />
+
+        <Setter
+        Property="CornerRadius"
+        Value="25" />
+
+        <Setter
+        Property="Padding"
+        Value="20" />
+
+        <Setter
+        Property="HasShadow"
+        Value="True" />
+
+        <Setter
+        Property="BorderColor"
+        Value="{StaticResource BorderColor}" />
+
+    </Style>
+
+    <!-- HERO CARD COLORS -->
+    <Color x:Key="HeroStartColor">
+        #2563EB
+    </Color>
+
+    <Color x:Key="HeroEndColor">
+        #7C3AED
+    </Color>
+
+    <!-- HERO BALANCE -->
+    <Style
+    x:Key="HeroBalanceLabel"
+    TargetType="Label">
+
+        <Setter
+        Property="FontSize"
+        Value="42" />
+
+        <Setter
+        Property="FontAttributes"
+        Value="Bold" />
+
+        <Setter
+        Property="TextColor"
+        Value="White" />
+
+    </Style>
+
+
+</ResourceDictionary>

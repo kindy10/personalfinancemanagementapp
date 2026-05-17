@@ -17,34 +17,26 @@
 
             <Label
                 Text="Dashboard"
-                FontSize="34"
-                FontAttributes="Bold"
-                TextColor="White" />
+                Style="{StaticResource TitleLabel}" />  
 
 
 
             <!-- INCOME CARD -->
 
-            <Frame
-                CornerRadius="25"
-                Padding="20"
-                BackgroundColor="White"
-                HasShadow="True">
+            <Frame Style="{StaticResource CardFrame}">
 
                 <VerticalStackLayout
                     Spacing="8">
 
                     <Label
                         Text="Total Income"
-                        FontSize="18"
-                        TextColor="#6B7280" />
+                        Style="{StaticResource NormalLabel}" />
 
                     <Label
                         Text="{Binding TotalIncome,
                                StringFormat='{0:C}'}"
-                        FontSize="32"
-                        FontAttributes="Bold"
-                        TextColor="#16A34A" />
+                        Style="{StaticResource MetricValueLabel}"
+                        TextColor="{StaticResource SuccessColor}" />
 
                 </VerticalStackLayout>
 
@@ -54,26 +46,19 @@
 
             <!-- EXPENSE CARD -->
 
-            <Frame
-                CornerRadius="25"
-                Padding="20"
-                BackgroundColor="White"
-                HasShadow="True">
-
+            <Frame Style="{StaticResource CardFrame}">
                 <VerticalStackLayout
                     Spacing="8">
 
                     <Label
                         Text="Total Expense"
-                        FontSize="18"
-                        TextColor="#6B7280" />
+                       Style="{StaticResource NormalLabel}" />
 
                     <Label
                         Text="{Binding TotalExpense,
                                StringFormat='{0:C}'}"
-                        FontSize="32"
-                        FontAttributes="Bold"
-                        TextColor="#DC2626" />
+                        Style="{StaticResource MetricValueLabel}"
+                       TextColor="{StaticResource SuccessColor}" />
 
                 </VerticalStackLayout>
 
@@ -83,44 +68,33 @@
 
             <!-- BALANCE CARD -->
 
-            <Frame
-                CornerRadius="25"
-                Padding="20"
-                BackgroundColor="White"
-                HasShadow="True">
+            <Frame Style="{StaticResource CardFrame}">
 
                 <VerticalStackLayout
                     Spacing="8">
 
                     <Label
                         Text="Balance"
-                        FontSize="18"
-                        TextColor="#6B7280" />
+                         Style="{StaticResource NormalLabel}" />
 
                     <Label
                         Text="{Binding Balance,
                                StringFormat='{0:C}'}"
-                        FontSize="32"
-                        FontAttributes="Bold"
-                        TextColor="#2563EB" />
+                        Style="{StaticResource MetricValueLabel}"
+                        TextColor="{StaticResource SuccessColor}" />
 
                 </VerticalStackLayout>
 
             </Frame>
+
             <!-- EXPENSE CHART -->
 
             <Label
                   Text="Expense Analytics"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   TextColor="White"
+                  Style="{StaticResource SectionLabel}"
                    Margin="0,20,0,10" />
 
-            <Frame
-                     BackgroundColor="White"
-                     CornerRadius="25"
-                      Padding="20"
-                      HasShadow="True">
+            <Frame Style="{StaticResource CardFrame}">
 
                 <VerticalStackLayout>
 
@@ -137,16 +111,11 @@
 
             <Label
                 Text="Monthly Trends"
-                FontSize="28"
-                FontAttributes="Bold"
-                TextColor="White"
+                Style="{StaticResource SectionLabel}"
                 Margin="0,20,0,10" />
 
             <Frame
-                BackgroundColor="White"
-                CornerRadius="25"
-                Padding="20"
-                HasShadow="True">
+                Style="{StaticResource CardFrame}">
 
                 <VerticalStackLayout>
 
@@ -164,9 +133,7 @@
 
             <Label
                 Text="Quick Actions"
-                FontSize="24"
-                FontAttributes="Bold"
-                TextColor="White"
+                Style="{StaticResource SectionLabel}"
                 Margin="0,10,0,5" />
 
             <Grid
@@ -182,11 +149,7 @@
                     Grid.Column="0"
                     Text="Transactions"
                     Command="{Binding GoToTransactionsCommand}"
-                    CornerRadius="20"
-                    HeightRequest="60"
-                    FontAttributes="Bold"
-                    BackgroundColor="#2563EB"
-                    TextColor="White" />
+                   Style="{StaticResource PrimaryButton}" />
 
 
 
@@ -197,11 +160,7 @@
                     Grid.Column="1"
                     Text="Categories"
                     Command="{Binding GoToCategoriesCommand}"
-                    CornerRadius="20"
-                    HeightRequest="60"
-                    FontAttributes="Bold"
-                    BackgroundColor="#7C3AED"
-                    TextColor="White" />
+                    Style="{StaticResource PrimaryButton}" />
 
 
 
@@ -212,11 +171,7 @@
                     Grid.Column="0"
                     Text="Budgets"
                     Command="{Binding GoToBudgetCommand}"
-                    CornerRadius="20"
-                    HeightRequest="60"
-                    FontAttributes="Bold"
-                    BackgroundColor="#059669"
-                    TextColor="White" />
+                    Style="{StaticResource PrimaryButton}" />
 
 
 
@@ -227,11 +182,7 @@
                     Grid.Column="1"
                     Text="Profile"
                     Command="{Binding GoToProfileCommand}"
-                    CornerRadius="20"
-                    HeightRequest="60"
-                    FontAttributes="Bold"
-                    BackgroundColor="#EA580C"
-                    TextColor="White" />
+                    Style="{StaticResource PrimaryButton}"/>
 
             </Grid>
 
@@ -241,9 +192,7 @@
 
             <Label
                 Text="Budget Usage"
-                FontSize="28"
-                FontAttributes="Bold"
-                TextColor="White"
+                Style="{StaticResource SectionLabel}"
                 Margin="0,20,0,10" />
 
 
@@ -257,11 +206,7 @@
                     <DataTemplate>
 
                         <Frame
-                            CornerRadius="25"
-                            Padding="20"
-                            Margin="0,8"
-                            HasShadow="True"
-                            BackgroundColor="White">
+                            Style="{StaticResource CardFrame}">
 
                             <VerticalStackLayout
                                 Spacing="12">
@@ -270,9 +215,7 @@
 
                                 <Label
                                     Text="{Binding CategoryName}"
-                                    FontSize="22"
-                                    FontAttributes="Bold"
-                                    TextColor="#111827" />
+                                    Style="{StaticResource SectionLabel}"/>
 
 
 
@@ -284,15 +227,14 @@
                                     <Label
                                         Text="{Binding Spent,
                                                StringFormat='Spent: {0:C}'}"
-                                        FontSize="16"
-                                        TextColor="#6B7280" />
+                                        Style="{StaticResource SectionLabel}" />
 
                                     <Label
                                         Grid.Column="1"
                                         Text="{Binding Limit,
                                                StringFormat='Limit: {0:C}'}"
-                                        FontSize="16"
-                                        TextColor="#6B7280" />
+                                        Style="{StaticResource MetricValueLabel}"
+                                        TextColor="{StaticResource SuccessColor}" />
 
                                 </Grid>
 
@@ -316,16 +258,14 @@
                                     <Label
                                         Text="{Binding Remaining,
                                                StringFormat='Remaining: {0:C}'}"
-                                        FontSize="15"
-                                        TextColor="#16A34A" />
+                                        Style="{StaticResource SectionLabel}" />
 
                                     <Label
                                         Grid.Column="1"
                                         Text="{Binding PercentageUsed,
                                                StringFormat='{0:P0}'}"
-                                        FontSize="15"
-                                        FontAttributes="Bold"
-                                        TextColor="#DC2626" />
+                                        Style="{StaticResource MetricValueLabel}"
+                                        TextColor="{StaticResource SuccessColor}" />
 
                                 </Grid>
                             </VerticalStackLayout>
