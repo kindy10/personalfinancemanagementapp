@@ -33,8 +33,17 @@
                                    TextColor="{StaticResource PrimaryText}"/>
                             
                             <!---Amount-->
-                            <Label Text="{Binding Amount}"/>
-                            
+                            <Label
+                                    Text="{Binding MonthlyLimit,
+                                           StringFormat='{0:C}'}"
+                                    FontSize="28"
+                                    FontAttributes="Bold"
+                                    TextColor="#16A34A" />  
+
+                            <Label Text="{Binding Month,StringFormat= 'Month: {0:MMMM yyyy'}"
+                                   FontSize="16"/>
+
+
                             <!--Edit-->
                             <Button Text="Edit"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},Path=BindingContext.EditCommand}"

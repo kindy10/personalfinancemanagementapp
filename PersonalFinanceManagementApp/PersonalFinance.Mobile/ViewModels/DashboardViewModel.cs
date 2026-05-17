@@ -1,10 +1,6 @@
 ﻿using PersonalFinance.Mobile.Services;
 using PersonalFinance.Shared.DTOs.Reports;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace PersonalFinance.Mobile.ViewModels
@@ -66,18 +62,27 @@ namespace PersonalFinance.Mobile.ViewModels
 
         //---------------Link to Profile
         public ICommand GoToProfileCommand { get; }
+
+        //Budget usage
+        public ObservableCollection<BudgetUsageDto> BudgetUsages { get; set; }
+
         //---------------Constructor
         public DashboardViewModel() { 
             _reportService = new ReportService();
 
             //Load dashboard data automatically
             LoadSummary();
+            _ = LoadBudgetUsage();
 
             GoToTransactionsCommand = new Command(async () => await Shell.Current.GoToAsync("//transactions"));
 
             GoToCategoriesCommand = new Command(async () => await Shell.Current.GoToAsync("//categories"));
+
             GoToBudgetCommand = new Command(async () => await Shell.Current.GoToAsync("//budgets"));
+
             GoToProfileCommand =new Command(async () => await Shell.Current.GoToAsync( "//profile"));
+
+            BudgetUsages = new ObservableCollection<BudgetUsageDto>();
 
         }
 
@@ -96,11 +101,38 @@ namespace PersonalFinance.Mobile.ViewModels
 
                 Balance = summary.Balance;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                //if API FAILS
+                await Application.Current.MainPage
+                    .DisplayAlert(
+                        "FULL ERROR",
+                        ex.ToString(),
+                        "OK");
+            }
+        }
 
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+
+        //Load Budget
+        private async Task LoadBudgetUsage()
+        {
+            try
+            {
+                var usages =await _reportService.GetBudgetUsageAsync();
+
+                BudgetUsages.Clear();
+
+                foreach (var usage in usages)
+                {
+                    BudgetUsages.Add(usage);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                    .DisplayAlert(
+                        "Error",
+                        ex.Message,
+                        "OK");
             }
         }
     }

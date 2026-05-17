@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace PersonalFinance.Shared.DTOs.Reports
 {
     public class BudgetUsageDto
@@ -17,5 +12,6 @@ namespace PersonalFinance.Shared.DTOs.Reports
         public decimal Remaining { get; set; }
 
         public double PercentageUsed { get; set; }
+        public double DisplayPercentage => PercentageUsed * 100;
     }
 }

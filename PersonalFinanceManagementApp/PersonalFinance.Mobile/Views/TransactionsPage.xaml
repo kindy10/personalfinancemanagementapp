@@ -3,72 +3,76 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PersonalFinance.Mobile.Views.TransactionsPage"
              Title="TransactionsPage">
-    <VerticalStackLayout>
-        <Label
-            Text="Transactins"
-            Style="{StaticResource PageTitleStyle}"/>
-        
-        <!--Transactions List -->
-        <CollectionView ItemsSource ="{Binding Transactions}">
+    <ScrollView>
+        <VerticalStackLayout>
             
-            <CollectionView.ItemTemplate>
-                
-                <DataTemplate>
-                    
-                    <!--Transaction Card-->
-                    <Frame Style=" {StaticResource DashboardCardStyle}">
+       
+            <Label
+                Text="Transactins"
+                Style="{StaticResource PageTitleStyle}"/>
+        
+            <!--Transactions List -->
+            <CollectionView ItemsSource ="{Binding Transactions}">
 
-                        <VerticalStackLayout>
-                            <!--Description-->
-                            <Label
-                                Text="{Binding Description}"
-                                FontSize="20"
-                                FontAttributes="Bold"/>
-                            
-                            <!---Amount -->
-                            <Label
-                                Text="{Binding Amount}"
-                                FontSize="20"/>
-                            
-                            <!---Category-->
-                            <Label
-                                Text="{Binding CategoryName}"
-                                TextColor="{StaticResource SecondaryText}"/>
-                            
-                            <!---Date-->
-                            <Label
-                                Text="{Binding Date}"
-                                FontSize="12"
-                                TextColor="{StaticResource SecondaryText}"/>
+                <CollectionView.ItemTemplate>
 
-                            <!--Delete button-->
-                           <Button
-                                 Text="Delete"
-                                BackgroundColor="{StaticResource DangerColor}"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
-                                CommandParameter="{Binding Id}" />      
-                            
-                           <!-- Create  button-->
-                            <Button
-                                Text="Add Transaction"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.GoToAddCommand}" />
-                            
-                            <!--Edit button-->
-                            <Button
-                                Text="Edit"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditCommand}"
-                                CommandParameter="{Binding .}" />
+                    <DataTemplate>
+
+                        <!--Transaction Card-->
+                        <Frame Style=" {StaticResource DashboardCardStyle}">
+
+                            <VerticalStackLayout>
+                                <!--Description-->
+                                <Label
+                                    Text="{Binding Description}"
+                                    FontSize="20"
+                                    FontAttributes="Bold"/>
+
+                                <!---Amount -->
+                                <Label
+                                    Text="{Binding Amount}"
+                                    FontSize="20"/>
+
+                                <!---Category-->
+                                <Label
+                                    Text="{Binding CategoryName}"
+                                    TextColor="{StaticResource SecondaryText}"/>
+
+                                <!---Date-->
+                                <Label
+                                    Text="{Binding Date}"
+                                    FontSize="12"
+                                    TextColor="{StaticResource SecondaryText}"/>
+
+                                <!--Delete button-->
+                                <Button
+                                     Text="Delete"
+                                    BackgroundColor="{StaticResource DangerColor}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteCommand}"
+                                    CommandParameter="{Binding Id}" />
+
+                                <!-- Create  button-->
+                                <Button
+                                    Text="Add Transaction"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.GoToAddCommand}" />
+
+                                <!--Edit button-->
+                                <Button
+                                    Text="Edit"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EditCommand}"
+                                    CommandParameter="{Binding .}" />
 
 
 
-                        </VerticalStackLayout>
-                                
-                                
-                    </Frame>
-                        
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                            </VerticalStackLayout>
 
-    </VerticalStackLayout>
+
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+
+    </ScrollView>
 </ContentPage>
