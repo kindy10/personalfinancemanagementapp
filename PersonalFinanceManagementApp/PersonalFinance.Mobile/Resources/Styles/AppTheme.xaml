@@ -382,5 +382,59 @@
 
     </Style>
 
+    
+    <!-- HERO BALANCE AMOUNT -->
+    <Style
+    x:Key="HeroAmountLabel"
+    TargetType="Label">
+
+        <Setter
+        Property="FontSize"
+        Value="40" />
+
+        <Setter
+        Property="FontAttributes"
+        Value="Bold" />
+
+        <Setter
+        Property="TextColor"
+        Value="#111827" />
+
+    </Style>
+
+    <!-- HERO SMALL METRIC -->
+    <Style
+    x:Key="HeroSmallMetric"
+    TargetType="Label">
+
+        <Setter
+        Property="FontSize"
+        Value="26" />
+
+        <Setter
+        Property="FontAttributes"
+        Value="Bold" />
+
+        <Setter
+        Property="TextColor"
+        Value="#111827" />
+
+    </Style>
+
+    <!-- HERO SMALL CAPTION -->
+    <Style
+    x:Key="HeroSmallCaption"
+    TargetType="Label">
+
+        <Setter
+        Property="FontSize"
+        Value="14" />
+
+        <Setter
+        Property="TextColor"
+        Value="#374151" />
+
+    </Style>
+
 
 </ResourceDictionary>
