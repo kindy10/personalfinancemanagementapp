@@ -1,285 +1,374 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui" 
+    xmlns:layouts="clr-namespace:PersonalFinance.Mobile.Layouts"
     x:Class="PersonalFinance.Mobile.Views.DashboardPage"
     BackgroundColor="#111827">
+    
+    
+    <layouts:MainLayoutPage>
+        <layouts:MainLayoutPage.PageContent>
 
-    <ScrollView>
+            <ScrollView>
 
-        <VerticalStackLayout
-            Padding="20"
-            Spacing="20">
+                    <VerticalStackLayout
+                        Padding="20"
+                        Spacing="20">
 
-            <!-- HEADER -->
+                        <!-- HEADER -->
 
-            <Label
-                Text="Dashboard"
-                Style="{StaticResource TitleLabel}" />  
+                        <Label
+                            Text="Dashboard"
+                            Style="{StaticResource TitleLabel}" />
 
 
 
-            <!-- INCOME CARD -->
-
-            <Frame Style="{StaticResource CardFrame}">
-
-                <VerticalStackLayout
-                    Spacing="8">
-
-                    <Label
-                        Text="Total Income"
-                        Style="{StaticResource NormalLabel}" />
-
-                    <Label
-                        Text="{Binding TotalIncome,
-                               StringFormat='{0:C}'}"
-                        Style="{StaticResource MetricValueLabel}"
-                        TextColor="{StaticResource SuccessColor}" />
-
-                </VerticalStackLayout>
-
-            </Frame>
-
-
-
-            <!-- EXPENSE CARD -->
-
-            <Frame Style="{StaticResource CardFrame}">
-                <VerticalStackLayout
-                    Spacing="8">
-
-                    <Label
-                        Text="Total Expense"
-                       Style="{StaticResource NormalLabel}" />
-
-                    <Label
-                        Text="{Binding TotalExpense,
-                               StringFormat='{0:C}'}"
-                        Style="{StaticResource MetricValueLabel}"
-                       TextColor="{StaticResource SuccessColor}" />
-
-                </VerticalStackLayout>
-
-            </Frame>
-
-
-
-            <!-- BALANCE CARD -->
-
-            <Frame Style="{StaticResource CardFrame}">
-
-                <VerticalStackLayout
-                    Spacing="8">
-
-                    <Label
-                        Text="Balance"
-                         Style="{StaticResource NormalLabel}" />
-
-                    <Label
-                        Text="{Binding Balance,
-                               StringFormat='{0:C}'}"
-                        Style="{StaticResource MetricValueLabel}"
-                        TextColor="{StaticResource SuccessColor}" />
-
-                </VerticalStackLayout>
-
-            </Frame>
-
-            <!-- EXPENSE CHART -->
-
-            <Label
-                  Text="Expense Analytics"
-                  Style="{StaticResource SectionLabel}"
-                   Margin="0,20,0,10" />
-
-            <Frame Style="{StaticResource CardFrame}">
-
-                <VerticalStackLayout>
-
-                    <lvc:PieChart
-                              Series="{Binding ExpenseSeries}"
-                              HeightRequest="300" />
-
-                </VerticalStackLayout>
-
-            </Frame>
-
-
-            <!-- MONTHLY TRENDS -->
-
-            <Label
-                Text="Monthly Trends"
-                Style="{StaticResource SectionLabel}"
-                Margin="0,20,0,10" />
-
-            <Frame
-                Style="{StaticResource CardFrame}">
-
-                <VerticalStackLayout>
-
-                    <lvc:CartesianChart
-                        Series="{Binding TrendSeries}"
-                        XAxes="{Binding XAxes}"
-                        HeightRequest="300" />
-
-                </VerticalStackLayout>
-
-            </Frame>
-
-
-            <!-- QUICK ACTIONS -->
-
-            <Label
-                Text="Quick Actions"
-                Style="{StaticResource SectionLabel}"
-                Margin="0,10,0,5" />
-
-            <Grid
-                ColumnDefinitions="*,*"
-                RowDefinitions="Auto,Auto"
-                ColumnSpacing="10"
-                RowSpacing="10">
-
-                <!-- TRANSACTIONS -->
-
-                <Button
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Text="Transactions"
-                    Command="{Binding GoToTransactionsCommand}"
-                   Style="{StaticResource PrimaryButton}" />
-
-
-
-                <!-- CATEGORIES -->
-
-                <Button
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Text="Categories"
-                    Command="{Binding GoToCategoriesCommand}"
-                    Style="{StaticResource PrimaryButton}" />
-
-
-
-                <!-- BUDGETS -->
-
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Text="Budgets"
-                    Command="{Binding GoToBudgetCommand}"
-                    Style="{StaticResource PrimaryButton}" />
-
-
-
-                <!-- PROFILE -->
-
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Text="Profile"
-                    Command="{Binding GoToProfileCommand}"
-                    Style="{StaticResource PrimaryButton}"/>
-
-            </Grid>
-
-
-
-            <!-- BUDGET USAGE -->
-
-            <Label
-                Text="Budget Usage"
-                Style="{StaticResource SectionLabel}"
-                Margin="0,20,0,10" />
-
-
-
-            <CollectionView
-                HeightRequest="350"
-                ItemsSource="{Binding BudgetUsages}">
-
-                <CollectionView.ItemTemplate>
-
-                    <DataTemplate>
+                        <!-- FINTECH HERO CARD -->
 
                         <Frame
-                            Style="{StaticResource CardFrame}">
+                                CornerRadius="35"
+                                Padding="25"
+                                BorderColor="Transparent"
+                                HasShadow="True"
+                                Margin="0,10">
+
+                            <Frame.Background>
+
+                                <SolidColorBrush Color="#F5F871"/>
+
+                            </Frame.Background>
 
                             <VerticalStackLayout
-                                Spacing="12">
+                                    Spacing="25">
 
-                                <!-- CATEGORY NAME -->
+                                <!-- BALANCE -->
 
-                                <Label
-                                    Text="{Binding CategoryName}"
-                                    Style="{StaticResource SectionLabel}"/>
+                                <VerticalStackLayout
+                                    HorizontalOptions="Center"
+                                    Spacing="5">
+
+                                    <Label
+                                        Text="Total Balance"
+                                        HorizontalOptions="Center"
+                                        Style="{StaticResource HeroSmallCaption}" />
 
 
 
-                                <!-- SPENT / LIMIT -->
+                                    <Label
+                            Text="{Binding Balance,
+                                   StringFormat='{0:C}'}"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource HeroAmountLabel}" />
+
+                                </VerticalStackLayout>
+
+
+
+                                <!-- INCOME + EXPENSE -->
 
                                 <Grid
-                                    ColumnDefinitions="*,Auto">
+                        ColumnDefinitions="*,*">
 
-                                    <Label
-                                        Text="{Binding Spent,
-                                               StringFormat='Spent: {0:C}'}"
-                                        Style="{StaticResource SectionLabel}" />
+                                    <!-- INCOME -->
 
-                                    <Label
-                                        Grid.Column="1"
-                                        Text="{Binding Limit,
-                                               StringFormat='Limit: {0:C}'}"
-                                        Style="{StaticResource MetricValueLabel}"
-                                        TextColor="{StaticResource SuccessColor}" />
+                                    <HorizontalStackLayout
+                            Grid.Column="0"
+                            Spacing="10">
+
+                                        <!-- ICON -->
+
+                                        <Frame
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                CornerRadius="20"
+                                Padding="0"
+                                BackgroundColor="#86EFAC"
+                                BorderColor="Transparent">
+
+                                            <Label
+                                    Text="↓"
+                                    FontSize="22"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    TextColor="#166534" />
+
+                                        </Frame>
+
+
+
+                                        <!-- TEXT -->
+
+                                        <VerticalStackLayout
+                                Spacing="0">
+
+                                            <Label
+                                    Text="{Binding TotalIncome,
+                                           StringFormat='+{0:C}'}"
+                                    Style="{StaticResource HeroSmallMetric}" />
+
+
+
+                                            <Label
+                                    Text="Total Income"
+                                    Style="{StaticResource HeroSmallCaption}" />
+
+                                        </VerticalStackLayout>
+
+                                    </HorizontalStackLayout>
+
+
+
+                                    <!-- EXPENSE -->
+
+                                    <HorizontalStackLayout
+                                            Grid.Column="1"
+                                            HorizontalOptions="End"
+                                            Spacing="10">
+
+                                        <!-- ICON -->
+
+                                        <Frame
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            CornerRadius="20"
+                                            Padding="0"
+                                            BackgroundColor="#FDA4AF"
+                                            BorderColor="Transparent">
+
+                                            <Label
+                                                Text="↑"
+                                                FontSize="22"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                TextColor="#9F1239" />
+
+                                        </Frame>
+
+
+
+                                        <!-- TEXT -->
+
+                                        <VerticalStackLayout
+                                Spacing="0">
+
+                                            <Label
+                                    Text="{Binding TotalExpense,
+                                           StringFormat='-{0:C}'}"
+                                    Style="{StaticResource HeroSmallMetric}" />
+
+
+
+                                            <Label
+                                    Text="Total Expenses"
+                                    Style="{StaticResource HeroSmallCaption}" />
+
+                                        </VerticalStackLayout>
+
+                                    </HorizontalStackLayout>
 
                                 </Grid>
 
-
-
-                                <!-- PROGRESS BAR -->
-
-                                <ProgressBar
-                                    Progress="{Binding PercentageUsed}"
-                                    HeightRequest="10"
-                                    BackgroundColor="#E5E7EB"
-                                    ProgressColor="#2563EB" />
-
-
-
-                                <!-- REMAINING -->
-
-                                <Grid
-                                    ColumnDefinitions="*,Auto">
-
-                                    <Label
-                                        Text="{Binding Remaining,
-                                               StringFormat='Remaining: {0:C}'}"
-                                        Style="{StaticResource SectionLabel}" />
-
-                                    <Label
-                                        Grid.Column="1"
-                                        Text="{Binding PercentageUsed,
-                                               StringFormat='{0:P0}'}"
-                                        Style="{StaticResource MetricValueLabel}"
-                                        TextColor="{StaticResource SuccessColor}" />
-
-                                </Grid>
                             </VerticalStackLayout>
 
                         </Frame>
 
-                    </DataTemplate>
+                        <!-- EXPENSE CHART -->
 
-                </CollectionView.ItemTemplate>
+                        <Label
+                              Text="Expense Analytics"
+                              Style="{StaticResource SectionLabel}"
+                               Margin="0,20,0,10" />
 
-            </CollectionView>
+                        <Frame Style="{StaticResource CardFrame}">
 
-        </VerticalStackLayout>
+                            <VerticalStackLayout>
 
-    </ScrollView>
+                                <lvc:PieChart
+                                          Series="{Binding ExpenseSeries}"
+                                          HeightRequest="300" />
+
+                            </VerticalStackLayout>
+
+                        </Frame>
+
+
+                        <!-- MONTHLY TRENDS -->
+
+                        <Label
+                            Text="Monthly Trends"
+                            Style="{StaticResource SectionLabel}"
+                            Margin="0,20,0,10" />
+
+                        <Frame
+                            Style="{StaticResource CardFrame}">
+
+                            <VerticalStackLayout>
+
+                                <lvc:CartesianChart
+                                    Series="{Binding TrendSeries}"
+                                    XAxes="{Binding XAxes}"
+                                    HeightRequest="300" />
+
+                            </VerticalStackLayout>
+
+                        </Frame>
+
+
+                        <!-- QUICK ACTIONS -->
+
+                        <Label
+                            Text="Quick Actions"
+                            Style="{StaticResource SectionLabel}"
+                            Margin="0,10,0,5" />
+
+                        <Grid
+                            ColumnDefinitions="*,*"
+                            RowDefinitions="Auto,Auto"
+                            ColumnSpacing="10"
+                            RowSpacing="10">
+
+                            <!-- TRANSACTIONS -->
+
+                            <Button
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Text="Transactions"
+                                Command="{Binding GoToTransactionsCommand}"
+                               Style="{StaticResource PrimaryButton}" />
+
+
+
+                            <!-- CATEGORIES -->
+
+                            <Button
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="Categories"
+                                Command="{Binding GoToCategoriesCommand}"
+                                Style="{StaticResource PrimaryButton}" />
+
+
+
+                            <!-- BUDGETS -->
+
+                            <Button
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Text="Budgets"
+                                Command="{Binding GoToBudgetCommand}"
+                                Style="{StaticResource PrimaryButton}" />
+
+
+
+                            <!-- PROFILE -->
+
+                            <Button
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="Profile"
+                                Command="{Binding GoToProfileCommand}"
+                                Style="{StaticResource PrimaryButton}"/>
+
+                        </Grid>
+
+
+
+                        <!-- BUDGET USAGE -->
+
+                        <Label
+                            Text="Budget Usage"
+                            Style="{StaticResource SectionLabel}"
+                            Margin="0,20,0,10" />
+
+
+
+                        <CollectionView
+                            HeightRequest="350"
+                            ItemsSource="{Binding BudgetUsages}">
+
+                            <CollectionView.ItemTemplate>
+
+                                <DataTemplate>
+
+                                    <Frame
+                                        Style="{StaticResource CardFrame}">
+
+                                        <VerticalStackLayout
+                                            Spacing="12">
+
+                                            <!-- CATEGORY NAME -->
+
+                                            <Label
+                                                Text="{Binding CategoryName}"
+                                                Style="{StaticResource SectionLabel}"/>
+
+
+
+                                            <!-- SPENT / LIMIT -->
+
+                                            <Grid
+                                                ColumnDefinitions="*,Auto">
+
+                                                <Label
+                                                    Text="{Binding Spent,
+                                                           StringFormat='Spent: {0:C}'}"
+                                                    Style="{StaticResource SectionLabel}" />
+
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Text="{Binding Limit,
+                                                           StringFormat='Limit: {0:C}'}"
+                                                    Style="{StaticResource MetricValueLabel}"
+                                                    TextColor="{StaticResource SuccessColor}" />
+
+                                            </Grid>
+
+
+
+                                            <!-- PROGRESS BAR -->
+
+                                            <ProgressBar
+                                                Progress="{Binding PercentageUsed}"
+                                                HeightRequest="10"
+                                                BackgroundColor="#E5E7EB"
+                                                ProgressColor="#2563EB" />
+
+
+
+                                            <!-- REMAINING -->
+
+                                            <Grid
+                                                ColumnDefinitions="*,Auto">
+
+                                                <Label
+                                                    Text="{Binding Remaining,
+                                                           StringFormat='Remaining: {0:C}'}"
+                                                    Style="{StaticResource SectionLabel}" />
+
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Text="{Binding PercentageUsed,
+                                                           StringFormat='{0:P0}'}"
+                                                    Style="{StaticResource MetricValueLabel}"
+                                                    TextColor="{StaticResource SuccessColor}" />
+
+                                            </Grid>
+                                        </VerticalStackLayout>
+
+                                    </Frame>
+
+                                </DataTemplate>
+
+                            </CollectionView.ItemTemplate>
+
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+
+                </ScrollView>
+        </layouts:MainLayoutPage.PageContent>
+    </layouts:MainLayoutPage>
 
 </ContentPage>
