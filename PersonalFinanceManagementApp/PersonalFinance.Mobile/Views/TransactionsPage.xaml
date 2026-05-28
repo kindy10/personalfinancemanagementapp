@@ -3,157 +3,163 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     xmlns:layouts="clr-namespace:PersonalFinance.Mobile.Layouts"
     x:Class="PersonalFinance.Mobile.Views.TransactionsPage"
     Title="Transactions">
-
-    <ScrollView>
-
-        <VerticalStackLayout
-            Padding="20"
-            Spacing="15">
-
-            <!-- PAGE TITLE -->
-
-            <Label
-                Text="Transactions"
-                Style="{StaticResource TitleLabel}" />
+    <layouts:MainLayoutPage>
+        <layouts:MainLayoutPage.PageContent>
 
 
+            <ScrollView>
 
-            <!-- ADD TRANSACTION BUTTON -->
+                <VerticalStackLayout
+                    Padding="20"
+                    Spacing="15">
 
-            <Button
-                Text="+ Add Transaction"
-                Style="{StaticResource PrimaryButton}"
-                Command="{Binding GoToAddTransactionCommand}" />
+                    <!-- PAGE TITLE -->
+
+                    <Label
+                        Text="Transactions"
+                        Style="{StaticResource TitleLabel}" />
 
 
 
-            <!-- TRANSACTIONS LIST -->
+                    <!-- ADD TRANSACTION BUTTON -->
 
-            <CollectionView
-                ItemsSource="{Binding Transactions}">
+                    <Button
+                        Text="+ Add Transaction"
+                        Style="{StaticResource PrimaryButton}"
+                        Command="{Binding AddCommand}" />
 
-                <CollectionView.ItemTemplate>
 
-                    <DataTemplate>
 
-                        <!-- TRANSACTION CARD -->
+                    <!-- TRANSACTIONS LIST -->
 
-                        <Frame
-                            Style="{StaticResource CardFrame}">
+                    <CollectionView
+                        ItemsSource="{Binding Transactions}">
 
-                            <VerticalStackLayout
-                                Spacing="14">
+                        <CollectionView.ItemTemplate>
 
-                                <!-- TOP SECTION -->
+                            <DataTemplate>
 
-                                <Grid
-                                    ColumnDefinitions="*,Auto">
+                                <!-- TRANSACTION CARD -->
 
-                                    <!-- LEFT SIDE -->
+                                <Frame
+                                    Style="{StaticResource CardFrame}">
 
                                     <VerticalStackLayout
-                                        Spacing="4">
+                                        Spacing="14">
 
-                                        <!-- CATEGORY -->
+                                        <!-- TOP SECTION -->
 
-                                        <Label
-                                            Text="{Binding Category.Name}"
-                                            FontSize="20"
-                                            FontAttributes="Bold"
-                                            TextColor="{StaticResource TextColor}" />
+                                        <Grid
+                                            ColumnDefinitions="*,Auto">
+
+                                            <!-- LEFT SIDE -->
+
+                                            <VerticalStackLayout
+                                                Spacing="4">
+
+                                                <!-- CATEGORY -->
+
+                                                <Label
+                                                    Text="{Binding Category.Name}"
+                                                    FontSize="20"
+                                                    FontAttributes="Bold"
+                                                    TextColor="{StaticResource TextColor}" />
 
 
 
-                                        <!-- DESCRIPTION -->
+                                                <!-- DESCRIPTION -->
 
-                                        <Label
-                                            Text="{Binding Description}"
-                                            Style="{StaticResource NormalLabel}" />
+                                                <Label
+                                                    Text="{Binding Description}"
+                                                    Style="{StaticResource NormalLabel}" />
+
+                                            </VerticalStackLayout>
+
+
+
+                                            <!-- RIGHT SIDE -->
+
+                                            <VerticalStackLayout
+                                                Grid.Column="1"
+                                                HorizontalOptions="End"
+                                                Spacing="4">
+
+                                                <!-- AMOUNT -->
+
+                                                <Label
+                                                    Text="{Binding Amount,
+                                                           StringFormat='-{0:C}'}"
+                                                    FontSize="24"
+                                                    FontAttributes="Bold"
+                                                    TextColor="{StaticResource DangerColor}"
+                                                    HorizontalTextAlignment="End" />
+
+
+
+                                                <!-- DATE -->
+
+                                                <Label
+                                                    Text="{Binding Date,
+                                                           StringFormat='{0:dd MMM yyyy}'}"
+                                                    FontSize="13"
+                                                    TextColor="{StaticResource SecondaryTextColor}"
+                                                    HorizontalTextAlignment="End" />
+
+                                            </VerticalStackLayout>
+
+                                        </Grid>
+
+
+
+                                        <!-- ACTION BUTTONS -->
+
+                                        <Grid
+                                            ColumnDefinitions="*,*"
+                                            ColumnSpacing="10">
+
+                                            <!-- EDIT BUTTON -->
+
+                                            <Button
+                                                Grid.Column="0"
+                                                Text="Edit"
+                                                Style="{StaticResource PrimaryButton}"
+                                                HeightRequest="45"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                                  Path=BindingContext.EditCommand}"
+                                                CommandParameter="{Binding .}" />
+
+
+
+                                            <!-- DELETE BUTTON -->
+
+                                            <Button
+                                                Grid.Column="1"
+                                                Text="Delete"
+                                                Style="{StaticResource DangerButton}"
+                                                HeightRequest="45"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                                  Path=BindingContext.DeleteCommand}"
+                                                CommandParameter="{Binding .}" />
+
+                                        </Grid>
 
                                     </VerticalStackLayout>
 
+                                </Frame>
 
+                            </DataTemplate>
 
-                                    <!-- RIGHT SIDE -->
+                        </CollectionView.ItemTemplate>
 
-                                    <VerticalStackLayout
-                                        Grid.Column="1"
-                                        HorizontalOptions="End"
-                                        Spacing="4">
+                    </CollectionView>
 
-                                        <!-- AMOUNT -->
+                </VerticalStackLayout>
 
-                                        <Label
-                                            Text="{Binding Amount,
-                                                   StringFormat='-{0:C}'}"
-                                            FontSize="24"
-                                            FontAttributes="Bold"
-                                            TextColor="{StaticResource DangerColor}"
-                                            HorizontalTextAlignment="End" />
-
-
-
-                                        <!-- DATE -->
-
-                                        <Label
-                                            Text="{Binding Date,
-                                                   StringFormat='{0:dd MMM yyyy}'}"
-                                            FontSize="13"
-                                            TextColor="{StaticResource SecondaryTextColor}"
-                                            HorizontalTextAlignment="End" />
-
-                                    </VerticalStackLayout>
-
-                                </Grid>
-
-
-
-                                <!-- ACTION BUTTONS -->
-
-                                <Grid
-                                    ColumnDefinitions="*,*"
-                                    ColumnSpacing="10">
-
-                                    <!-- EDIT BUTTON -->
-
-                                    <Button
-                                        Grid.Column="0"
-                                        Text="Edit"
-                                        Style="{StaticResource PrimaryButton}"
-                                        HeightRequest="45"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
-                                                          Path=BindingContext.EditCommand}"
-                                        CommandParameter="{Binding .}" />
-
-
-
-                                    <!-- DELETE BUTTON -->
-
-                                    <Button
-                                        Grid.Column="1"
-                                        Text="Delete"
-                                        Style="{StaticResource DangerButton}"
-                                        HeightRequest="45"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
-                                                          Path=BindingContext.DeleteCommand}"
-                                        CommandParameter="{Binding .}" />
-
-                                </Grid>
-
-                            </VerticalStackLayout>
-
-                        </Frame>
-
-                    </DataTemplate>
-
-                </CollectionView.ItemTemplate>
-
-            </CollectionView>
-
-        </VerticalStackLayout>
-
-    </ScrollView>
+            </ScrollView>
+        </layouts:MainLayoutPage.PageContent>
+    </layouts:MainLayoutPage>
 
 </ContentPage>

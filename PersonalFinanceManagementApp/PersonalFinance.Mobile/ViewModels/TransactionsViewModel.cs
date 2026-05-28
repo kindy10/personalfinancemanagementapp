@@ -26,8 +26,8 @@ namespace PersonalFinance.Mobile.ViewModels
         //Command for deleting transaction
         public ICommand DeleteCommand { get; }
 
-        //Command for Navigation
-        public ICommand GoToAddCommand { get; }
+        //Command for  adding transaction
+        public ICommand AddCommand { get; }
 
         //Command for editing
         public ICommand EditCommand { get; }
@@ -44,10 +44,7 @@ namespace PersonalFinance.Mobile.ViewModels
 
 
 
-            GoToAddCommand = new Command(async () =>
-                
-                await Shell.Current.GoToAsync("transaction-form")
-           );
+            AddCommand = new Command(async () =>await Shell.Current.GoToAsync("transaction-form") );
                     
             //LoadTransactions();
             

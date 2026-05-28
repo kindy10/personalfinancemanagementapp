@@ -13,13 +13,13 @@ namespace PersonalFinance.Mobile
                 "transaction-form",
                 typeof(TransactionFormPage));
 
-                        Routing.RegisterRoute(
-                            "category-form",
-                            typeof(CategoryFormPage));
+            Routing.RegisterRoute(
+                "category-form",
+                 typeof(CategoryFormPage));
 
-                        Routing.RegisterRoute(
-                            "budget-form",
-                            typeof(BudgetFormPage));
+            Routing.RegisterRoute(
+                "budget-form",
+                typeof(BudgetFormPage));
         }
     }
 }
