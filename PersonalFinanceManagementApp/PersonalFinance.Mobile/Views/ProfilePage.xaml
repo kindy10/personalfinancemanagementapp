@@ -3,100 +3,106 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:layouts="clr-namespace:PersonalFinance.Mobile.Layouts"
     x:Class="PersonalFinance.Mobile.Views.ProfilePage"
     Title="Profile">
-
-    <ScrollView>
-
-        <VerticalStackLayout
-            Padding="20"
-            Spacing="20">
-
-            <!-- PAGE TITLE -->
-
-            <Label
-                Text="My Profile"
-                Style="{StaticResource TitleLabel}" />
+    <layouts:MainLayoutPage>
+        <layouts:MainLayoutPage.PageContent>
 
 
+            <ScrollView>
 
-            <!-- PROFILE CARD -->
+            <VerticalStackLayout
+                    Padding="20"
+                    Spacing="20">
 
-            <Frame
-                Style="{StaticResource CardFrame}">
+                <!-- PAGE TITLE -->
 
-                <VerticalStackLayout
-                    Spacing="18">
+                <Label
+                        Text="My Profile"
+                        Style="{StaticResource TitleLabel}" />
 
-                    <!-- NAME -->
+
+
+                <!-- PROFILE CARD -->
+
+                <Frame
+                        Style="{StaticResource CardFrame}">
 
                     <VerticalStackLayout
-                        Spacing="6">
+                            Spacing="18">
 
-                        <Label
-                            Text="Name"
-                            Style="{StaticResource NormalLabel}" />
+                        <!-- NAME -->
 
-                        <Entry
-                            Placeholder="Enter your name"
-                            Text="{Binding Name}"
-                            Style="{StaticResource AppEntry}" />
+                        <VerticalStackLayout
+                                Spacing="6">
+
+                            <Label
+                                    Text="Name"
+                                    Style="{StaticResource NormalLabel}" />
+
+                            <Entry
+                                    Placeholder="Enter your name"
+                                    Text="{Binding Name}"
+                                    Style="{StaticResource AppEntry}" />
+
+                        </VerticalStackLayout>
+
+
+
+                        <!-- SURNAME -->
+
+                        <VerticalStackLayout
+                                Spacing="6">
+
+                            <Label
+                                    Text="Surname"
+                                    Style="{StaticResource NormalLabel}" />
+
+                            <Entry
+                                    Placeholder="Enter your surname"
+                                    Text="{Binding SurName}"
+                                    Style="{StaticResource AppEntry}" />
+
+                        </VerticalStackLayout>
+
+
+
+                        <!-- EMAIL -->
+
+                        <VerticalStackLayout
+                                Spacing="6">
+
+                            <Label
+                                    Text="Email"
+                                    Style="{StaticResource NormalLabel}" />
+
+                            <Entry
+                                    Placeholder="Enter your email"
+                                    Keyboard="Email"
+                                    Text="{Binding Email}"
+                                    Style="{StaticResource AppEntry}" />
+
+                        </VerticalStackLayout>
+
+
+
+                        <!-- SAVE BUTTON -->
+
+                        <Button
+                                Text="Save Changes"
+                                Command="{Binding SaveCommand}"
+                                Style="{StaticResource PrimaryButton}"
+                                Margin="0,10,0,0" />
 
                     </VerticalStackLayout>
 
+                </Frame>
 
+            </VerticalStackLayout>
 
-                    <!-- SURNAME -->
-
-                    <VerticalStackLayout
-                        Spacing="6">
-
-                        <Label
-                            Text="Surname"
-                            Style="{StaticResource NormalLabel}" />
-
-                        <Entry
-                            Placeholder="Enter your surname"
-                            Text="{Binding SurName}"
-                            Style="{StaticResource AppEntry}" />
-
-                    </VerticalStackLayout>
-
-
-
-                    <!-- EMAIL -->
-
-                    <VerticalStackLayout
-                        Spacing="6">
-
-                        <Label
-                            Text="Email"
-                            Style="{StaticResource NormalLabel}" />
-
-                        <Entry
-                            Placeholder="Enter your email"
-                            Keyboard="Email"
-                            Text="{Binding Email}"
-                            Style="{StaticResource AppEntry}" />
-
-                    </VerticalStackLayout>
-
-
-
-                    <!-- SAVE BUTTON -->
-
-                    <Button
-                        Text="Save Changes"
-                        Command="{Binding SaveCommand}"
-                        Style="{StaticResource PrimaryButton}"
-                        Margin="0,10,0,0" />
-
-                </VerticalStackLayout>
-
-            </Frame>
-
-        </VerticalStackLayout>
-
-    </ScrollView>
+        </ScrollView>
+        </layouts:MainLayoutPage.PageContent>
+    </layouts:MainLayoutPage>
 
 </ContentPage>
