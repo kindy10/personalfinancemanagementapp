@@ -46,13 +46,41 @@ namespace PersonalFinance.Mobile.ViewModels
             }
         }
         //selected Type 
-        private string _selectedType;
-        public string SelectedType
+        private CategoryType _selectedType;
+        public CategoryType SelectedType
         {
             get => _selectedType;
             set
             {
                 _selectedType = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool _isIncome;
+        public bool IsIncome
+        {
+            get => _isIncome;
+            set
+            {
+                _isIncome = value;
+
+                if (value)
+                    SelectedType = CategoryType.Income;
+
+                OnPropertyChanged();
+            }
+        }
+        private bool _isExpense;
+        public bool IsExpense
+        {
+            get => _isExpense;
+            set
+            {
+                _isExpense = value;
+
+                if (value)
+                    SelectedType = CategoryType.Expense;
+
                 OnPropertyChanged();
             }
         }
@@ -84,9 +112,18 @@ namespace PersonalFinance.Mobile.ViewModels
             _categoryId = category.Id;
             Name = category.Name;
 
-            SelectedType = category.Type;
+            SelectedType =Enum.Parse<CategoryType>(category.Type);
 
             PageTitle = "Edit Category";
+
+            if (SelectedType == CategoryType.Income)
+            {
+                IsIncome = true;
+            }
+            else
+            {
+                IsExpense = true;
+            }
         }
 
         //-----------SAVE CATEGORY
@@ -94,36 +131,36 @@ namespace PersonalFinance.Mobile.ViewModels
         {
             try
             {
-                //Validation
-                if (string.IsNullOrWhiteSpace(Name))
-                {
-                    await Application.Current.MainPage
-                    .DisplayAlert(
-                        "Validation",
-                        "Name is required",
-                        "OK");
+                ////Validation
+                //if (string.IsNullOrWhiteSpace(Name))
+                //{
+                //    await Application.Current.MainPage
+                //    .DisplayAlert(
+                //        "Validation",
+                //        "Name is required",
+                //        "OK");
 
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(SelectedType))
-                {
-                    await Application.Current.MainPage
-                        .DisplayAlert(
-                            "Validation",
-                            "Please select a type",
-                            "OK");
+                //    return;
+                //}
+                //if (string.IsNullOrWhiteSpace(SelectedType))
+                //{
+                //    await Application.Current.MainPage
+                //        .DisplayAlert(
+                //            "Validation",
+                //            "Please select a type",
+                //            "OK");
 
-                    return;
-                }
-                if (!Enum.TryParse<CategoryType>( SelectedType,true,out var categoryType)){
-                    await Application.Current.MainPage
-                        .DisplayAlert(
-                            "Validation",
-                            "Invalid category type",
-                            "OK");
+                //    return;
+                //}
+                //if (!Enum.TryParse<CategoryType>( SelectedType,true,out var categoryType)){
+                //    await Application.Current.MainPage
+                //        .DisplayAlert(
+                //            "Validation",
+                //            "Invalid category type",
+                //            "OK");
 
-                    return;
-                }
+                //    return;
+                //}
 
                 //-------CREATE MODE
                 if (!IsEditMode)
@@ -131,7 +168,7 @@ namespace PersonalFinance.Mobile.ViewModels
                     var request = new CreateCategoryRequestDto
                     {
                         Name = Name,
-                        Type = categoryType
+                        Type = SelectedType
                     };
                     await _categoryService.CreateCategoryAsync(request);
                 }
@@ -141,7 +178,7 @@ namespace PersonalFinance.Mobile.ViewModels
                     var request = new UpdateCategoryRequestDto
                     {
                         Name = Name,
-                        Type =  categoryType
+                        Type =  SelectedType
                     };
                     await _categoryService.UpdateCategoryAsync(_categoryId, request);
                 }

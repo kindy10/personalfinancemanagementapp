@@ -39,11 +39,28 @@
 
                     <!-- CATEGORY TYPE -->
 
-                    <Picker
-                        Title="Select Type"
-                        ItemsSource="{Binding Types}"
-                        SelectedItem="{Binding SelectedType}"
-                        Style="{StaticResource AppPicker}" />
+                    <VerticalStackLayout
+                         Spacing="10">
+
+                        <Label
+                            Text="Category Type"
+                            Style="{StaticResource NormalLabel}" />
+
+                        <HorizontalStackLayout Spacing="30">
+
+                            <RadioButton
+                                Content="Income"
+                                GroupName="CategoryType"
+                                IsChecked="{Binding IsIncome}" />
+
+                            <RadioButton
+                                Content="Expense"
+                                GroupName="CategoryType"
+                                IsChecked="{Binding IsExpense}" />
+
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
 
 
 
