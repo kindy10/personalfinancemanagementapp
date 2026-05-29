@@ -469,8 +469,8 @@
     </Style>
     <!---         Profile      Avatar -->
     <Style
-    x:Key="AvatarFrameStyle"
-    TargetType="Frame">
+        x:Key="AvatarFrameStyle"
+        TargetType="Frame">
 
         <Setter Property="WidthRequest" Value="60"/>
         <Setter Property="HeightRequest" Value="60"/>
@@ -479,6 +479,7 @@
         <Setter Property="HasShadow" Value="False"/>
 
         <Setter Property="BackgroundColor"
+                
             Value="{StaticResource CardBackground}"/>
 
     </Style>
