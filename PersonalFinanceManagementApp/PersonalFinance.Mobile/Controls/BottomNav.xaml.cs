@@ -21,7 +21,7 @@ public partial class BottomNav : ContentView
 
     private async void OnAddClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(TransactionFormPage));
+        await Shell.Current.GoToAsync("transaction-form");
     }
 
     private async void OnBudgetsClicked(object sender, EventArgs e)

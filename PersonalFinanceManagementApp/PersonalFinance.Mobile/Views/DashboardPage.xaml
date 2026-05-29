@@ -19,13 +19,37 @@
 
                         <!-- HEADER -->
 
-                        <Label
-                            Text="Dashboard"
-                            Style="{StaticResource TitleLabel}" />
+                    <Grid
+                        ColumnDefinitions="Auto,*"
+                        Margin="0,10,0,25">
+
+                        <Frame Style="{StaticResource AvatarFrameStyle}">
+
+                            <Image
+                                    Source="{Binding AvatarSource}"
+                                    Aspect="AspectFill"/>
+
+                        </Frame>
+
+                        <VerticalStackLayout
+        Grid.Column="1"
+        Margin="15,0,0,0">
+
+                            <Label
+            Text="{Binding WelcomeMessage}"
+            Style="{StaticResource DashboardGreetingStyle}" />
+
+                            <Label
+            Text="{Binding CurrentMonth}"
+            Style="{StaticResource DashboardSubTitleStyle}" />
+
+                        </VerticalStackLayout>
+
+                    </Grid>
 
 
 
-                        <!-- FINTECH HERO CARD -->
+                    <!-- FINTECH HERO CARD -->
 
                         <Frame
                                 CornerRadius="35"
