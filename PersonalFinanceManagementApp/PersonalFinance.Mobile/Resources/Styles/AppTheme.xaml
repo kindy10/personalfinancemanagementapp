@@ -36,7 +36,15 @@
     <Color x:Key="BorderColor">
         #334155
     </Color>
+    
+    
+    <Color x:Key="PrimaryText">#F9FAFB</Color>
+    
+    <Color x:Key="SecondaryText">#9CA3AF</Color>
 
+    <Color x:Key="PageBackground">#111827</Color>
+
+    <Color x:Key="CardBackground">#1E293B</Color>
 
 
     <!-- PAGE STYLE -->
@@ -433,6 +441,45 @@
         <Setter
         Property="TextColor"
         Value="#374151" />
+
+    </Style>
+    
+    
+<!---         Profile      Title -->
+    <Style
+    x:Key="DashboardGreetingStyle"
+    TargetType="Label">
+
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="TextColor"
+            Value="{StaticResource PrimaryText}"/>
+
+    </Style>
+
+    <!---         Profile      SubTitle -->
+    <Style
+    x:Key="DashboardSubTitleStyle"
+    TargetType="Label">
+
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="TextColor"
+            Value="{StaticResource SecondaryText}"/>
+
+    </Style>
+    <!---         Profile      Avatar -->
+    <Style
+    x:Key="AvatarFrameStyle"
+    TargetType="Frame">
+
+        <Setter Property="WidthRequest" Value="60"/>
+        <Setter Property="HeightRequest" Value="60"/>
+        <Setter Property="CornerRadius" Value="30"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HasShadow" Value="False"/>
+
+        <Setter Property="BackgroundColor"
+            Value="{StaticResource CardBackground}"/>
 
     </Style>
 

@@ -14,6 +14,9 @@ namespace PersonalFinance.Mobile.ViewModels
         //Service for calling backend API
         private readonly ReportService _reportService;
 
+        //Service for calling profileService
+        private readonly ProfileService _profileService;
+
         //Properties that will be displayed in UI
 
         private decimal _totalIncome { get; set; }    
@@ -52,6 +55,37 @@ namespace PersonalFinance.Mobile.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        //-------USER NAME
+        private string _userName;
+        public string UserName
+        {
+            get => _userName;
+            set
+            {
+                _userName = value;
+                //Notify UI
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(WelcomeMessage));
+
+            }
+        }
+        public string WelcomeMessage => $"👋 Hello {UserName}";
+
+        private string _avatarSource = "default_avatar.png";
+
+        public string AvatarSource
+        {
+            get => _avatarSource;
+            set
+            {
+                _avatarSource = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //-------Current date
+        public string CurrentMonth =>DateTime.Now.ToString("MMMM yyyy");
 
         //Link to transactions
         public ICommand GoToTransactionsCommand { get; }
@@ -133,13 +167,16 @@ namespace PersonalFinance.Mobile.ViewModels
 
         //---------------Constructor
         public DashboardViewModel() { 
+
             _reportService = new ReportService();
+            _profileService = new ProfileService();
 
             //Load dashboard data automatically
             LoadSummary();
             _ = LoadBudgetUsage();
             _ = LoadExpenseChart();
             _ = LoadTrendChart();
+            _ = LoadUserInfo();
 
             GoToTransactionsCommand = new Command(async () => await Shell.Current.GoToAsync("//transactions"));
 
@@ -175,6 +212,25 @@ namespace PersonalFinance.Mobile.ViewModels
                         "FULL ERROR",
                         ex.ToString(),
                         "OK");
+            }
+        }
+
+        //Load UserInfo
+        private async Task LoadUserInfo()
+        {
+            try
+            {
+                var profile = await _profileService.GetProfileAsync();
+
+                UserName = profile.Name;
+                if (!string.IsNullOrWhiteSpace(profile.AvatarUrl))
+                {
+                    AvatarSource = profile.AvatarUrl;
+                }
+            }
+            catch
+            {
+                UserName = "User";
             }
         }
 

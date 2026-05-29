@@ -6,4 +6,6 @@ public class UserProfileDto
     public string SurName { get; set; }
 
     public string Email { get; set; }
+
+    public string? AvatarUrl { get; set; }
 }
