@@ -6,9 +6,7 @@ using PersonalFinance.Shared.DTOs.Transactions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Input;
 
 namespace PersonalFinance.Mobile.ViewModels
@@ -61,7 +59,7 @@ namespace PersonalFinance.Mobile.ViewModels
             {
                _searchText = value;
                OnPropertyChanged();
-              ApplySearch();
+              ApplyFilters();
            }
         }
 
@@ -78,6 +76,13 @@ namespace PersonalFinance.Mobile.ViewModels
                 ApplyFilters();
             }
         }
+
+        // 
+        public bool IsAllSelected => SelectedFilter == "All";
+
+        public bool IsIncomeSelected =>SelectedFilter == "Income";
+
+        public bool IsExpenseSelected =>SelectedFilter == "Expense";
 
         public TransactionsViewModel()
         {
@@ -195,35 +200,35 @@ namespace PersonalFinance.Mobile.ViewModels
         }
 
         //----------SEARCH BAR
-        private void ApplySearch()
-        {
-            Transactions.Clear();
+        //private void ApplySearch()
+        //{
+        //    Transactions.Clear();
 
-            var filtered =
-                _allTransactions.Where(t =>
-                    string.IsNullOrWhiteSpace(SearchText)
+        //    var filtered =
+        //        _allTransactions.Where(t =>
+        //            string.IsNullOrWhiteSpace(SearchText)
 
-                    ||
+        //            ||
 
-                    t.Description.Contains(
-                        SearchText,
-                        StringComparison.OrdinalIgnoreCase)
+        //            t.Description.Contains(
+        //                SearchText,
+        //                StringComparison.OrdinalIgnoreCase)
 
-                    ||
-                    t.Amount.ToString().Contains(
-                        SearchText,
-                        StringComparison.OrdinalIgnoreCase)
-                    ||
+        //            ||
+        //            t.Amount.ToString().Contains(
+        //                SearchText,
+        //                StringComparison.OrdinalIgnoreCase)
+        //            ||
 
-                    t.CategoryName.Contains(
-                        SearchText,
-                        StringComparison.OrdinalIgnoreCase));
+        //            t.CategoryName.Contains(
+        //                SearchText,
+        //                StringComparison.OrdinalIgnoreCase));
 
-            foreach (var transaction in filtered)
-            {
-                Transactions.Add(transaction);
-            }
-        }
+        //    foreach (var transaction in filtered)
+        //    {
+        //        Transactions.Add(transaction);
+        //    }
+        //}
         //Filter
         private void ApplyFilters()
         {

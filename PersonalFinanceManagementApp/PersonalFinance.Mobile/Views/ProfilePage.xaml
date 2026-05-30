@@ -98,8 +98,12 @@
                     </VerticalStackLayout>
 
                 </Frame>
+                    <Button
+                        Text="🚪 Logout"
+                        Style="{StaticResource DangerButton}"
+                        Command="{Binding LogoutCommand}" />
 
-            </VerticalStackLayout>
+                </VerticalStackLayout>
 
         </ScrollView>
         </layouts:MainLayoutPage.PageContent>

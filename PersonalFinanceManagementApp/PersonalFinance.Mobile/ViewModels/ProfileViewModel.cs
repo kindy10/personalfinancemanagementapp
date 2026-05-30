@@ -55,6 +55,11 @@ public class ProfileViewModel : BaseViewModel
     // Save command
     public ICommand SaveCommand { get; }
 
+    //Logout Command
+    public ICommand LogoutCommand { get; }
+
+
+
     public ProfileViewModel()
     {
         _profileService =
@@ -62,6 +67,7 @@ public class ProfileViewModel : BaseViewModel
 
         SaveCommand =
             new Command(async () => await Save());
+        LogoutCommand =new Command(async () => await Logout());
 
         _ = LoadProfile();
     }
@@ -118,5 +124,24 @@ public class ProfileViewModel : BaseViewModel
                     ex.Message,
                     "OK");
         }
+    }
+    //Logout 
+    private async Task Logout()
+    {
+        bool confirm =
+            await Application.Current.MainPage.DisplayAlert(
+                "Logout",
+                "Are you sure you want to logout?",
+                "Yes",
+                "No");
+
+        if (!confirm)
+            return;
+
+        // Clear saved token
+
+        SecureStorage.Remove("auth_token");
+
+        await Shell.Current.GoToAsync("//login");
     }
 }

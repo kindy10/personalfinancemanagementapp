@@ -568,6 +568,37 @@
             Value="{StaticResource SecondaryText}"/>
 
     </Style>
+    
+    <!---Search Bar-->
 
+    <Style x:Key="FilterChip"
+       TargetType="Button">
 
+        <Setter Property="Padding"
+            Value="18,8" />
+
+        <Setter Property="CornerRadius"
+            Value="20" />
+
+        <Setter Property="FontSize"
+            Value="14" />
+
+        <Setter Property="BackgroundColor"
+            Value="{StaticResource CardBackground}" />
+
+        <Setter Property="TextColor"
+            Value="{StaticResource TextColor}" />
+
+    </Style>
+    <Style x:Key="SelectedFilterChip"
+       TargetType="Button"
+       BasedOn="{StaticResource FilterChip}">
+
+        <Setter Property="BackgroundColor"
+            Value="{StaticResource PrimaryColor}" />
+
+        <Setter Property="TextColor"
+            Value="White" />
+
+    </Style>
 </ResourceDictionary>
