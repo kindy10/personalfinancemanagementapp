@@ -91,35 +91,42 @@
 
 
                     <!-- BUDGET LIST -->
-                    
+                    <CollectionView
+                            ItemsSource="{Binding Budgets}"
+                        >
 
-                <CollectionView
-                        ItemsSource="{Binding Budgets}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                    Orientation="Vertical"
+                                    Span="1" />
+                        </CollectionView.ItemsLayout>
 
-                    <CollectionView.ItemTemplate>
+                        <CollectionView.ItemTemplate>
 
-                        <DataTemplate>
+                            <DataTemplate>
 
-                            <!-- BUDGET CARD -->
+                                <!-- BUDGET CARD -->
 
                                 <Frame
-                                        Style="{StaticResource CardFrame}">
+                                    Style="{StaticResource CardFrame}"
+                                    Margin="5">
 
                                     <VerticalStackLayout
-                                                Spacing="15">
+                                             Spacing="15"
+                                        Padding="5">
 
                                         <!-- HEADER -->
 
                                         <Grid
-                                            ColumnDefinitions="60,*,Auto">
+                                        ColumnDefinitions="60,*,50">
 
                                             <!-- ICON -->
 
                                             <Frame
-                                                    Style="{StaticResource CategoryIconContainer}">
+                                                Style="{StaticResource CategoryIconContainer}">
 
                                                 <Label
-                                                    Text="🍔"
+                                                    Text="{Binding Icon}"
                                                     FontSize="24"
                                                     HorizontalOptions="Center"
                                                     VerticalOptions="Center"/>
@@ -129,8 +136,8 @@
                                             <!-- INFO -->
 
                                             <VerticalStackLayout
-                                                    Grid.Column="1"
-                                                    Margin="15,0">
+                                                Grid.Column="1"
+                                                Margin="15,0">
 
                                                 <Label
                                                     Text="{Binding CategoryName}"
@@ -159,42 +166,53 @@
 
                                         <Label
                                             Text="Budget Limit"
-                                       
+       
                                             Style="{StaticResource SubtitleLabel}" />
 
                                         <!-- SPENT / LIMIT -->
 
-                                        <Label
-                                            Text="{Binding Spent,
-                                                           StringFormat='{0:C}'}"
-                                            Style="{StaticResource AmountLabel}" />
+                                        <HorizontalStackLayout
+                                            Spacing="5">
 
-                                        <Label
-                                            Text="{Binding Limit,
-                                                           StringFormat='of {0:C}'}"
-                                            Style="{StaticResource NormalLabel}" />
+                                               <Label
+                                                Text="{Binding Spent,
+                                                               StringFormat='{0:C}'}"
+                                                Style="{StaticResource AmountLabel}" />
+
+                                                 <Label
+                                                Text="{Binding Limit,
+                                                               StringFormat='/ {0:C}'}"
+                                                Style="{StaticResource NormalLabel}"
+                                                VerticalOptions="End"/>
+                                               </HorizontalStackLayout>
                                         <ProgressBar
-                                                Progress="{Binding ProgressValue}"
-                                                HeightRequest="8"
-                                                ProgressColor="{Binding Status,
-                                                Converter={StaticResource BudgetStatusColorConverter}}" />
+                                            Progress="{Binding ProgressValue}"
+                                            HeightRequest="8"
+                                            ProgressColor="{Binding Status,
+                                            Converter={StaticResource BudgetStatusColorConverter}}" />
 
                                         <Grid
-                                                ColumnDefinitions="*,Auto">
+                                            ColumnDefinitions="Auto,*,Auto"
+                                            Margin="0,5,0,0">
 
                                             <Label
-                                                Text="{Binding PercentageText}"
-                                                Style="{StaticResource NormalLabel}" />
+                                                    Grid.Column="0"
+                                                    Text="{Binding PercentageText}"
+                                                    Style="{StaticResource NormalLabel}" />
+
+                                            <BoxView
+                                                    Grid.Column="1"
+                                                    Opacity="0" />
 
                                             <Label
-                                                Grid.Column="1"
-                                                Text="{Binding Status}"
-                                                Style="{StaticResource NormalLabel}"
-                                                TextColor="{Binding Status,Converter={StaticResource BudgetStatusColorConverter}}" />
-
-                                            
+                                                    Grid.Column="2"
+                                                    Text="{Binding Status}"
+                                                    FontAttributes="Bold"
+                                                    TextColor="{Binding Status,
+                                                                        Converter={StaticResource BudgetStatusColorConverter}}" />
 
                                         </Grid>
+
                                         <Label
                                             Text="{Binding Remaining,
                                                            StringFormat='Remaining: {0:C}'}"
@@ -203,6 +221,10 @@
                                     </VerticalStackLayout>
 
                                 </Frame>
+
+
+
+
 
 
                             </DataTemplate>

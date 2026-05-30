@@ -35,5 +35,6 @@ namespace PersonalFinance.Shared.DTOs.Reports
                     <= 90 => "Warning",
                     _ => "Danger"
                 };
+        public string Icon { get; set; } = "📊";
     }
 }
