@@ -24,6 +24,25 @@ namespace PersonalFinance.Mobile.ViewModels
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
 
+        public ICommand ShowOptionsCommand { get; }
+
+        //-----------ICONS
+        //public string Icon
+        //{
+        //    get
+        //    {
+        //        return Name switch
+        //        {
+        //            "Food" => "🍔",
+        //            "Transport" => "🚕",
+        //            "Salary" => "💰",
+        //            "Shopping" => "🛍️",
+        //            "Health" => "🏥",
+        //            _ => "📂"
+        //        };
+        //    }
+        //}
+
         public CategoriesViewModel()
         {
             _categoryService = new CategoryService();
@@ -39,6 +58,27 @@ namespace PersonalFinance.Mobile.ViewModels
 
             //Delete Category
             DeleteCommand = new Command<Guid>(async (id) => await DeleteCategory(id));
+
+            //Show OPtion
+            ShowOptionsCommand = new Command<CategoryDto>(async category =>
+            {
+                string action =
+                    await Application.Current.MainPage.DisplayActionSheet(
+                        category.Name,
+                        "Cancel",
+                        null,
+                        "Edit",
+                        "Delete");
+
+                if (action == "Edit")
+                {
+                    EditCommand.Execute(category);
+                }
+                else if (action == "Delete")
+                {
+                    DeleteCommand.Execute(category.Id);
+                }
+            });
 
         }
         //Load categories

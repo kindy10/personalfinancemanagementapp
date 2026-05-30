@@ -26,8 +26,8 @@
                         <Frame Style="{StaticResource AvatarFrameStyle}">
 
                             <Image
-                                    Source="{Binding AvatarSource}"
-                                    Aspect="AspectFill"/>
+                            Source="{Binding AvatarSource}"
+                            Aspect="AspectFill"/>
 
                         </Frame>
 

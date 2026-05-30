@@ -24,6 +24,9 @@
     <Color x:Key="DangerColor">
         #EF4444
     </Color>
+    
+    <Color x:Key="WarningColor">#F59E0B
+    </Color>
 
     <Color x:Key="TextColor">
         White
@@ -469,8 +472,8 @@
     </Style>
     <!---         Profile      Avatar -->
     <Style
-    x:Key="AvatarFrameStyle"
-    TargetType="Frame">
+        x:Key="AvatarFrameStyle"
+        TargetType="Frame">
 
         <Setter Property="WidthRequest" Value="60"/>
         <Setter Property="HeightRequest" Value="60"/>
@@ -479,7 +482,90 @@
         <Setter Property="HasShadow" Value="False"/>
 
         <Setter Property="BackgroundColor"
+                
             Value="{StaticResource CardBackground}"/>
+
+    </Style>
+
+    <Style
+    x:Key="CardTitleLabel"
+    TargetType="Label">
+
+        <Setter Property="FontSize"
+            Value="20"/>
+
+        <Setter Property="FontAttributes"
+            Value="Bold"/>
+
+        <Setter Property="TextColor"
+            Value="{StaticResource TextColor}"/>
+
+    </Style>
+    
+    <Style
+    x:Key="CategoryIconContainer"
+    TargetType="Frame">
+
+        <Setter Property="WidthRequest"
+            Value="50"/>
+
+        <Setter Property="HeightRequest"
+            Value="50"/>
+
+        <Setter Property="CornerRadius"
+            Value="25"/>
+
+        <Setter Property="Padding"
+            Value="0"/>
+
+        <Setter Property="BorderColor"
+            Value="Transparent"/>
+
+        <Setter Property="BackgroundColor"
+            Value="{StaticResource PrimaryColor}"/>
+
+    </Style>
+    
+    
+    <Style
+    x:Key="AmountLabel"
+    TargetType="Label">
+
+        <Setter Property="FontSize"
+            Value="26"/>
+
+        <Setter Property="FontAttributes"
+            Value="Bold"/>
+
+        <Setter Property="TextColor"
+            Value="{StaticResource SuccessColor}"/>
+
+    </Style>
+
+    <Style
+    x:Key="MenuButton"
+    TargetType="Button">
+
+        <Setter Property="FontSize"
+            Value="24"/>
+
+        <Setter Property="BackgroundColor"
+            Value="Transparent"/>
+
+        <Setter Property="TextColor"
+            Value="{StaticResource SecondaryText}"/>
+
+    </Style>
+
+    <Style
+    x:Key="SubtitleLabel"
+    TargetType="Label">
+
+        <Setter Property="FontSize"
+            Value="14"/>
+
+        <Setter Property="TextColor"
+            Value="{StaticResource SecondaryText}"/>
 
     </Style>
 

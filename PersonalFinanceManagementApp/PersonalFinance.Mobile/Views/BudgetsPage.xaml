@@ -3,6 +3,7 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui" 
     xmlns:layouts="clr-namespace:PersonalFinance.Mobile.Layouts"
     x:Class="PersonalFinance.Mobile.Views.BudgetsPage"
     Title="Budgets">
@@ -14,24 +15,83 @@
                     Padding="20"
                     Spacing="20">
 
-                <!-- PAGE TITLE -->
 
-                <Label
-                        Text="Budgets"
-                        Style="{StaticResource TitleLabel}" />
+                    <Grid
+                        ColumnDefinitions="*,Auto"
+                        Margin="0,0,0,10">
+                        <VerticalStackLayout>
+
+                            <!-- PAGE TITLE -->
+
+                            <Label
+                                    Text="Budgets"
+                                    Style="{StaticResource TitleLabel}" />
+                            <Label
+                                Text="Track your monthly spending"
+                                Style="{StaticResource NormalLabel}" />
+
+                         </VerticalStackLayout>
+                        
+
+                        <!-- ADD BUTTON -->
+
+                        <Button
+                                Grid.Column="1"
+                                Text="+"
+                                WidthRequest="55"
+                                HeightRequest="55"
+                                CornerRadius="28"
+                                Command="{Binding AddCommand}"
+                                Style="{StaticResource PrimaryButton}" />
+
+                    </Grid>
+                    
+                    <!---Piechart  (Circle)-->
+                    <Frame
+    Style="{StaticResource CardFrame}"
+    Padding="20">
+
+                        <Grid>
+
+                            <!-- Pie Chart -->
+
+                            <lvc:PieChart
+                                    Series="{Binding BudgetSeries}"
+                                    HeightRequest="250"
+                                LegendPosition="Hidden"/>
+
+                            <!-- Center Content -->
+
+                            <VerticalStackLayout
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Spacing="4">
+
+                                <Label
+                Text="Total Budget"
+                Style="{StaticResource SubtitleLabel}"
+                HorizontalOptions="Center"/>
+
+                                <Label
+                Text="{Binding TotalBudget,
+                               StringFormat='{0:C}'}"
+                Style="{StaticResource MetricValueLabel}"
+                HorizontalOptions="Center"/>
+
+                                <Label
+                Text="{Binding CurrentMonth}"
+                Style="{StaticResource NormalLabel}"
+                HorizontalOptions="Center"/>
+
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                    </Frame>
 
 
-
-                <!-- ADD BUTTON -->
-
-                <Button
-                        Text="+ Add Budget"
-                        Command="{Binding AddCommand}"
-                        Style="{StaticResource PrimaryButton}" />
-
-
-
-                <!-- BUDGET LIST -->
+                    <!-- BUDGET LIST -->
+                    
 
                 <CollectionView
                         ItemsSource="{Binding Budgets}">
@@ -42,78 +102,110 @@
 
                             <!-- BUDGET CARD -->
 
-                            <Frame
-                                    Style="{StaticResource CardFrame}">
+                                <Frame
+                                        Style="{StaticResource CardFrame}">
 
-                                <VerticalStackLayout
-                                        Spacing="14">
+                                    <VerticalStackLayout
+                                                Spacing="15">
 
-                                    <!-- CATEGORY -->
+                                        <!-- HEADER -->
 
-                                    <Label
-                                            Text="{Binding CategoryName}"
-                                            FontSize="22"
-                                            FontAttributes="Bold"
-                                            TextColor="{StaticResource TextColor}" />
+                                        <Grid
+                                            ColumnDefinitions="60,*,Auto">
 
+                                            <!-- ICON -->
 
+                                            <Frame
+                                                    Style="{StaticResource CategoryIconContainer}">
 
-                                    <!-- AMOUNT -->
+                                                <Label
+                                                    Text="🍔"
+                                                    FontSize="24"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center"/>
 
-                                    <Label
-                                            Text="{Binding MonthlyLimit,
-                                                   StringFormat='{0:C}'}"
-                                            Style="{StaticResource MetricValueLabel}"
-                                            TextColor="{StaticResource SuccessColor}" />
+                                            </Frame>
 
+                                            <!-- INFO -->
 
+                                            <VerticalStackLayout
+                                                    Grid.Column="1"
+                                                    Margin="15,0">
 
-                                    <!-- MONTH -->
+                                                <Label
+                                                    Text="{Binding CategoryName}"
+                                                    Style="{StaticResource CardTitleLabel}" />
 
-                                    <Label
-                                            Text="{Binding Month,
-                                                   StringFormat='Month: {0:MMMM yyyy}'}"
-                                            Style="{StaticResource NormalLabel}" />
+                                                <Label
+                                                    Text="{Binding Month,
+                                                                   StringFormat='{0:MMMM yyyy}'}"
+                                                    Style="{StaticResource SubtitleLabel}" />
 
+                                            </VerticalStackLayout>
 
+                                            <!-- MENU -->
 
-                                    <!-- ACTION BUTTONS -->
-
-                                    <Grid
-                                            ColumnDefinitions="*,*"
-                                            ColumnSpacing="10">
-
-                                        <!-- EDIT -->
-
-                                        <Button
-                                                Grid.Column="0"
-                                                Text="Edit"
-                                                Style="{StaticResource PrimaryButton}"
-                                                HeightRequest="45"
+                                            <Button
+                                                Grid.Column="2"
+                                                Text="⋮"
+                                                Style="{StaticResource MenuButton}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
-                                                                  Path=BindingContext.EditCommand}"
+                                                                  Path=BindingContext.ShowOptionsCommand}"
                                                 CommandParameter="{Binding .}" />
 
+                                        </Grid>
 
+                                        <!-- AMOUNT -->
 
-                                        <!-- DELETE -->
+                                        <Label
+                                            Text="Budget Limit"
+                                       
+                                            Style="{StaticResource SubtitleLabel}" />
 
-                                        <Button
+                                        <!-- SPENT / LIMIT -->
+
+                                        <Label
+                                            Text="{Binding Spent,
+                                                           StringFormat='{0:C}'}"
+                                            Style="{StaticResource AmountLabel}" />
+
+                                        <Label
+                                            Text="{Binding Limit,
+                                                           StringFormat='of {0:C}'}"
+                                            Style="{StaticResource NormalLabel}" />
+                                        <ProgressBar
+                                                Progress="{Binding ProgressValue}"
+                                                HeightRequest="8"
+                                                ProgressColor="{Binding Status,
+                                                Converter={StaticResource BudgetStatusColorConverter}}" />
+
+                                        <Grid
+                                                ColumnDefinitions="*,Auto">
+
+                                            <Label
+                                                Text="{Binding PercentageText}"
+                                                Style="{StaticResource NormalLabel}" />
+
+                                            <Label
                                                 Grid.Column="1"
-                                                Text="Delete"
-                                                Style="{StaticResource DangerButton}"
-                                                HeightRequest="45"
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
-                                                                  Path=BindingContext.DeleteCommand}"
-                                                CommandParameter="{Binding Id}" />
+                                                Text="{Binding Status}"
+                                                Style="{StaticResource NormalLabel}"
+                                                TextColor="{Binding Status,Converter={StaticResource BudgetStatusColorConverter}}" />
 
-                                    </Grid>
+                                            
 
-                                </VerticalStackLayout>
+                                        </Grid>
+                                        <Label
+                                            Text="{Binding Remaining,
+                                                           StringFormat='Remaining: {0:C}'}"
+                                            Style="{StaticResource NormalLabel}" />
 
-                            </Frame>
+                                    </VerticalStackLayout>
 
-                        </DataTemplate>
+                                </Frame>
+
+
+                            </DataTemplate>
 
                     </CollectionView.ItemTemplate>
 

@@ -11,4 +11,13 @@ public partial class DashboardPage : ContentPage
 		//Connect ViewModel to page
 		BindingContext = new DashboardViewModel();
 	}
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (BindingContext is DashboardViewModel vm)
+        {
+            await vm.LoadData();
+        }
+    }
 }

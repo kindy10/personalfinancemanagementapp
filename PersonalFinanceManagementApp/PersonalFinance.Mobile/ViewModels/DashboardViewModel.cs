@@ -172,11 +172,11 @@ namespace PersonalFinance.Mobile.ViewModels
             _profileService = new ProfileService();
 
             //Load dashboard data automatically
-            LoadSummary();
-            _ = LoadBudgetUsage();
-            _ = LoadExpenseChart();
-            _ = LoadTrendChart();
-            _ = LoadUserInfo();
+            //LoadSummary();
+            //_ = LoadBudgetUsage();
+            //_ = LoadExpenseChart();
+            //_ = LoadTrendChart();
+            //_ = LoadUserInfo();
 
             GoToTransactionsCommand = new Command(async () => await Shell.Current.GoToAsync("//transactions"));
 
@@ -191,7 +191,7 @@ namespace PersonalFinance.Mobile.ViewModels
         }
 
 
-        public async void LoadSummary()
+        public async Task LoadSummary()
         {
             try
             {
@@ -352,6 +352,14 @@ namespace PersonalFinance.Mobile.ViewModels
                         ex.ToString(),
                         "OK");
             }
+        }
+        public async Task LoadData()
+        {
+            await LoadSummary();
+            await LoadBudgetUsage();
+            await LoadExpenseChart();
+            await LoadTrendChart();
+            await LoadUserInfo();
         }
     }
 }
