@@ -17,10 +17,18 @@ namespace PersonalFinance.Mobile.ViewModels
     {
         private readonly TransactionService _transactionService;
 
-   
+        //CATEGORIES FOR SEARCH
+        private readonly CategoryService _categoryService;
+
+
+
+        private List<CategoryDto> _categories = [];
 
         //Collection automatically updates UI
         public ObservableCollection<TransactionDto> Transactions { get; set; }
+
+        //Original  transactions
+        private List<TransactionDto> _allTransactions = new();
 
 
         //Command for deleting transaction
@@ -35,10 +43,46 @@ namespace PersonalFinance.Mobile.ViewModels
         //Show 3 .dot
         public ICommand ShowOptionsCommand { get; }
 
+        //----------------------search command
+        public ICommand SearchCommand { get; }
+        public ICommand AllFilterCommand { get; }
+
+        public ICommand IncomeFilterCommand { get; }
+
+        public ICommand ExpenseFilterCommand { get; }
+
+        //SEARCH && FILTER
+       private string _searchText;
+
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+               _searchText = value;
+               OnPropertyChanged();
+              ApplySearch();
+           }
+        }
+
+        private string _selectedFilter = "All";
+
+        public string SelectedFilter
+        {
+            get => _selectedFilter;
+            set
+            {
+                _selectedFilter = value;
+                OnPropertyChanged();
+
+                ApplyFilters();
+            }
+        }
+
         public TransactionsViewModel()
         {
             _transactionService = new TransactionService();
-
+            _categoryService = new CategoryService();
             Transactions = new ObservableCollection<TransactionDto>();
 
             EditCommand =new Command<TransactionDto>( async (transaction) =>await EditTransaction(transaction));
@@ -69,9 +113,16 @@ namespace PersonalFinance.Mobile.ViewModels
 
 
             AddCommand = new Command(async () =>await Shell.Current.GoToAsync("transaction-form") );
-                    
+
+            SearchCommand =new Command(ApplyFilters);
+            AllFilterCommand =new Command(() => SelectedFilter = "All");
+
+            IncomeFilterCommand = new Command(() => SelectedFilter = "Income");
+
+            ExpenseFilterCommand = new Command(() => SelectedFilter = "Expense");
+
             //LoadTransactions();
-            
+
         }
 
         //---------------------------Load tranasaction from API
@@ -84,13 +135,18 @@ namespace PersonalFinance.Mobile.ViewModels
             {
                 //Get data from backend
 
-            var transactions = await _transactionService.GetTransactionAsync();
+                var transactions = await _transactionService.GetTransactionAsync();
+                _allTransactions = transactions.ToList();
 
-              // Clear old items
+                //Get categories
+                _categories =(await _categoryService.GetCategoriesAsync())
+                    .ToList();
+
+                // Clear old items
                 Transactions.Clear();
 
                //Add new items
-               foreach(var transaction in transactions)
+               foreach(var transaction in _allTransactions)
                {
                     transaction.Icon =
                         CategoryIconHelper.GetIcon(
@@ -137,8 +193,76 @@ namespace PersonalFinance.Mobile.ViewModels
                     "OK");
             }
         }
-        
-        
+
+        //----------SEARCH BAR
+        private void ApplySearch()
+        {
+            Transactions.Clear();
+
+            var filtered =
+                _allTransactions.Where(t =>
+                    string.IsNullOrWhiteSpace(SearchText)
+
+                    ||
+
+                    t.Description.Contains(
+                        SearchText,
+                        StringComparison.OrdinalIgnoreCase)
+
+                    ||
+                    t.Amount.ToString().Contains(
+                        SearchText,
+                        StringComparison.OrdinalIgnoreCase)
+                    ||
+
+                    t.CategoryName.Contains(
+                        SearchText,
+                        StringComparison.OrdinalIgnoreCase));
+
+            foreach (var transaction in filtered)
+            {
+                Transactions.Add(transaction);
+            }
+        }
+        //Filter
+        private void ApplyFilters()
+        {
+            Transactions.Clear();
+
+            var filtered =
+                _allTransactions.Where(t =>
+                    string.IsNullOrWhiteSpace(SearchText)
+                    ||
+                    t.Description.Contains(
+                        SearchText,
+                        StringComparison.OrdinalIgnoreCase)
+                    ||
+                    t.CategoryName.Contains(
+                        SearchText,
+                        StringComparison.OrdinalIgnoreCase));
+
+            // FILTER BUTTONS
+
+            if (SelectedFilter != "All")
+            {
+                filtered = filtered.Where(t =>
+                {
+                    var category =
+                        _categories.FirstOrDefault(
+                            c => c.Id == t.CategoryId);
+
+                    return category?.Type == SelectedFilter;
+                });
+            }
+
+            foreach (var transaction in filtered)
+            {
+                Transactions.Add(transaction);
+            }
+        }
+
+
+
 
     }
 }

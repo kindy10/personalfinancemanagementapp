@@ -36,8 +36,29 @@
                             Command="{Binding AddCommand}" />
 
                     </Grid>
+                    <!--Search bar-->
 
+                    <SearchBar
+                            Placeholder="Search transactions..."
+                            Text="{Binding SearchText}"
+                            SearchCommand="{Binding SearchCommand}" />
+                    <HorizontalStackLayout
+    Spacing="10"
+    Margin="0,10">
 
+                        <Button
+        Text="All"
+        Command="{Binding AllFilterCommand}" />
+
+                        <Button
+        Text="Income"
+        Command="{Binding IncomeFilterCommand}" />
+
+                        <Button
+        Text="Expense"
+        Command="{Binding ExpenseFilterCommand}" />
+
+                    </HorizontalStackLayout>
 
                     <!-- TRANSACTIONS LIST -->
 
