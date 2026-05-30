@@ -31,7 +31,10 @@ namespace PersonalFinance.Mobile.ViewModels
 
         //Command for editing
         public ICommand EditCommand { get; }
-             
+
+        //Show 3 .dot
+        public ICommand ShowOptionsCommand { get; }
+
         public TransactionsViewModel()
         {
             _transactionService = new TransactionService();
@@ -41,6 +44,27 @@ namespace PersonalFinance.Mobile.ViewModels
             EditCommand =new Command<TransactionDto>( async (transaction) =>await EditTransaction(transaction));
 
             DeleteCommand = new Command<Guid>(async (id) => await DeleteTransaction(id));
+
+            ShowOptionsCommand = new Command<TransactionDto>(async transaction =>
+            {
+                string action =
+                    await Application.Current.MainPage
+                        .DisplayActionSheet(
+                            "Options",
+                            "Cancel",
+                            null,
+                            "Edit",
+                            "Delete");
+
+                if (action == "Edit")
+                {
+                    EditCommand.Execute(transaction);
+                }
+                else if (action == "Delete")
+                {
+                    DeleteCommand.Execute(transaction);
+                }
+            });
 
 
 

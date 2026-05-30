@@ -16,20 +16,26 @@
                     Padding="20"
                     Spacing="15">
 
-                    <!-- PAGE TITLE -->
+                    <Grid
+                        ColumnDefinitions="*,Auto">
+                        <!--Title-->
 
-                    <Label
-                        Text="Transactions"
-                        Style="{StaticResource TitleLabel}" />
+                        <Label
+                            Text="Transactions"
+                            Style="{StaticResource TitleLabel}" />
 
+                        <!--ADD BUTTON-->
 
+                        <Button
+                            Grid.Column="1"
+                            Text="+"
+                            WidthRequest="55"
+                            HeightRequest="55"
+                            CornerRadius="28"
+                            Style="{StaticResource PrimaryButton}"
+                            Command="{Binding AddCommand}" />
 
-                    <!-- ADD TRANSACTION BUTTON -->
-
-                    <Button
-                        Text="+ Add Transaction"
-                        Style="{StaticResource PrimaryButton}"
-                        Command="{Binding AddCommand}" />
+                    </Grid>
 
 
 
@@ -53,24 +59,32 @@
                                         <!-- TOP SECTION -->
 
                                         <Grid
-                                            ColumnDefinitions="*,Auto">
+                                             ColumnDefinitions="60,*,Auto,Auto">
 
-                                            <!-- LEFT SIDE -->
+                                            <!-- ICON -->
+
+                                            <Frame
+                                                Grid.Column="0"
+                                                Style="{StaticResource CategoryIconContainer}">
+
+                                                <Label
+                                                    Text="{Binding Icon}"
+                                                    FontSize="20"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center"/>
+
+                                            </Frame>
+
+                                            <!-- INFO -->
 
                                             <VerticalStackLayout
-                                                Spacing="4">
-
-                                                <!-- CATEGORY -->
+                                                Grid.Column="1"
+                                                Margin="12,0"
+                                                Spacing="2">
 
                                                 <Label
                                                     Text="{Binding Category.Name}"
-                                                    FontSize="20"
-                                                    FontAttributes="Bold"
-                                                    TextColor="{StaticResource TextColor}" />
-
-
-
-                                                <!-- DESCRIPTION -->
+                                                    Style="{StaticResource CardTitleLabel}" />
 
                                                 <Label
                                                     Text="{Binding Description}"
@@ -78,74 +92,40 @@
 
                                             </VerticalStackLayout>
 
-
-
-                                            <!-- RIGHT SIDE -->
+                                            <!-- AMOUNT -->
 
                                             <VerticalStackLayout
-                                                Grid.Column="1"
+                                                Grid.Column="2"
                                                 HorizontalOptions="End"
-                                                Spacing="4">
-
-                                                <!-- AMOUNT -->
+                                                Spacing="2">
 
                                                 <Label
                                                     Text="{Binding Amount,
                                                            StringFormat='-{0:C}'}"
-                                                    FontSize="24"
+                                                    FontSize="22"
                                                     FontAttributes="Bold"
                                                     TextColor="{StaticResource DangerColor}"
-                                                    HorizontalTextAlignment="End" />
-
-
-
-                                                <!-- DATE -->
+                                                    HorizontalTextAlignment="End"/>
 
                                                 <Label
                                                     Text="{Binding Date,
                                                            StringFormat='{0:dd MMM yyyy}'}"
-                                                    FontSize="13"
-                                                    TextColor="{StaticResource SecondaryTextColor}"
-                                                    HorizontalTextAlignment="End" />
+                                                    Style="{StaticResource NormalLabel}"
+                                                    HorizontalTextAlignment="End"/>
 
                                             </VerticalStackLayout>
 
-                                        </Grid>
-
-
-
-                                        <!-- ACTION BUTTONS -->
-
-                                        <Grid
-                                            ColumnDefinitions="*,*"
-                                            ColumnSpacing="10">
-
-                                            <!-- EDIT BUTTON -->
-
+                                            <!-- MENU -->
+                    
                                             <Button
-                                                Grid.Column="0"
-                                                Text="Edit"
-                                                Style="{StaticResource PrimaryButton}"
-                                                HeightRequest="45"
+                                                Grid.Column="3"
+                                                Text="⋮"
+                                                Style="{StaticResource MenuButton}"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
-                                                                  Path=BindingContext.EditCommand}"
-                                                CommandParameter="{Binding .}" />
-
-
-
-                                            <!-- DELETE BUTTON -->
-
-                                            <Button
-                                                Grid.Column="1"
-                                                Text="Delete"
-                                                Style="{StaticResource DangerButton}"
-                                                HeightRequest="45"
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
-                                                                  Path=BindingContext.DeleteCommand}"
+                                                                  Path=BindingContext.ShowOptionsCommand}"
                                                 CommandParameter="{Binding .}" />
 
                                         </Grid>
-
                                     </VerticalStackLayout>
 
                                 </Frame>
