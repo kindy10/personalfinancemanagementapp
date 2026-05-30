@@ -4,7 +4,7 @@ public static class CategoryIconHelper
 {
     public static string GetIcon(string categoryName)
     {
-        return categoryName?.ToLower() switch
+        return categoryName?.Trim().ToLower() switch
         {
             "food" => "🍔",
             "transport" => "🚕",
@@ -16,6 +16,7 @@ public static class CategoryIconHelper
             "entertainment" => "🎮",
             "travel" => "✈️",
             "utilities" => "⚡",
+            "game" => "🎮",
 
             _ => "📊"
         };

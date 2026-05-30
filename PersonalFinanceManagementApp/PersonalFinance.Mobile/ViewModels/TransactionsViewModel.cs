@@ -92,8 +92,11 @@ namespace PersonalFinance.Mobile.ViewModels
                //Add new items
                foreach(var transaction in transactions)
                {
+                    transaction.Icon =
+                        CategoryIconHelper.GetIcon(
+                            transaction.CategoryName);
                     Transactions.Add(transaction);
-                }
+               }
             }
            catch(Exception ex)
             {
@@ -134,6 +137,8 @@ namespace PersonalFinance.Mobile.ViewModels
                     "OK");
             }
         }
+        
+        
 
     }
 }
