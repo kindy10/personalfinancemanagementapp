@@ -103,27 +103,36 @@ namespace PersonalFinance.Mobile.ViewModels
                     var usage =
                         usages.FirstOrDefault(
                             x => x.CategoryName == budget.CategoryName);
+                    var card = new BudgetCardDto
+                                {
+                                    Id = budget.Id,
 
-                    Budgets.Add(
-                        new BudgetCardDto
-                        {
-                            Id = budget.Id,
-                            CategoryName = budget.CategoryName,
-                            Month = budget.Month,
+                                    CategoryName = budget.CategoryName,
 
-                            Limit = usage?.Limit
-                                    ?? budget.MonthlyLimit,
+                                    Icon =
+                    CategoryIconHelper.GetIcon(
+                        budget.CategoryName),
 
-                            Spent = usage?.Spent ?? 0,
+                                    Month = budget.Month,
 
-                            Remaining = usage?.Remaining
-                                        ?? budget.MonthlyLimit,
+                                    Limit = usage?.Limit
+                        ?? budget.MonthlyLimit,
 
-                            Percentage =
-                                usage?.DisplayPercentage ?? 0
-                        });
+                                    Spent = usage?.Spent ?? 0,
+
+                                    Remaining = usage?.Remaining
+                            ?? budget.MonthlyLimit,
+
+                                    Percentage =
+                    usage?.DisplayPercentage ?? 0
+                                };
+
+                    Budgets.Add(card);
+
+                    
 
                 }
+
                 TotalBudget = Budgets.Sum(x => x.Limit);
 
                 //Build chart series
