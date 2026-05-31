@@ -116,6 +116,11 @@ namespace PersonalFinance.Mobile.ViewModels
         {
             try
             {
+                bool confirm = await Application.Current.MainPage.DisplayAlert("Delete Category",
+                    "Are you sure you want to delete this category ?",
+                    "Delete", "cancel");
+                if (!confirm)
+                    return;
                 await _categoryService.DeleteCategoryAsync(id);
                 await LoadCategories();
             }

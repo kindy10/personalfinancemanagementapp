@@ -195,11 +195,16 @@ namespace PersonalFinance.Mobile.ViewModels
 
             await Shell.Current.GoToAsync("budget-form");
         }
-        //Delete budget 
+        //--------------Delete budget 
         private async Task DeleteBudget(Guid id)
         {
             try
             {
+                bool confirm = await Application.Current.MainPage.DisplayAlert("Delete budget?",
+                    "Are you sure you want to delete this budget ?",
+                    "Delete", "cancel");
+                if (!confirm)
+                    return;
                 await _budgetService.DeleteBudgetAsync(id);
 
                 await LoadBudgets();

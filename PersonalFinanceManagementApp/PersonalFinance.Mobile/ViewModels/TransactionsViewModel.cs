@@ -183,6 +183,11 @@ namespace PersonalFinance.Mobile.ViewModels
         {
             try
             {
+                bool confirm = await Application.Current.MainPage.DisplayAlert("Delete transaction",
+                    "Are you sure you want to delete this transaction ?",
+                    "Delete", "cancel");
+                if (!confirm)
+                    return;
                 //Delete from backend
                 await _transactionService.DeleteTransactionAsync(id);
 
