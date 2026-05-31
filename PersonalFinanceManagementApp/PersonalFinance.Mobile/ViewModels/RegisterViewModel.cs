@@ -59,7 +59,7 @@ namespace PersonalFinance.Mobile.ViewModels
 
         //Commands
         public ICommand RegisterCommand { get; }
-        public ICommand GoToLoginCommnand { get; }
+        public ICommand GoToLoginCommand { get; }
 
         public RegisterViewModel()
         {
@@ -67,7 +67,7 @@ namespace PersonalFinance.Mobile.ViewModels
 
             RegisterCommand = new Command(async () => await Register());
 
-            GoToLoginCommnand = new Command(async () => await Shell.Current.GoToAsync("//login"));
+            GoToLoginCommand = new Command(async () => await Shell.Current.GoToAsync("//login"));
         }
 
         private async Task Register()

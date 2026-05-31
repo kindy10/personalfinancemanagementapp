@@ -11,4 +11,13 @@ public partial class ProfilePage : ContentPage
         BindingContext =
             new ProfileViewModel();
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (BindingContext is ProfileViewModel vm)
+        {
+            await vm.LoadStatistics();
+        }
+    }
 }
