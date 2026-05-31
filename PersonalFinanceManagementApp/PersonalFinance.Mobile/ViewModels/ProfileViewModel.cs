@@ -58,7 +58,8 @@ public class ProfileViewModel : BaseViewModel
     //Logout Command
     public ICommand LogoutCommand { get; }
 
-
+    //ChangePassword Command
+    public ICommand ChangePasswordCommand { get; }
 
     public ProfileViewModel()
     {
@@ -68,6 +69,10 @@ public class ProfileViewModel : BaseViewModel
         SaveCommand =
             new Command(async () => await Save());
         LogoutCommand =new Command(async () => await Logout());
+
+        ChangePasswordCommand =
+                new Command(async () =>
+                    await Shell.Current.GoToAsync("auth-changePassword"));
 
         _ = LoadProfile();
     }

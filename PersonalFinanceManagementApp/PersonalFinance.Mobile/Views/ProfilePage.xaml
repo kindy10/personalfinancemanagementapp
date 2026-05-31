@@ -103,6 +103,11 @@
                         Style="{StaticResource DangerButton}"
                         Command="{Binding LogoutCommand}" />
 
+                    <Button
+                        Text="🔒 Change Password"
+                        Style="{StaticResource PrimaryButton}"
+                        Command="{Binding ChangePasswordCommand}" />
+
                 </VerticalStackLayout>
 
         </ScrollView>

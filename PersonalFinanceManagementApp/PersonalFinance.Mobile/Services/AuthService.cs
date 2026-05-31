@@ -64,5 +64,13 @@ namespace PersonalFinance.Mobile.Services
             return response.Data;
         }
 
+        //--------PASSWORD CHANGE
+        public async Task ChangePasswordAsync(ChangePasswordRequestDto request)
+        {
+            await _apiService.PostAsync<object>(
+                "auth/change-password",
+                request);
+        }
+
     }
 }

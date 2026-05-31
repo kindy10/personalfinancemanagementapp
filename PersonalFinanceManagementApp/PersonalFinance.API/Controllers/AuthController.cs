@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Auth;
 using PersonalFinance.Shared.DTOs.Common;
+using System.Security.Claims;
 
 namespace PersonalFinance.API.Controllers
 {
@@ -46,6 +47,25 @@ namespace PersonalFinance.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }*/
 
+        }
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword( ChangePasswordRequestDto request)
+        {
+            var userId =
+                Guid.Parse(
+                    User.FindFirst(ClaimTypes.NameIdentifier)!
+                        .Value);
+
+            await _authService.ChangePasswordAsync(
+                userId,
+                request);
+
+            return Ok(
+                new ApiResponse<string>
+                {
+                    Success = true,
+                    Data = "Password changed successfully"
+                });
         }
 
     }
