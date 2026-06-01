@@ -9,7 +9,6 @@
     <layouts:MainLayoutPage>
         <layouts:MainLayoutPage.PageContent>
 
-
             <ScrollView>
 
             <VerticalStackLayout
@@ -17,7 +16,6 @@
                     Spacing="20">
 
                 <!-- PAGE TITLE -->
-
                 <Label
                         Text="My Profile"
                         Style="{StaticResource TitleLabel}" />
@@ -34,12 +32,10 @@
                             FontSize="50"
                             HorizontalOptions="Center"
                             VerticalOptions="Center"/>
-                        
-
-                    </Frame>
-                <VerticalStackLayout
-                        HorizontalOptions="Center"
-                        Spacing="2">
+                      
+                </Frame>
+                
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
 
                         <Label
                             Text="{Binding Name}"
@@ -52,16 +48,12 @@
                                 Style="{StaticResource SubtitleLabel}" />
 
                 </VerticalStackLayout>
-                    <Frame
-    Style="{StaticResource CardFrame}"
-    Padding="15">
+                    <Frame  Style="{StaticResource CardFrame}" Padding="15">
 
                         <Grid ColumnDefinitions="*,*,*">
 
                             <!-- Transactions -->
-
-                            <VerticalStackLayout
-            HorizontalOptions="Center">
+                            <VerticalStackLayout HorizontalOptions="Center">
 
                                 <Label
                                     Text="{Binding TransactionsCount}"
@@ -70,16 +62,15 @@
                                     TextColor="{StaticResource PrimaryColor}" />
 
                                 <Label
-                Text="Transactions"
-                Style="{StaticResource SubtitleLabel}" />
+                                    Text="Transactions"
+                                    Style="{StaticResource SubtitleLabel}" />
 
                             </VerticalStackLayout>
 
                             <!-- Budgets -->
-
                             <VerticalStackLayout
-            Grid.Column="1"
-            HorizontalOptions="Center">
+                                Grid.Column="1"
+                                HorizontalOptions="Center">
 
                                 <Label
                                 Text="{Binding BudgetsCount}"
@@ -94,7 +85,6 @@
                             </VerticalStackLayout>
 
                             <!-- Categories -->
-
                             <VerticalStackLayout
                                 Grid.Column="2"
                                 HorizontalOptions="Center">
@@ -115,10 +105,7 @@
 
                     </Frame>
 
-
-
                     <!-- PROFILE CARD -->
-
                 <Frame
                         Style="{StaticResource CardFrame}">
 
@@ -126,7 +113,6 @@
                             Spacing="18">
 
                         <!-- NAME -->
-
                         <VerticalStackLayout
                                 Spacing="6">
 
@@ -144,7 +130,6 @@
 
 
                         <!-- SURNAME -->
-
                         <VerticalStackLayout
                                 Spacing="6">
 
@@ -162,26 +147,22 @@
 
 
                         <!-- EMAIL -->
-
-                        <VerticalStackLayout
+                            <VerticalStackLayout
                                 Spacing="6">
 
-                            <Label
+                                <Label
                                     Text="Email"
                                     Style="{StaticResource NormalLabel}" />
 
-                            <Entry
+                                <Entry
                                     Placeholder="Enter your email"
                                     Keyboard="Email"
                                     Text="{Binding Email}"
                                     Style="{StaticResource AppEntry}" />
 
-                        </VerticalStackLayout>
-
-
-
-                        <!-- SAVE BUTTON -->
-
+                            </VerticalStackLayout>
+                        
+                            <!-- SAVE BUTTON -->
                         <Button
                                 Text="Save Changes"
                                 Command="{Binding SaveCommand}"
@@ -191,11 +172,11 @@
                     </VerticalStackLayout>
 
                 </Frame>
-                    <Frame
-                            Style="{StaticResource CardFrame}">
+                    <Frame Style="{StaticResource CardFrame}">
 
                         <Grid ColumnDefinitions="Auto,*,Auto">
-
+                            
+                            <!---LOG OUT-->
                             <Label
                                 Text="🚪"
                                 FontSize="22"
@@ -229,6 +210,7 @@
 
                         <Grid ColumnDefinitions="Auto,*,Auto">
 
+                            <!---UPDATE PASSWORD-->
                             <Label
                                 Text="🔒"
                                 FontSize="22"
@@ -255,7 +237,7 @@
 
                         </Grid>
 
-                      </Frame>
+                     </Frame>
 
                 </VerticalStackLayout>
 

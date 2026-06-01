@@ -29,8 +29,6 @@
                 Style="{StaticResource NormalLabel}"
                 HorizontalOptions="Center" />
 
-
-
             <!-- REGISTER CARD -->
 
             <Frame
@@ -47,15 +45,12 @@
                         Style="{StaticResource AppEntry}" />
 
 
-
                     <!-- SURNAME -->
 
                     <Entry
                         Placeholder="Surname"
                         Text="{Binding SurName}"
                         Style="{StaticResource AppEntry}" />
-
-
 
                     <!-- EMAIL -->
 
@@ -64,10 +59,7 @@
                         Text="{Binding Email}"
                         Style="{StaticResource AppEntry}" />
 
-
-
                     <!-- PASSWORD -->
-
                     <Entry
                         Placeholder="Password"
                         IsPassword="True"
@@ -75,9 +67,7 @@
                         Style="{StaticResource AppEntry}" />
 
 
-
                     <!-- REGISTER BUTTON -->
-
                     <Button
                         Text="Create Account"
                         Command="{Binding RegisterCommand}"
@@ -86,8 +76,6 @@
                 </VerticalStackLayout>
 
             </Frame>
-
-
 
             <!-- LOGIN NAVIGATION -->
 

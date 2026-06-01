@@ -20,7 +20,7 @@ namespace PersonalFinance.API.Services.Implementations
             _context = context;
             _configuration = configuration;
         }
-        public async Task<AuthResponseDto> RegisterAsync (RegisterRequestDto request)
+        public async Task<AuthResponseDto> RegisterAsync(RegisterRequestDto request)
         {
             //1. Check if email exists
             var existingUser = await _context.Users
@@ -40,7 +40,6 @@ namespace PersonalFinance.API.Services.Implementations
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
             //3.Create user
-
             var user = new User
             {
                 Id = Guid.NewGuid(),
@@ -53,22 +52,18 @@ namespace PersonalFinance.API.Services.Implementations
             };
 
             //4. Save
-
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             var token = GenerateToken(user);
 
 
             //5 Return response
-
             return new AuthResponseDto {
                 UserId = user.Id,
                 Email = user.Email,
                 Name = user.Name   ,
                 Token = token
-            };
-            
-                
+            };     
             
         }
 

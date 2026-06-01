@@ -10,7 +10,7 @@ namespace PersonalFinance.API.Controllers
     [Authorize]
     [ApiController]
     [Route("api/transactions")]
-    public class TransactionController:ControllerBase
+    public class TransactionController : ControllerBase
     {
         private readonly ITransactionService _transactionService;
 
@@ -26,13 +26,13 @@ namespace PersonalFinance.API.Controllers
         {
             //try
             //{
-                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-                if (userIdClaim == null) return Unauthorized("Invalid token");
-                var userId = Guid.Parse(userIdClaim.Value);
-            
-                var result = await _transactionService.GetAllAsync(userId);
-                return Ok(ApiResponse<object>.SuccessResponse(result,"Success"));
-          
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null) return Unauthorized("Invalid token");
+            var userId = Guid.Parse(userIdClaim.Value);
+
+            var result = await _transactionService.GetAllAsync(userId);
+            return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));
+
             /*}
             catch(Exception ex)
             {
@@ -42,13 +42,13 @@ namespace PersonalFinance.API.Controllers
 
         //---------------------------------------------------------CREATE--------------------------///
         [HttpPost]
-        public async Task <IActionResult> Create([FromBody] CreateTransactionRequestDto request)
+        public async Task<IActionResult> Create([FromBody] CreateTransactionRequestDto request)
         {
             //try
             //{
-                var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-                var result = await _transactionService.CreateAsync(userId, request);
-                return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));  
+            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var result = await _transactionService.CreateAsync(userId, request);
+            return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));
             /*}
             catch(Exception ex)
             {
@@ -74,14 +74,14 @@ namespace PersonalFinance.API.Controllers
             //try
             //{
             var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-                 await _transactionService.DeleteAsync(id, userId);
+            await _transactionService.DeleteAsync(id, userId);
 
-                return NoContent();
-           /* }
-            catch(Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }*/
+            return NoContent();
+            /* }
+             catch(Exception ex)
+             {
+                 return BadRequest(new { message = ex.Message });
+             }*/
         }
 
     }

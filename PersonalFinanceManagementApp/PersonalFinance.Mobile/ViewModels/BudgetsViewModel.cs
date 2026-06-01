@@ -23,16 +23,13 @@ namespace PersonalFinance.Mobile.ViewModels
 
         //Commands
         public ICommand  AddCommand { get; }
-
         public ICommand EditCommand { get; }
-
         public ICommand DeleteCommand { get; }
         public ICommand ShowOptionsCommand { get; }
 
 
         //Total budgets 
         private decimal _totalBudget;
-
         public decimal TotalBudget
         {
             get => _totalBudget;
@@ -86,7 +83,6 @@ namespace PersonalFinance.Mobile.ViewModels
             });
             
         }
-
         //Load buget;
         public async Task LoadBudgets()
         {

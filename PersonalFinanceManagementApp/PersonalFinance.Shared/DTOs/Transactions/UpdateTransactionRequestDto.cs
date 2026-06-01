@@ -15,6 +15,6 @@ namespace PersonalFinance.Shared.DTOs.Transactions
 
         public Guid CategoryId { get; set; }
 
-        public string Icon { get; set; }
+        public string ? Icon { get; set; }
     }
 }

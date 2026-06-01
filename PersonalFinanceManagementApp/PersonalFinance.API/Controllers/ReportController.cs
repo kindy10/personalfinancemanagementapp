@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PersonalFinance.API.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Common;
-using PersonalFinance.Shared.DTOs.Enums;
 using PersonalFinance.Shared.DTOs.Reports;
 using System.Security.Claims;
 

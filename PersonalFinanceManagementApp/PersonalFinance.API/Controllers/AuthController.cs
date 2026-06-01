@@ -9,7 +9,7 @@ using System.Security.Claims;
 namespace PersonalFinance.API.Controllers
 {
     [ApiController]
-    [Route ("api/auth")]
+    [Route("api/auth")]
     public class AuthController :ControllerBase
     {
         private readonly IAuthService _authService;
@@ -22,30 +22,20 @@ namespace PersonalFinance.API.Controllers
         [HttpPost ("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
         {
-            //try
-            //{
+           
                 var result = await _authService.RegisterAsync(request);
                 return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));
-            //}
-            /*catch(Exception ex)
-            {
-                return BadRequest(new {message = ex.Message});
-            }*/
+            
 
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
-            //try
-            //{
+           
                 var result = await _authService.LoginAsync(request);
                 return Ok(ApiResponse<object>.SuccessResponse(result, "Success"));
-            /*}
-            catch(Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }*/
+            
 
         }
         [HttpPost("change-password")]
@@ -69,4 +59,5 @@ namespace PersonalFinance.API.Controllers
         }
 
     }
+    
 }

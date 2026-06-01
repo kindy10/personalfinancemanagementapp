@@ -1,13 +1,14 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using PersonalFinance.API.Data;
+using PersonalFinance.API.Endpoints;
+using PersonalFinance.API.Middleware;
 using PersonalFinance.API.Services.Implementations;
 using PersonalFinance.API.Services.Interfaces;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.OpenApi.Models;
-using PersonalFinance.API.Middleware;
 
 
 namespace PersonalFinance.API
@@ -133,6 +134,10 @@ namespace PersonalFinance.API
 
             //  MAP CONTROLLERS
             app.MapControllers();
+            app.MapAuthEndpoints();
+           /* app.MapCategoryEndpoints();
+            app.MapBudgetEndpoints();
+            app.MapReportEndpoints();*/
 
             app.MapGet("/", () => "Welcome");
 

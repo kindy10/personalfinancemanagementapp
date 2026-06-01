@@ -26,23 +26,14 @@ namespace PersonalFinance.API.Services.Implementations
                     Month = b.Month,
                     //Year = b.Year,
                     CategoryId = b.CategoryId,
-                    CategoryName = b.Category.Name,
+                    CategoryName = b.Category.Name
                 })
                 .ToList();
         }
         //private void checkBugetConstraint()
-
         //----------------------------CREATE --------------------------//
         public async Task<BudgetDto> CreateAsync(Guid userId,CreateBudgetRequestDto request)
         {
-            //Check Month
-            //if (request.Month < 1 || request.Month > 12)
-            //    throw new AppException("Invalid month");
-
-            //Check Year
-            //if (request.Year < 2000)
-            //    throw new AppException("Invalid year");
-            //check MonthlyLimit
             if (request.MonthlyLimit <= 0)
                 throw new AppException("Budget must be grater than zero");
             var budget = new Budget
@@ -65,10 +56,9 @@ namespace PersonalFinance.API.Services.Implementations
                 MonthlyLimit = budget.MonthlyLimit,
                 Month = budget.Month,
                 //Year = budget.Year,
-                CategoryId = budget.CategoryId,
+                CategoryId = budget.CategoryId
             };
         }
-
         //------------------------------UPDATE---------------------------------------------//
         public async Task<BudgetDto> UpdateAsync(Guid id, Guid userId, UpdateBudgetRequestDto request)
         {
@@ -87,10 +77,9 @@ namespace PersonalFinance.API.Services.Implementations
                 Id = budget.Id,
                 MonthlyLimit = budget.MonthlyLimit,
                 //Year= budget.Year,
-                CategoryId = budget.CategoryId,
+                CategoryId = budget.CategoryId
             };
         }
-
         //-------------------------DELETE -----------------------------------------------------//
         public async Task DeleteAsync(Guid id, Guid userId)
         {

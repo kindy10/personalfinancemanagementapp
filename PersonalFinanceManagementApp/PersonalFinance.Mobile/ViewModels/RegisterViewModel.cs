@@ -1,10 +1,5 @@
 ﻿using PersonalFinance.Mobile.Services;
 using PersonalFinance.Shared.DTOs.Auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace PersonalFinance.Mobile.ViewModels
@@ -99,6 +94,5 @@ namespace PersonalFinance.Mobile.ViewModels
             }
         }
     }
-
 
 }

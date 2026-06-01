@@ -6,6 +6,7 @@ using System.Security.Claims;
 
 namespace PersonalFinance.API.Controllers
 {
+    
     [ApiController]
     [Route("api/categories")]
     public class CategoryController:ControllerBase
@@ -30,7 +31,6 @@ namespace PersonalFinance.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }*/
         }
-
         //------------------------------------------------------------CREATE-------------------------------//
         [HttpPost]
         public async Task<IActionResult> Create(CreateCategoryRequestDto request)
@@ -71,4 +71,5 @@ namespace PersonalFinance.API.Controllers
 
         }
     }
+
 }

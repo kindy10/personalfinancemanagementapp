@@ -1,10 +1,7 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using PersonalFinance.Mobile.Helpers;
+﻿using PersonalFinance.Mobile.Helpers;
 using PersonalFinance.Mobile.Services;
 using PersonalFinance.Shared.DTOs.Categories;
 using PersonalFinance.Shared.DTOs.Transactions;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using System.Windows.Input;
@@ -17,8 +14,6 @@ namespace PersonalFinance.Mobile.ViewModels
 
         //CATEGORIES FOR SEARCH
         private readonly CategoryService _categoryService;
-
-
 
         private List<CategoryDto> _categories = [];
 
@@ -77,7 +72,7 @@ namespace PersonalFinance.Mobile.ViewModels
             }
         }
 
-        // 
+        
         public bool IsAllSelected => SelectedFilter == "All";
 
         public bool IsIncomeSelected =>SelectedFilter == "Income";
@@ -114,8 +109,6 @@ namespace PersonalFinance.Mobile.ViewModels
                     DeleteCommand.Execute(transaction);
                 }
             });
-
-
 
             AddCommand = new Command(async () =>await Shell.Current.GoToAsync("transaction-form") );
 
@@ -270,9 +263,6 @@ namespace PersonalFinance.Mobile.ViewModels
                 Transactions.Add(transaction);
             }
         }
-
-
-
 
     }
 }

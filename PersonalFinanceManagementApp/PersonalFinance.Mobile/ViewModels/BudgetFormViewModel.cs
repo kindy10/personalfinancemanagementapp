@@ -1,15 +1,11 @@
 ﻿
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-
-using PersonalFinance.Mobile.Helpers;
 using PersonalFinance.Mobile.Services;
-
 using PersonalFinance.Shared.DTOs.Budgets;
 using PersonalFinance.Shared.DTOs.Categories;
 
 namespace PersonalFinance.Mobile.ViewModels;
-
 public class BudgetFormViewModel : BaseViewModel
 {
     private readonly BudgetService _budgetService;
@@ -77,7 +73,6 @@ public class BudgetFormViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-
     // Categories list
     public ObservableCollection<CategoryDto>
         Categories

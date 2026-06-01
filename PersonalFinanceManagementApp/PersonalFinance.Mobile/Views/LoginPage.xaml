@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -21,15 +20,12 @@
                 HorizontalOptions="Center" />
 
 
-
             <!-- SUBTITLE -->
 
             <Label
                 Text="Track your money professionally"
                 Style="{StaticResource NormalLabel}"
                 HorizontalOptions="Center" />
-
-
 
             <!-- LOGIN CARD -->
 
@@ -40,26 +36,19 @@
                     Spacing="18">
 
                     <!-- EMAIL -->
-
                     <Entry
                         Placeholder="Email"
                         Text="{Binding Email}"
                         Style="{StaticResource AppEntry}" />
 
-
-
                     <!-- PASSWORD -->
-
                     <Entry
                         Placeholder="Password"
                         IsPassword="True"
                         Text="{Binding Password}"
                         Style="{StaticResource AppEntry}" />
 
-
-
                     <!-- LOGIN BUTTON -->
-
                     <Button
                         Text="Login"
                         Command="{Binding LoginCommand}"
@@ -69,10 +58,7 @@
 
             </Frame>
 
-
-
             <!-- REGISTER NAVIGATION -->
-
             <Button
                 Text="Don't have an account? Register"
                 BackgroundColor="Transparent"

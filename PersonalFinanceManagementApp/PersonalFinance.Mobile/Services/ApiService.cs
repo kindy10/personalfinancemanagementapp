@@ -77,12 +77,7 @@ namespace PersonalFinance.Mobile.Services
             }
 
             // Deserialize JSON
-            return JsonSerializer.Deserialize<T>(
-                result,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
+            return JsonSerializer.Deserialize<T>(result, new JsonSerializerOptions{ PropertyNameCaseInsensitive = true});
 
         }
 
