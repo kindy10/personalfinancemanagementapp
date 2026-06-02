@@ -115,6 +115,7 @@ namespace PersonalFinance.API
                     ClockSkew = TimeSpan.Zero 
                 };
             });
+            builder.Services.AddAuthorization();
 
             var app = builder.Build();
 

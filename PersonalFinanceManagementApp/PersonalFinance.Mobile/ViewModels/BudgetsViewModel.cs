@@ -110,7 +110,6 @@ namespace PersonalFinance.Mobile.ViewModels
                         budget.CategoryName),
 
                                     Month = budget.Month,
-
                                     Limit = usage?.Limit
                         ?? budget.MonthlyLimit,
 

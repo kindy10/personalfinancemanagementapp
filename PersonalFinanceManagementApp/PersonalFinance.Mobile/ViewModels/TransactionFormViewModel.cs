@@ -98,27 +98,28 @@ namespace PersonalFinance.Mobile.ViewModels
                 new Command(async () => await Save());
 
 
-            LoadCategories();
+           // LoadCategoriesAsync();
 
             
         }
 
         // Used for edit mode
-        public void LoadTransaction(TransactionDto transaction)
+        public async Task LoadTransactionAsync(TransactionDto transaction)
         {
+            await LoadCategoriesAsync();
+
             PageTitle = "Edit Transaction";
             IsEditMode = true;
 
             _transactionId = transaction.Id;
 
             Amount = transaction.Amount.ToString();
-
             Description = transaction.Description;
-
             Date = transaction.Date;
-            PageTitle = "Edit Transaction";
+
+            SelectedCategory =Categories.FirstOrDefault( c => c.Id == transaction.CategoryId);
         }
-        public async Task LoadCategories()
+        public async Task LoadCategoriesAsync()
         {
             try
             {

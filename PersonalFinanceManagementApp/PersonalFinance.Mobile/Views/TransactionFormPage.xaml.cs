@@ -13,7 +13,7 @@ public partial class TransactionFormPage : ContentPage
 		//check if editing existing transaction
 		if(TemporaryData.selectedTransaction != null)
 		{
-			vm.LoadTransaction(TemporaryData.selectedTransaction);
+			vm.LoadTransactionAsync(TemporaryData.selectedTransaction);
 
 			//Clear tmeporary state
 			TemporaryData.selectedTransaction = null;

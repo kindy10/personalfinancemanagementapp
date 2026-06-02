@@ -301,8 +301,7 @@
                                                 ColumnDefinitions="*,Auto">
 
                                             <Label
-                                                    Text="{Binding Remaining,
-                                                           StringFormat='Remaining: {0:C}'}"
+                                                    Text="{Binding RemainingText}"
                                                     Style="{StaticResource SectionLabel}" />
 
                                             <Label
