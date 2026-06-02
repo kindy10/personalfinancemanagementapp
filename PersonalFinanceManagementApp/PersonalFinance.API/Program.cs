@@ -34,12 +34,12 @@ namespace PersonalFinance.API
 
 
             // Controllers
-            builder.Services.AddControllers()
+            /*builder.Services.AddControllers()
                     .AddJsonOptions(options =>
                     {
                         options.JsonSerializerOptions.Converters.Add(
                             new System.Text.Json.Serialization.JsonStringEnumConverter());
-                    });
+                    });*/
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();
@@ -133,11 +133,18 @@ namespace PersonalFinance.API
 
 
             //  MAP CONTROLLERS
-            app.MapControllers();
+            // app.MapControllers();
+
+            //MINIMAL API
+
+            // MAP ENDPOINTS
+
             app.MapAuthEndpoints();
-           /* app.MapCategoryEndpoints();
+            app.MapCategoryEndpoints();
             app.MapBudgetEndpoints();
-            app.MapReportEndpoints();*/
+            app.MapTransactionEndpoints();
+            app.MapReportEndpoints();
+            app.MapProfileEndpoints();
 
             app.MapGet("/", () => "Welcome");
 

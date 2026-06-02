@@ -35,11 +35,18 @@ namespace PersonalFinance.Mobile.Services
             return response.Data;
         }
 
-        //Get  report from API
+        //Get  Monthly report from API
         public async Task<List<BudgetUsageDto>> GetBudgetUsageAsync()
         {
             var response =
                 await _apiService.GetAsync< ApiResponse<List<BudgetUsageDto>>>("reports/budget-usage");
+
+            return response.Data;
+        }
+        public async Task<List<BudgetUsageDto>> GetAllBudgetUsageAsync()
+        {
+            var response =
+                await _apiService.GetAsync<ApiResponse<List<BudgetUsageDto>>>("reports/allbudgets-usage");
 
             return response.Data;
         }

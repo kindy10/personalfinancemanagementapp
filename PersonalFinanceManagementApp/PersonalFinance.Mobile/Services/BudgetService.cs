@@ -30,7 +30,7 @@ namespace PersonalFinance.Mobile.Services
             await _apiService.PostAsync<object>("budgets", request);
         }
 
-        //-----------UPDATA BUDGET
+        //-----------UPDAT BUDGET
         public async Task UpdateBudgetAsync(Guid id,UpdateBudgetRequestDto request)
         {
 

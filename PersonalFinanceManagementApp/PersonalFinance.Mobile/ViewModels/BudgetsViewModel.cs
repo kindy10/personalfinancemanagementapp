@@ -90,7 +90,7 @@ namespace PersonalFinance.Mobile.ViewModels
             {
                 var budgets = await _budgetService.GetBudgetsAsync();
 
-                var usages = await _reportService.GetBudgetUsageAsync();
+                var usages = await _reportService.GetAllBudgetUsageAsync();
 
                 Budgets.Clear();
 
@@ -159,7 +159,7 @@ namespace PersonalFinance.Mobile.ViewModels
         {
             try
             {
-                var usages = await _reportService.GetBudgetUsageAsync();
+                var usages = await _reportService.GetAllBudgetUsageAsync();
 
                 BudgetUsages.Clear();
 
