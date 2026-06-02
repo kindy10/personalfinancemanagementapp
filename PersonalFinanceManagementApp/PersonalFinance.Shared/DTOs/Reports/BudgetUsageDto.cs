@@ -13,5 +13,9 @@ namespace PersonalFinance.Shared.DTOs.Reports
 
         public double PercentageUsed { get; set; }
         public double DisplayPercentage => PercentageUsed * 100;
+        public string RemainingText =>
+            Remaining >= 0
+        ? $"Remaining: {Remaining:C}"
+        : $"Over Budget: {Math.Abs(Remaining):C}";
     }
 }

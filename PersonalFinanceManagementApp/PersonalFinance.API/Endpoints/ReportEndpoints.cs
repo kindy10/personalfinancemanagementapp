@@ -1,4 +1,6 @@
-﻿using PersonalFinance.API.Services.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using PersonalFinance.API.Models;
+using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Common;
 using PersonalFinance.Shared.DTOs.Reports;
 using System.Security.Claims;
@@ -104,6 +106,29 @@ public static class ReportEndpoints
                         .SuccessResponse(
                             result,
                             "Success"));
+            });
+
+        group.MapGet("/allbudgets-usage",
+            async (ClaimsPrincipal user,
+            IReportService reportService) =>
+            {
+                var userIdClaim =
+                    user.FindFirst(
+                        ClaimTypes.NameIdentifier);
+                if (userIdClaim is null)
+                    return Results.Unauthorized();
+
+                var userId =
+                    Guid.Parse(
+                        userIdClaim.Value);
+                var result =
+                    await reportService
+                        .GetAllBudgetUsageAsync(userId);
+                return Results.Ok(
+                   ApiResponse<List<BudgetUsageDto>>
+                       .SuccessResponse(
+                           result,
+                           "Success"));
             });
 
         // EXPENSE CATEGORIES

@@ -15,7 +15,7 @@ public partial class BudgetFormPage : ContentPage
         // Edit mode
         if (TemporaryBudgetData.SelectedBudget != null)
         {
-            vm.LoadBudget(
+            vm.LoadBudgetAsync(
                 TemporaryBudgetData.SelectedBudget);
 
             TemporaryBudgetData.SelectedBudget = null;

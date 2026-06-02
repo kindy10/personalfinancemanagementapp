@@ -100,11 +100,11 @@ public class BudgetFormViewModel : BaseViewModel
             execution continues before the call completes
          */
 
-        _ = LoadCategories();
+        //_ = LoadCategoriesAsync();
     }
 
     // Load categories
-    private async Task LoadCategories()
+    private async Task LoadCategoriesAsync()
     {
         try
         {
@@ -130,8 +130,9 @@ public class BudgetFormViewModel : BaseViewModel
     }
 
     // Load existing budget for edit
-    public void LoadBudget(BudgetDto budget)
+    public async Task LoadBudgetAsync(BudgetDto budget)
     {
+        await LoadCategoriesAsync();
         IsEditMode = true;
 
         _budgetId = budget.Id;
@@ -141,6 +142,8 @@ public class BudgetFormViewModel : BaseViewModel
         Month = budget.Month;
 
         PageTitle = "Edit Budget";
+        SelectedCategory = Categories.FirstOrDefault(c => c.Id == budget.CategoryId);
+
     }
 
     // Save budget
