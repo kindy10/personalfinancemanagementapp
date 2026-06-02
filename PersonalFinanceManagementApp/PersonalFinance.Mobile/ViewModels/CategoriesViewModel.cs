@@ -1,13 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PersonalFinance.Mobile.Helpers;
+﻿using PersonalFinance.Mobile.Helpers;
 using PersonalFinance.Mobile.Services;
 using PersonalFinance.Shared.DTOs.Categories;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace PersonalFinance.Mobile.ViewModels
@@ -116,6 +110,11 @@ namespace PersonalFinance.Mobile.ViewModels
         {
             try
             {
+                bool confirm = await Application.Current.MainPage.DisplayAlert("Delete Category",
+                    "Are you sure you want to delete this category ?",
+                    "Delete", "cancel");
+                if (!confirm)
+                    return;
                 await _categoryService.DeleteCategoryAsync(id);
                 await LoadCategories();
             }

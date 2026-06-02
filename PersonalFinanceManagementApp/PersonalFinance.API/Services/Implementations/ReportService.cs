@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersonalFinance.API.Data;
+using PersonalFinance.API.Models;
 using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Enums;
 using PersonalFinance.Shared.DTOs.Reports;
@@ -14,8 +15,8 @@ namespace PersonalFinance.API.Services.Implementations
             _context = context; 
 
         }
-
-        public async Task<List<BudgetUsageDto>>GetBudgetUsageAsync(Guid userId)
+        //--------GET BUDGET FOR CURRENT MONTH
+       public async Task<List<BudgetUsageDto>>GetBudgetUsageAsync(Guid userId)
         {
             var currentMonth =
                 new DateTime(
@@ -32,6 +33,7 @@ namespace PersonalFinance.API.Services.Implementations
                         b.Month.Year == currentMonth.Year &&
                         b.Month.Month == currentMonth.Month)
                     .ToListAsync();
+           
 
             var result =
                 new List<BudgetUsageDto>();
@@ -67,6 +69,44 @@ namespace PersonalFinance.API.Services.Implementations
                         budget.MonthlyLimit == 0
                             ? 0
                             : (double)(spent / budget.MonthlyLimit )
+                });
+            }
+
+            return result;
+        }
+        //-------------GET ALL BUDGET  
+        public async Task<List<BudgetUsageDto>> GetAllBudgetUsageAsync(Guid userId)
+        {
+            var budgets =
+                await _context.Budgets
+                    .Include(b => b.Category)
+                    .Where(b => b.UserId == userId)
+                    .ToListAsync();
+
+            var result = new List<BudgetUsageDto>();
+
+            foreach (var budget in budgets)
+            {
+                var spent =
+                    await _context.Transactions
+                        .Where(t =>
+                            t.UserId == userId &&
+                            t.CategoryId == budget.CategoryId &&
+                            t.Date.Month == budget.Month.Month &&
+                            t.Date.Year == budget.Month.Year)
+                        .SumAsync(t =>
+                            (decimal?)t.Amount) ?? 0;
+
+                result.Add(new BudgetUsageDto
+                {
+                    CategoryName = budget.Category.Name,
+                    Limit = budget.MonthlyLimit,
+                    Spent = spent,
+                    Remaining = budget.MonthlyLimit - spent,
+                    PercentageUsed =
+                        budget.MonthlyLimit == 0
+                            ? 0
+                            : (double)(spent / budget.MonthlyLimit)
                 });
             }
 

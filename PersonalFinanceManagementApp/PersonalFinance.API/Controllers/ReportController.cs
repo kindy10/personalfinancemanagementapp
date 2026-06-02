@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PersonalFinance.API.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinance.API.Services.Interfaces;
 using PersonalFinance.Shared.DTOs.Common;
-using PersonalFinance.Shared.DTOs.Enums;
 using PersonalFinance.Shared.DTOs.Reports;
 using System.Security.Claims;
 
@@ -68,6 +64,20 @@ namespace PersonalFinance.API.Controllers
                         result,
                         "Success"));
         }
+        [HttpGet("allbudgets-usage")]
+        public async Task<IActionResult> GetAllBudgetUsage()
+        {
+            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            var result = await _reportService.GetAllBudgetUsageAsync(userId);
+
+            return Ok(
+                ApiResponse<List<BudgetUsageDto>>
+                    .SuccessResponse(
+                        result,
+                        "Success"));
+        }
+
 
         //EXpense category
         [HttpGet("expense-categories")]

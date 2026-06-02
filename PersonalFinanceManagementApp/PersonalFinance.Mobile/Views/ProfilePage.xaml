@@ -9,7 +9,6 @@
     <layouts:MainLayoutPage>
         <layouts:MainLayoutPage.PageContent>
 
-
             <ScrollView>
 
             <VerticalStackLayout
@@ -17,15 +16,96 @@
                     Spacing="20">
 
                 <!-- PAGE TITLE -->
-
                 <Label
                         Text="My Profile"
                         Style="{StaticResource TitleLabel}" />
+                <Frame
+                        WidthRequest="120"
+                        HeightRequest="120"
+                        CornerRadius="60"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        HorizontalOptions="Center"
+                        BorderColor="Transparent">
 
+                        <Label
+                            Text="👤"
+                            FontSize="50"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"/>
+                      
+                </Frame>
+                
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
 
+                        <Label
+                            Text="{Binding Name}"
+                            FontSize="28"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource TextColor}" />
 
-                <!-- PROFILE CARD -->
+                        <Label
+                                Text="{Binding Email}"
+                                Style="{StaticResource SubtitleLabel}" />
 
+                </VerticalStackLayout>
+                    <Frame  Style="{StaticResource CardFrame}" Padding="15">
+
+                        <Grid ColumnDefinitions="*,*,*">
+
+                            <!-- Transactions -->
+                            <VerticalStackLayout HorizontalOptions="Center">
+
+                                <Label
+                                    Text="{Binding TransactionsCount}"
+                                    FontSize="24"
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource PrimaryColor}" />
+
+                                <Label
+                                    Text="Transactions"
+                                    Style="{StaticResource SubtitleLabel}" />
+
+                            </VerticalStackLayout>
+
+                            <!-- Budgets -->
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                HorizontalOptions="Center">
+
+                                <Label
+                                Text="{Binding BudgetsCount}"
+                                FontSize="24"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource SuccessColor}" />
+
+                                <Label
+                                    Text="Budgets"
+                                    Style="{StaticResource SubtitleLabel}" />
+
+                            </VerticalStackLayout>
+
+                            <!-- Categories -->
+                            <VerticalStackLayout
+                                Grid.Column="2"
+                                HorizontalOptions="Center">
+
+                                <Label
+                                    Text="{Binding CategoriesCount}"
+                                    FontSize="24"
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource WarningColor}" />
+
+                                <Label
+                                    Text="Categories"
+                                    Style="{StaticResource SubtitleLabel}" />
+
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                    </Frame>
+
+                    <!-- PROFILE CARD -->
                 <Frame
                         Style="{StaticResource CardFrame}">
 
@@ -33,7 +113,6 @@
                             Spacing="18">
 
                         <!-- NAME -->
-
                         <VerticalStackLayout
                                 Spacing="6">
 
@@ -51,7 +130,6 @@
 
 
                         <!-- SURNAME -->
-
                         <VerticalStackLayout
                                 Spacing="6">
 
@@ -69,26 +147,22 @@
 
 
                         <!-- EMAIL -->
-
-                        <VerticalStackLayout
+                            <VerticalStackLayout
                                 Spacing="6">
 
-                            <Label
+                                <Label
                                     Text="Email"
                                     Style="{StaticResource NormalLabel}" />
 
-                            <Entry
+                                <Entry
                                     Placeholder="Enter your email"
                                     Keyboard="Email"
                                     Text="{Binding Email}"
                                     Style="{StaticResource AppEntry}" />
 
-                        </VerticalStackLayout>
-
-
-
-                        <!-- SAVE BUTTON -->
-
+                            </VerticalStackLayout>
+                        
+                            <!-- SAVE BUTTON -->
                         <Button
                                 Text="Save Changes"
                                 Command="{Binding SaveCommand}"
@@ -98,10 +172,72 @@
                     </VerticalStackLayout>
 
                 </Frame>
-                    <Button
-                        Text="🚪 Logout"
-                        Style="{StaticResource DangerButton}"
-                        Command="{Binding LogoutCommand}" />
+                    <Frame Style="{StaticResource CardFrame}">
+
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            
+                            <!---LOG OUT-->
+                            <Label
+                                Text="🚪"
+                                FontSize="22"
+                                VerticalOptions="Center"/>
+
+                            <Label
+                                Grid.Column="1"
+                                Text="Logout"
+                                Margin="15,0"
+                                Style="{StaticResource NormalLabel}"
+                                VerticalOptions="Center"/>
+
+                            <Label
+                                Grid.Column="2"
+                                Text="›"
+                                FontSize="28"
+                                TextColor="{StaticResource SubtitleLabel}"
+                                VerticalOptions="Center"/>
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                Command="{Binding LogoutCommand}" />
+                            </Grid.GestureRecognizers>
+
+                        </Grid>
+
+                    </Frame>
+
+                    <Frame
+                        Style="{StaticResource CardFrame}">
+
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+
+                            <!---UPDATE PASSWORD-->
+                            <Label
+                                Text="🔒"
+                                FontSize="22"
+                                VerticalOptions="Center"/>
+
+                            <Label
+                                Grid.Column="1"
+                                Text="Change Password"
+                                Margin="15,0"
+                                Style="{StaticResource NormalLabel}"
+                                VerticalOptions="Center"/>
+
+                            <Label
+                                Grid.Column="2"
+                                Text="›"
+                                FontSize="28"
+                                TextColor="{StaticResource SubtitleLabel}"
+                                VerticalOptions="Center"/>
+
+                            <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer
+                            Command="{Binding ChangePasswordCommand}" />
+                            </Grid.GestureRecognizers>
+
+                        </Grid>
+
+                     </Frame>
 
                 </VerticalStackLayout>
 

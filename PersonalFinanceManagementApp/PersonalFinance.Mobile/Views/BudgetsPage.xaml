@@ -11,9 +11,7 @@
         <layouts:MainLayoutPage.PageContent>
             <ScrollView>
 
-                <VerticalStackLayout
-                    Padding="20"
-                    Spacing="20">
+                <VerticalStackLayout  Padding="20" Spacing="20">
 
 
                     <Grid
@@ -22,7 +20,6 @@
                         <VerticalStackLayout>
 
                             <!-- PAGE TITLE -->
-
                             <Label
                                     Text="Budgets"
                                     Style="{StaticResource TitleLabel}" />
@@ -32,9 +29,7 @@
 
                          </VerticalStackLayout>
                         
-
                         <!-- ADD BUTTON -->
-
                         <Button
                                 Grid.Column="1"
                                 Text="+"
@@ -47,41 +42,37 @@
                     </Grid>
                     
                     <!---Piechart  (Circle)-->
-                    <Frame
-    Style="{StaticResource CardFrame}"
-    Padding="20">
+                    <Frame Style="{StaticResource CardFrame}" Padding="20">
 
                         <Grid>
 
                             <!-- Pie Chart -->
-
                             <lvc:PieChart
                                     Series="{Binding BudgetSeries}"
                                     HeightRequest="250"
                                 LegendPosition="Hidden"/>
 
                             <!-- Center Content -->
-
                             <VerticalStackLayout
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            Spacing="4">
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Spacing="4">
 
                                 <Label
-                Text="Total Budget"
-                Style="{StaticResource SubtitleLabel}"
-                HorizontalOptions="Center"/>
+                                    Text="Total Budget"
+                                    Style="{StaticResource SubtitleLabel}"
+                                    HorizontalOptions="Center"/>
 
                                 <Label
-                Text="{Binding TotalBudget,
-                               StringFormat='{0:C}'}"
-                Style="{StaticResource MetricValueLabel}"
-                HorizontalOptions="Center"/>
+                                    Text="{Binding TotalBudget,
+                                                   StringFormat='{0:C}'}"
+                                    Style="{StaticResource MetricValueLabel}"
+                                    HorizontalOptions="Center"/>
 
                                 <Label
-                Text="{Binding CurrentMonth}"
-                Style="{StaticResource NormalLabel}"
-                HorizontalOptions="Center"/>
+                                    Text="{Binding CurrentMonth}"
+                                    Style="{StaticResource NormalLabel}"
+                                    HorizontalOptions="Center"/>
 
                             </VerticalStackLayout>
 
@@ -89,11 +80,9 @@
 
                     </Frame>
 
-
                     <!-- BUDGET LIST -->
                     <CollectionView
-                            ItemsSource="{Binding Budgets}"
-                        >
+                            ItemsSource="{Binding Budgets}">
 
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout
@@ -106,7 +95,6 @@
                             <DataTemplate>
 
                                 <!-- BUDGET CARD -->
-
                                 <Frame
                                     Style="{StaticResource CardFrame}"
                                     Margin="5">
@@ -116,12 +104,10 @@
                                         Padding="5">
 
                                         <!-- HEADER -->
-
                                         <Grid
                                         ColumnDefinitions="60,*,50">
 
                                             <!-- ICON -->
-
                                             <Frame
                                                 Style="{StaticResource CategoryIconContainer}">
 
@@ -134,7 +120,6 @@
                                             </Frame>
 
                                             <!-- INFO -->
-
                                             <VerticalStackLayout
                                                 Grid.Column="1"
                                                 Margin="15,0">
@@ -151,7 +136,6 @@
                                             </VerticalStackLayout>
 
                                             <!-- MENU -->
-
                                             <Button
                                                 Grid.Column="2"
                                                 Text="⋮"
@@ -163,28 +147,27 @@
                                         </Grid>
 
                                         <!-- AMOUNT -->
-
                                         <Label
                                             Text="Budget Limit"
        
                                             Style="{StaticResource SubtitleLabel}" />
 
                                         <!-- SPENT / LIMIT -->
-
                                         <HorizontalStackLayout
                                             Spacing="5">
 
-                                               <Label
+                                            <Label
                                                 Text="{Binding Spent,
                                                                StringFormat='{0:C}'}"
                                                 Style="{StaticResource AmountLabel}" />
 
-                                                 <Label
+                                            <Label
                                                 Text="{Binding Limit,
                                                                StringFormat='/ {0:C}'}"
                                                 Style="{StaticResource NormalLabel}"
                                                 VerticalOptions="End"/>
-                                               </HorizontalStackLayout>
+                                        </HorizontalStackLayout>
+                                        
                                         <ProgressBar
                                             Progress="{Binding ProgressValue}"
                                             HeightRequest="8"
@@ -221,12 +204,7 @@
                                     </VerticalStackLayout>
 
                                 </Frame>
-
-
-
-
-
-
+                                
                             </DataTemplate>
 
                     </CollectionView.ItemTemplate>
@@ -237,6 +215,5 @@
             </ScrollView>
         </layouts:MainLayoutPage.PageContent>
     </layouts:MainLayoutPage>
-
 
 </ContentPage>

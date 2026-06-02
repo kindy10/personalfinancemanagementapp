@@ -1,13 +1,14 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using PersonalFinance.API.Data;
+using PersonalFinance.API.Endpoints;
+using PersonalFinance.API.Middleware;
 using PersonalFinance.API.Services.Implementations;
 using PersonalFinance.API.Services.Interfaces;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.OpenApi.Models;
-using PersonalFinance.API.Middleware;
 
 
 namespace PersonalFinance.API
@@ -33,12 +34,12 @@ namespace PersonalFinance.API
 
 
             // Controllers
-            builder.Services.AddControllers()
+            /*builder.Services.AddControllers()
                     .AddJsonOptions(options =>
                     {
                         options.JsonSerializerOptions.Converters.Add(
                             new System.Text.Json.Serialization.JsonStringEnumConverter());
-                    });
+                    });*/
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();
@@ -132,7 +133,18 @@ namespace PersonalFinance.API
 
 
             //  MAP CONTROLLERS
-            app.MapControllers();
+            // app.MapControllers();
+
+            //MINIMAL API
+
+            // MAP ENDPOINTS
+
+            app.MapAuthEndpoints();
+            app.MapCategoryEndpoints();
+            app.MapBudgetEndpoints();
+            app.MapTransactionEndpoints();
+            app.MapReportEndpoints();
+            app.MapProfileEndpoints();
 
             app.MapGet("/", () => "Welcome");
 

@@ -10,11 +10,7 @@
     <layouts:MainLayoutPage>
         <layouts:MainLayoutPage.PageContent>
 
-            <VerticalStackLayout
-                Padding="20"
-                Spacing="20">
-
-               
+            <VerticalStackLayout Padding="20" Spacing="20">
 
                 <Grid
                         ColumnDefinitions="*,Auto"
@@ -32,8 +28,8 @@
                                 Style="{StaticResource NormalLabel}" />
 
                     </VerticalStackLayout>
-                    
-            <!---Add Button-->
+
+                    <!---Add Button-->
                     <Button
                             Grid.Column="1"
                             Text="+"
@@ -45,10 +41,7 @@
 
                 </Grid>
 
-
-
                 <!-- CATEGORIES LIST -->
-
                 <CollectionView
                     ItemsSource="{Binding Categories}">
 
@@ -57,17 +50,14 @@
                         <DataTemplate>
 
                             <!-- CATEGORY CARD -->
-
                             <Frame
                                 Style="{StaticResource CardFrame}"
                                 Padding="15"
                                 Margin="0,0,0,12">
 
-                                <Grid
-                                    ColumnDefinitions="60,*,Auto">
+                                <Grid ColumnDefinitions="60,*,Auto">
 
                                     <!-- Icon -->
-
                                     <Frame
                                         WidthRequest="50"
                                         HeightRequest="50"
@@ -76,31 +66,26 @@
                                         BackgroundColor="{StaticResource PrimaryColor}"
                                         BorderColor="Transparent">
 
-                                        <Image
-                Source="{Binding IconSource}" />
+                                        <Image Source="{Binding IconSource}" />
 
                                     </Frame>
 
                                     <!-- Info -->
-
-                                    <VerticalStackLayout
-            Grid.Column="1"
-            Margin="15,0">
+                                    <VerticalStackLayout Grid.Column="1" Margin="15,0">
 
                                         <Label
-                Text="{Binding Name}"
-                FontSize="18"
-                FontAttributes="Bold"
-                TextColor="{StaticResource TextColor}" />
+                                            Text="{Binding Name}"
+                                            FontSize="18"
+                                            FontAttributes="Bold"
+                                            TextColor="{StaticResource TextColor}" />
 
                                         <Label
-                Text="{Binding Type}"
-                Style="{StaticResource NormalLabel}" />
+                                            Text="{Binding Type}"
+                                            Style="{StaticResource NormalLabel}" />
 
                                     </VerticalStackLayout>
 
                                     <!-- Menu -->
-
                                     <Button
                                         Grid.Column="2"
                                         Text="⋮"

@@ -48,8 +48,6 @@ namespace PersonalFinance.API.Services.Implementations
                 Type = request.Type
 
             };
-            
-
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
@@ -87,7 +85,6 @@ namespace PersonalFinance.API.Services.Implementations
                 Type = category.Type.ToString()
 
             };
-
 
         }
 

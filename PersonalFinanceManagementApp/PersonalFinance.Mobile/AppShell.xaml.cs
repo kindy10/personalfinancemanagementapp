@@ -22,6 +22,11 @@ namespace PersonalFinance.Mobile
             Routing.RegisterRoute(
                 "budget-form",
                 typeof(BudgetFormPage));
+
+            Routing.RegisterRoute(
+                    "auth-changePassword",
+                    typeof(ChangePasswordPage));
+
         }
         private async void CheckAuthentication()
         {

@@ -1,10 +1,5 @@
 ﻿using PersonalFinance.Shared.DTOs.Budgets;
 using PersonalFinance.Shared.DTOs.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PersonalFinance.Mobile.Services
 {
@@ -35,7 +30,7 @@ namespace PersonalFinance.Mobile.Services
             await _apiService.PostAsync<object>("budgets", request);
         }
 
-        //-----------UPDATA BUDGET
+        //-----------UPDAT BUDGET
         public async Task UpdateBudgetAsync(Guid id,UpdateBudgetRequestDto request)
         {
 

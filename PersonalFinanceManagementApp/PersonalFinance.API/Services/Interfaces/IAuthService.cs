@@ -6,6 +6,6 @@ namespace PersonalFinance.API.Services.Interfaces
     {
         Task<AuthResponseDto> RegisterAsync(RegisterRequestDto request);
         Task<AuthResponseDto> LoginAsync(LoginRequestDto request);
-
+        Task ChangePasswordAsync(Guid userId,ChangePasswordRequestDto request);
     }
 }

@@ -13,15 +13,10 @@
 
             <ScrollView>
 
-                    <VerticalStackLayout
-                        Padding="20"
-                        Spacing="20">
+                <VerticalStackLayout Padding="20"  Spacing="20">
 
-                        <!-- HEADER -->
-
-                    <Grid
-                        ColumnDefinitions="Auto,*"
-                        Margin="0,10,0,25">
+                    <!-- HEADER -->
+                    <Grid ColumnDefinitions="Auto,*" Margin="0,10,0,25">
 
                         <Frame Style="{StaticResource AvatarFrameStyle}">
 
@@ -31,129 +26,102 @@
 
                         </Frame>
 
-                        <VerticalStackLayout
-        Grid.Column="1"
-        Margin="15,0,0,0">
+                        <VerticalStackLayout Grid.Column="1" Margin="15,0,0,0">
 
                             <Label
-            Text="{Binding WelcomeMessage}"
-            Style="{StaticResource DashboardGreetingStyle}" />
+                                Text="{Binding WelcomeMessage}"
+                                Style="{StaticResource DashboardGreetingStyle}" />
 
                             <Label
-            Text="{Binding CurrentMonth}"
-            Style="{StaticResource DashboardSubTitleStyle}" />
+                                Text="{Binding CurrentMonth}"
+                                Style="{StaticResource DashboardSubTitleStyle}" />
 
                         </VerticalStackLayout>
 
                     </Grid>
 
-
-
                     <!-- FINTECH HERO CARD -->
-
-                        <Frame
+                    <Frame
                                 CornerRadius="35"
                                 Padding="25"
                                 BorderColor="Transparent"
                                 HasShadow="True"
                                 Margin="0,10">
 
-                            <Frame.Background>
+                        <Frame.Background>
 
-                                <SolidColorBrush Color="#F5F871"/>
+                            <SolidColorBrush Color="#F5F871"/>
 
-                            </Frame.Background>
+                        </Frame.Background>
 
+                        <VerticalStackLayout  Spacing="25">
+
+                            <!-- BALANCE -->
                             <VerticalStackLayout
-                                    Spacing="25">
-
-                                <!-- BALANCE -->
-
-                                <VerticalStackLayout
                                     HorizontalOptions="Center"
                                     Spacing="5">
 
-                                    <Label
+                                <Label
                                         Text="Total Balance"
                                         HorizontalOptions="Center"
                                         Style="{StaticResource HeroSmallCaption}" />
 
-
-
-                                    <Label
-                            Text="{Binding Balance,
-                                   StringFormat='{0:C}'}"
-                            HorizontalOptions="Center"
-                            Style="{StaticResource HeroAmountLabel}" />
-
-                                </VerticalStackLayout>
-
-
-
-                                <!-- INCOME + EXPENSE -->
-
-                                <Grid
-                        ColumnDefinitions="*,*">
-
-                                    <!-- INCOME -->
-
-                                    <HorizontalStackLayout
-                            Grid.Column="0"
-                            Spacing="10">
-
-                                        <!-- ICON -->
-
-                                        <Frame
-                                WidthRequest="40"
-                                HeightRequest="40"
-                                CornerRadius="20"
-                                Padding="0"
-                                BackgroundColor="#86EFAC"
-                                BorderColor="Transparent">
-
-                                            <Label
-                                    Text="↓"
-                                    FontSize="22"
+                                <Label
+                                    Text="{Binding Balance,
+                                           StringFormat='{0:C}'}"
                                     HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    TextColor="#166534" />
+                                    Style="{StaticResource HeroAmountLabel}" />
 
-                                        </Frame>
+                            </VerticalStackLayout>
+
+                            <!-- INCOME + EXPENSE -->
+                            <Grid ColumnDefinitions="*,*">
+
+                                <!-- INCOME -->
+                                <HorizontalStackLayout Grid.Column="0" Spacing="10">
+
+                                    <!-- ICON -->
+                                    <Frame
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            CornerRadius="20"
+                                            Padding="0"
+                                            BackgroundColor="#86EFAC"
+                                            BorderColor="Transparent">
+
+                                        <Label
+                                                Text="↓"
+                                                FontSize="22"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                TextColor="#166534" />
+
+                                    </Frame>
+
+                                    <!-- TEXT -->
+                                    <VerticalStackLayout Spacing="0">
+
+                                        <Label
+                                                Text="{Binding TotalIncome,
+                                                       StringFormat='+{0:C}'}"
+                                                Style="{StaticResource HeroSmallMetric}" />
 
 
 
-                                        <!-- TEXT -->
+                                        <Label Text="Total Income" Style="{StaticResource HeroSmallCaption}" />
 
-                                        <VerticalStackLayout
-                                Spacing="0">
+                                    </VerticalStackLayout>
 
-                                            <Label
-                                    Text="{Binding TotalIncome,
-                                           StringFormat='+{0:C}'}"
-                                    Style="{StaticResource HeroSmallMetric}" />
+                                </HorizontalStackLayout>
 
-
-
-                                            <Label
-                                    Text="Total Income"
-                                    Style="{StaticResource HeroSmallCaption}" />
-
-                                        </VerticalStackLayout>
-
-                                    </HorizontalStackLayout>
-
-
-
-                                    <!-- EXPENSE -->
-
-                                    <HorizontalStackLayout
+                                <!-- EXPENSE -->
+                                <HorizontalStackLayout
                                             Grid.Column="1"
                                             HorizontalOptions="End"
                                             Spacing="10">
 
-                                        <!-- ICON -->
-
-                                        <Frame
+                                    <!-- ICON -->
+                                    <Frame
                                             WidthRequest="40"
                                             HeightRequest="40"
                                             CornerRadius="20"
@@ -161,112 +129,97 @@
                                             BackgroundColor="#FDA4AF"
                                             BorderColor="Transparent">
 
-                                            <Label
+                                        <Label
                                                 Text="↑"
                                                 FontSize="22"
                                                 HorizontalOptions="Center"
                                                 VerticalOptions="Center"
                                                 TextColor="#9F1239" />
 
-                                        </Frame>
+                                    </Frame>
+
+                                    <!-- TEXT -->
+                                    <VerticalStackLayout Spacing="0">
+
+                                        <Label
+                                                Text="{Binding TotalExpense,
+                                                       StringFormat='-{0:C}'}"
+                                                Style="{StaticResource HeroSmallMetric}" />
 
 
 
-                                        <!-- TEXT -->
+                                        <Label  Text="Total Expenses" Style="{StaticResource HeroSmallCaption}" />
 
-                                        <VerticalStackLayout
-                                Spacing="0">
+                                    </VerticalStackLayout>
 
-                                            <Label
-                                    Text="{Binding TotalExpense,
-                                           StringFormat='-{0:C}'}"
-                                    Style="{StaticResource HeroSmallMetric}" />
+                                </HorizontalStackLayout>
 
+                            </Grid>
 
+                        </VerticalStackLayout>
 
-                                            <Label
-                                    Text="Total Expenses"
-                                    Style="{StaticResource HeroSmallCaption}" />
+                    </Frame>
 
-                                        </VerticalStackLayout>
-
-                                    </HorizontalStackLayout>
-
-                                </Grid>
-
-                            </VerticalStackLayout>
-
-                        </Frame>
-
-                        <!-- EXPENSE CHART -->
-
-                        <Label
+                    <!-- EXPENSE CHART -->
+                    <Label
                               Text="Expense Analytics"
                               Style="{StaticResource SectionLabel}"
                                Margin="0,20,0,10" />
 
-                        <Frame Style="{StaticResource CardFrame}">
+                    <Frame Style="{StaticResource CardFrame}">
 
-                            <VerticalStackLayout>
+                        <VerticalStackLayout>
 
-                                <lvc:PieChart
+                            <lvc:PieChart
                                           Series="{Binding ExpenseSeries}"
                                           HeightRequest="300" />
 
-                            </VerticalStackLayout>
+                        </VerticalStackLayout>
 
-                        </Frame>
+                    </Frame>
 
-
-                        <!-- MONTHLY TRENDS -->
-
-                        <Label
+                    <!-- MONTHLY TRENDS -->
+                    <Label
                             Text="Monthly Trends"
                             Style="{StaticResource SectionLabel}"
                             Margin="0,20,0,10" />
 
-                        <Frame
+                    <Frame
                             Style="{StaticResource CardFrame}">
 
-                            <VerticalStackLayout>
+                        <VerticalStackLayout>
 
-                                <lvc:CartesianChart
+                            <lvc:CartesianChart
                                     Series="{Binding TrendSeries}"
                                     XAxes="{Binding XAxes}"
                                     HeightRequest="300" />
 
-                            </VerticalStackLayout>
+                        </VerticalStackLayout>
 
-                        </Frame>
+                    </Frame>
 
-
-                        <!-- QUICK ACTIONS -->
-
-                        <Label
+                    <!-- QUICK ACTIONS -->
+                    <Label
                             Text="Quick Actions"
                             Style="{StaticResource SectionLabel}"
                             Margin="0,10,0,5" />
 
-                        <Grid
+                    <Grid
                             ColumnDefinitions="*,*"
                             RowDefinitions="Auto,Auto"
                             ColumnSpacing="10"
                             RowSpacing="10">
 
-                            <!-- TRANSACTIONS -->
-
-                            <Button
+                        <!-- TRANSACTIONS -->
+                        <Button
                                 Grid.Row="0"
                                 Grid.Column="0"
                                 Text="Transactions"
                                 Command="{Binding GoToTransactionsCommand}"
                                Style="{StaticResource PrimaryButton}" />
 
-
-
-                            <!-- CATEGORIES -->
-
-                            <Button
+                        <!-- CATEGORIES -->
+                        <Button
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 Text="Categories"
@@ -274,10 +227,8 @@
                                 Style="{StaticResource PrimaryButton}" />
 
 
-
-                            <!-- BUDGETS -->
-
-                            <Button
+                        <!-- BUDGETS -->
+                        <Button
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Text="Budgets"
@@ -285,113 +236,91 @@
                                 Style="{StaticResource PrimaryButton}" />
 
 
-
-                            <!-- PROFILE -->
-
-                            <Button
+                        <!-- PROFILE -->
+                        <Button
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 Text="Profile"
                                 Command="{Binding GoToProfileCommand}"
                                 Style="{StaticResource PrimaryButton}"/>
 
-                        </Grid>
+                    </Grid>
 
-
-
-                        <!-- BUDGET USAGE -->
-
-                        <Label
+                    <!-- BUDGET USAGE -->
+                    <Label
                             Text="Budget Usage"
                             Style="{StaticResource SectionLabel}"
                             Margin="0,20,0,10" />
 
-
-
-                        <CollectionView
+                    <CollectionView
                             HeightRequest="350"
                             ItemsSource="{Binding BudgetUsages}">
 
-                            <CollectionView.ItemTemplate>
+                        <CollectionView.ItemTemplate>
 
-                                <DataTemplate>
+                            <DataTemplate>
 
-                                    <Frame
+                                <Frame
                                         Style="{StaticResource CardFrame}">
 
-                                        <VerticalStackLayout
+                                    <VerticalStackLayout
                                             Spacing="12">
 
-                                            <!-- CATEGORY NAME -->
-
-                                            <Label
+                                        <!-- CATEGORY NAME -->
+                                        <Label
                                                 Text="{Binding CategoryName}"
                                                 Style="{StaticResource SectionLabel}"/>
 
-
-
-                                            <!-- SPENT / LIMIT -->
-
-                                            <Grid
+                                        <!-- SPENT / LIMIT -->
+                                        <Grid
                                                 ColumnDefinitions="*,Auto">
 
-                                                <Label
+                                            <Label
                                                     Text="{Binding Spent,
                                                            StringFormat='Spent: {0:C}'}"
                                                     Style="{StaticResource SectionLabel}" />
 
-                                                <Label
+                                            <Label
                                                     Grid.Column="1"
                                                     Text="{Binding Limit,
                                                            StringFormat='Limit: {0:C}'}"
                                                     Style="{StaticResource MetricValueLabel}"
                                                     TextColor="{StaticResource SuccessColor}" />
 
-                                            </Grid>
+                                        </Grid>
 
-
-
-                                            <!-- PROGRESS BAR -->
-
-                                            <ProgressBar
+                                        <!-- PROGRESS BAR -->
+                                        <ProgressBar
                                                 Progress="{Binding PercentageUsed}"
                                                 HeightRequest="10"
                                                 BackgroundColor="#E5E7EB"
                                                 ProgressColor="#2563EB" />
 
-
-
-                                            <!-- REMAINING -->
-
-                                            <Grid
+                                        <!-- REMAINING -->
+                                        <Grid
                                                 ColumnDefinitions="*,Auto">
 
-                                                <Label
+                                            <Label
                                                     Text="{Binding Remaining,
                                                            StringFormat='Remaining: {0:C}'}"
                                                     Style="{StaticResource SectionLabel}" />
 
-                                                <Label
+                                            <Label
                                                     Grid.Column="1"
                                                     Text="{Binding PercentageUsed,
                                                            StringFormat='{0:P0}'}"
                                                     Style="{StaticResource MetricValueLabel}"
                                                     TextColor="{StaticResource SuccessColor}" />
 
-                                            </Grid>
-                                        </VerticalStackLayout>
+                                        </Grid>
+                                    </VerticalStackLayout>
 
-                                    </Frame>
-
-                                </DataTemplate>
-
-                            </CollectionView.ItemTemplate>
-
-                        </CollectionView>
-
-                    </VerticalStackLayout>
-
-                </ScrollView>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </ScrollView>
         </layouts:MainLayoutPage.PageContent>
     </layouts:MainLayoutPage>
 

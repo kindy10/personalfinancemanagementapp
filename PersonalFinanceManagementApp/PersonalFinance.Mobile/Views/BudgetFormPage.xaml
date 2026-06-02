@@ -18,10 +18,7 @@
                 Text="{Binding PageTitle}"
                 Style="{StaticResource TitleLabel}" />
 
-
-
             <!-- FORM CARD -->
-
             <Frame
                 Style="{StaticResource CardFrame}">
 
@@ -29,25 +26,18 @@
                     Spacing="18">
 
                     <!-- AMOUNT -->
-
                     <Entry
                         Placeholder="Budget Amount"
                         Keyboard="Numeric"
                         Text="{Binding Amount}"
                         Style="{StaticResource AppEntry}" />
 
-
-
                     <!-- MONTH -->
-
                     <DatePicker
                         Date="{Binding Month}"
                         Style="{StaticResource AppDatePicker}" />
 
-
-
                     <!-- CATEGORY -->
-
                     <Picker
                         Title="Select Category"
                         ItemsSource="{Binding Categories}"
@@ -56,9 +46,7 @@
                         Style="{StaticResource AppPicker}" />
 
 
-
                     <!-- SAVE BUTTON -->
-
                     <Button
                         Text="Save Budget"
                         Command="{Binding SaveCommand}"
@@ -67,7 +55,6 @@
                 </VerticalStackLayout>
 
             </Frame>
-
         </VerticalStackLayout>
 
     </ScrollView>

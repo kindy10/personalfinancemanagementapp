@@ -1,10 +1,5 @@
 ﻿using PersonalFinance.Mobile.Services;
 using PersonalFinance.Shared.DTOs.Auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace PersonalFinance.Mobile.ViewModels
@@ -59,7 +54,7 @@ namespace PersonalFinance.Mobile.ViewModels
 
         //Commands
         public ICommand RegisterCommand { get; }
-        public ICommand GoToLoginCommnand { get; }
+        public ICommand GoToLoginCommand { get; }
 
         public RegisterViewModel()
         {
@@ -67,7 +62,7 @@ namespace PersonalFinance.Mobile.ViewModels
 
             RegisterCommand = new Command(async () => await Register());
 
-            GoToLoginCommnand = new Command(async () => await Shell.Current.GoToAsync("//login"));
+            GoToLoginCommand = new Command(async () => await Shell.Current.GoToAsync("//login"));
         }
 
         private async Task Register()
@@ -99,6 +94,5 @@ namespace PersonalFinance.Mobile.ViewModels
             }
         }
     }
-
 
 }

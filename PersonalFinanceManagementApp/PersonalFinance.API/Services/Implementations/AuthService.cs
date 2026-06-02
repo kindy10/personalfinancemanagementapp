@@ -20,7 +20,7 @@ namespace PersonalFinance.API.Services.Implementations
             _context = context;
             _configuration = configuration;
         }
-        public async Task<AuthResponseDto> RegisterAsync (RegisterRequestDto request)
+        public async Task<AuthResponseDto> RegisterAsync(RegisterRequestDto request)
         {
             //1. Check if email exists
             var existingUser = await _context.Users
@@ -40,7 +40,6 @@ namespace PersonalFinance.API.Services.Implementations
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
             //3.Create user
-
             var user = new User
             {
                 Id = Guid.NewGuid(),
@@ -53,22 +52,18 @@ namespace PersonalFinance.API.Services.Implementations
             };
 
             //4. Save
-
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             var token = GenerateToken(user);
 
 
             //5 Return response
-
             return new AuthResponseDto {
                 UserId = user.Id,
                 Email = user.Email,
                 Name = user.Name   ,
                 Token = token
-            };
-            
-                
+            };     
             
         }
 
@@ -77,6 +72,10 @@ namespace PersonalFinance.API.Services.Implementations
             //1 .Find user
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == request.Email);
+
+            if (user is null)
+                throw new AppException(
+                    "Email or password is incorrect");
 
             //2 .Verify password
             var isPasswordValid = BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash);
@@ -93,6 +92,51 @@ namespace PersonalFinance.API.Services.Implementations
                 Token = token
                 
             };
+        }
+
+        //--------PASSWORD
+        public async Task ChangePasswordAsync(
+                Guid userId,
+                ChangePasswordRequestDto request)
+        {
+            // Find user
+
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user is null)
+                throw new AppException("User not found");
+
+            // Verify current password
+
+            var isCurrentPasswordValid =
+                BCrypt.Net.BCrypt.Verify(
+                    request.CurrentPassword,
+                    user.PasswordHash);
+
+            if (!isCurrentPasswordValid)
+                throw new AppException(
+                    "Current password is incorrect");
+
+            // Verify confirmation
+
+            if (request.NewPassword != request.ConfirmPassword)
+                throw new AppException(
+                    "Passwords do not match");
+
+            // Optional validation
+
+            /*if (request.NewPassword.Length < 6)
+                throw new AppException(
+                    "Password must contain at least 6 characters");*/
+
+            // Hash new password
+
+            user.PasswordHash =
+                BCrypt.Net.BCrypt.HashPassword(
+                    request.NewPassword);
+
+            await _context.SaveChangesAsync();
         }
 
         //Generate Tokens

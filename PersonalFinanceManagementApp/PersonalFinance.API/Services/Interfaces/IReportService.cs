@@ -1,10 +1,12 @@
-﻿using PersonalFinance.Shared.DTOs.Reports;
+﻿using PersonalFinance.API.Models;
+using PersonalFinance.Shared.DTOs.Reports;
 
 namespace PersonalFinance.API.Services.Interfaces
 {
     public interface IReportService
     {
         Task<List<BudgetUsageDto>>GetBudgetUsageAsync(Guid userId);
+        Task<List<BudgetUsageDto>> GetAllBudgetUsageAsync(Guid userId);
 
         Task<SummaryDto> GetSummaryAsync(Guid userId);
 

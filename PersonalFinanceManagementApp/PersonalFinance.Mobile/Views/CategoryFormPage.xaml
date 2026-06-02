@@ -13,15 +13,11 @@
             Spacing="20">
 
             <!-- PAGE TITLE -->
-
             <Label
                 Text="{Binding PageTitle}"
                 Style="{StaticResource TitleLabel}" />
 
-
-
             <!-- FORM CARD -->
-
             <Frame
                 Style="{StaticResource CardFrame}">
 
@@ -29,16 +25,12 @@
                     Spacing="18">
 
                     <!-- CATEGORY NAME -->
-
                     <Entry
                         Placeholder="Category Name"
                         Text="{Binding Name}"
                         Style="{StaticResource AppEntry}" />
 
-
-
                     <!-- CATEGORY TYPE -->
-
                     <VerticalStackLayout
                          Spacing="10">
 
@@ -62,10 +54,7 @@
 
                     </VerticalStackLayout>
 
-
-
                     <!-- SAVE BUTTON -->
-
                     <Button
                         Text="Save Category"
                         Command="{Binding SaveCommand}"

@@ -23,16 +23,13 @@ namespace PersonalFinance.Mobile.ViewModels
 
         //Commands
         public ICommand  AddCommand { get; }
-
         public ICommand EditCommand { get; }
-
         public ICommand DeleteCommand { get; }
         public ICommand ShowOptionsCommand { get; }
 
 
         //Total budgets 
         private decimal _totalBudget;
-
         public decimal TotalBudget
         {
             get => _totalBudget;
@@ -86,7 +83,6 @@ namespace PersonalFinance.Mobile.ViewModels
             });
             
         }
-
         //Load buget;
         public async Task LoadBudgets()
         {
@@ -94,7 +90,7 @@ namespace PersonalFinance.Mobile.ViewModels
             {
                 var budgets = await _budgetService.GetBudgetsAsync();
 
-                var usages = await _reportService.GetBudgetUsageAsync();
+                var usages = await _reportService.GetAllBudgetUsageAsync();
 
                 Budgets.Clear();
 
@@ -163,7 +159,7 @@ namespace PersonalFinance.Mobile.ViewModels
         {
             try
             {
-                var usages = await _reportService.GetBudgetUsageAsync();
+                var usages = await _reportService.GetAllBudgetUsageAsync();
 
                 BudgetUsages.Clear();
 
@@ -195,11 +191,16 @@ namespace PersonalFinance.Mobile.ViewModels
 
             await Shell.Current.GoToAsync("budget-form");
         }
-        //Delete budget 
+        //--------------Delete budget 
         private async Task DeleteBudget(Guid id)
         {
             try
             {
+                bool confirm = await Application.Current.MainPage.DisplayAlert("Delete budget?",
+                    "Are you sure you want to delete this budget ?",
+                    "Delete", "cancel");
+                if (!confirm)
+                    return;
                 await _budgetService.DeleteBudgetAsync(id);
 
                 await LoadBudgets();

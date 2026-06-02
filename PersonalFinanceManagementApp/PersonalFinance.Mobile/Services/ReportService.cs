@@ -19,7 +19,6 @@ namespace PersonalFinance.Mobile.Services
         }
 
         //Get dashboard summary from API
-
         public async Task<SummaryDto> GetSummaryAsync()
         {
             //Call API
@@ -36,7 +35,7 @@ namespace PersonalFinance.Mobile.Services
             return response.Data;
         }
 
-        //Get  report from API
+        //Get  Monthly report from API
         public async Task<List<BudgetUsageDto>> GetBudgetUsageAsync()
         {
             var response =
@@ -44,15 +43,21 @@ namespace PersonalFinance.Mobile.Services
 
             return response.Data;
         }
+        public async Task<List<BudgetUsageDto>> GetAllBudgetUsageAsync()
+        {
+            var response =
+                await _apiService.GetAsync<ApiResponse<List<BudgetUsageDto>>>("reports/allbudgets-usage");
 
-        //---------GET CATEGORY FROM API
+            return response.Data;
+        }
+
+        //---------GET Expense per CATEGORY FROM API
         public async Task<List<ExpenseCategoryDto>>GetExpenseCategoriesAsync()
         {
             var response =await _apiService .GetAsync<ApiResponse<List<ExpenseCategoryDto>>>("reports/expense-categories");
 
             return response.Data;
         }
-
 
         //-------Monthly trend 
         public async Task<List<MonthlyTrendDto>>GetMonthlyTrendsAsync()
