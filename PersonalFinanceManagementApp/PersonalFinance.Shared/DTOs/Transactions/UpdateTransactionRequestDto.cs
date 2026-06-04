@@ -9,12 +9,17 @@ namespace PersonalFinance.Shared.DTOs.Transactions
     public  class UpdateTransactionRequestDto
     {
         public decimal Amount { get; set; }
+
         public DateTime Date { get; set; }
 
         public string Description { get; set; }
 
         public Guid CategoryId { get; set; }
 
-        public string ? Icon { get; set; }
+        public string CategoryName { get; set; }
+
+        public string? Icon { get; set; }
+
+        public string CategoryType { get; set; } = string.Empty;
     }
 }

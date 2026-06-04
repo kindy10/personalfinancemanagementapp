@@ -94,7 +94,7 @@ namespace PersonalFinance.Mobile.ViewModels
                 string action =
                     await Application.Current.MainPage
                         .DisplayActionSheet(
-                            "Options",
+                             "Option",
                             "Cancel",
                             null,
                             "Edit",
@@ -106,7 +106,7 @@ namespace PersonalFinance.Mobile.ViewModels
                 }
                 else if (action == "Delete")
                 {
-                    DeleteCommand.Execute(transaction);
+                    DeleteCommand.Execute(transaction.Id);
                 }
             });
 
@@ -181,11 +181,12 @@ namespace PersonalFinance.Mobile.ViewModels
                     "Delete", "cancel");
                 if (!confirm)
                     return;
+
                 //Delete from backend
                 await _transactionService.DeleteTransactionAsync(id);
 
                 //Reload list
-                LoadTransactions();
+                await LoadTransactions();
 
             }
             catch (Exception ex)

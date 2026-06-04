@@ -98,7 +98,7 @@ namespace PersonalFinance.Mobile.ViewModels
                 new Command(async () => await Save());
 
 
-           // LoadCategoriesAsync();
+           LoadCategoriesAsync();
 
             
         }

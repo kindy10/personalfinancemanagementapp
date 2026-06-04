@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using PersonalFinance.Shared.DTOs.Enums;
+using PersonalFinance.Mobile.Helpers;
 
 namespace PersonalFinance.Mobile.ViewModels
 {
@@ -161,6 +162,24 @@ namespace PersonalFinance.Mobile.ViewModels
 
                 //    return;
                 //}
+                if (string.IsNullOrWhiteSpace(Name))
+                {
+                    await Application.Current.MainPage.DisplayAlert(
+                        "Validation",
+                        "Name is required",
+                        "OK");
+
+                    return;
+                }
+                if (!IsIncome && !IsExpense)
+                {
+                    await Application.Current.MainPage.DisplayAlert(
+                        "Validation",
+                        "Please select a category type",
+                        "OK");
+
+                    return;
+                }
 
                 //-------CREATE MODE
                 if (!IsEditMode)
@@ -196,11 +215,8 @@ namespace PersonalFinance.Mobile.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage
-                    .DisplayAlert(
-                        "Error",
-                        ex.Message,
-                        "OK");
+                await AlertHelper.ShowErrorAsync(
+                    ex.Message);
             }
 
         }

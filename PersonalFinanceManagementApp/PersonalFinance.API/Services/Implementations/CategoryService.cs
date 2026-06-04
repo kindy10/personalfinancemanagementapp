@@ -31,7 +31,7 @@ namespace PersonalFinance.API.Services.Implementations
         }
 
         //-------------------------------------CREATE-----------------------------//
-        public async Task<CategoryDto> CreateAsync(Guid userid, CreateCategoryRequestDto request)
+        public async Task<CategoryDto> CreateAsync(Guid userId, CreateCategoryRequestDto request)
         {
 
             if (string.IsNullOrWhiteSpace(request.Name))
@@ -39,11 +39,21 @@ namespace PersonalFinance.API.Services.Implementations
 
             if (!Enum.IsDefined(typeof(CategoryType), request.Type))
                 throw new AppException("Invalid category type");
+            var existingCategory =await _context.Categories
+                    .FirstOrDefaultAsync(c =>
+                    c.UserId == userId &&
+                    c.Name.ToLower() == request.Name.ToLower());
+
+            if (existingCategory != null)
+            {
+                throw new AppException(
+                    "Category already exists");
+            }
             var category = new Category
             {
                 Id = Guid.NewGuid(),
                 Name = request.Name,
-                UserId = userid,
+                UserId = userId,
                 CreatedAt = DateTime.UtcNow,
                 Type = request.Type
 

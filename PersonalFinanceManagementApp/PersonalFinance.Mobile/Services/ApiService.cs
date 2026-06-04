@@ -1,11 +1,9 @@
 ﻿using PersonalFinance.Mobile.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using PersonalFinance.Shared.DTOs.Common;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+
 
 namespace PersonalFinance.Mobile.Services
 {
@@ -41,8 +39,32 @@ namespace PersonalFinance.Mobile.Services
 
             var content = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode)
-                throw new Exception(content);
+            if(!response.IsSuccessStatusCode)
+{
+                var content1 =
+                    await response.Content.ReadAsStringAsync();
+
+                try
+                {
+                    var errorResponse =
+                        JsonSerializer.Deserialize<
+                            ApiResponse<object>>(
+                            content1,
+                            new JsonSerializerOptions
+                            {
+                                PropertyNameCaseInsensitive = true
+                            });
+
+                    throw new Exception(
+                        errorResponse?.Message ??
+                        "An unexpected error occurred.");
+                }
+                catch
+                {
+                    throw new Exception(
+                        "An unexpected error occurred.");
+                }
+            }
 
             return JsonSerializer.Deserialize<T>(content,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -70,10 +92,29 @@ namespace PersonalFinance.Mobile.Services
                 await response.Content.ReadAsStringAsync();
 
             // Throw detailed error if failed
+
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception(
-                    $"Status: {response.StatusCode}\n\n{result}");
+                var content1 =
+                    await response.Content.ReadAsStringAsync();
+
+                try
+                {
+                    using var document =
+                        JsonDocument.Parse(content1);
+
+                    var message =
+                        document.RootElement
+                            .GetProperty("message")
+                            .GetString();
+
+                    throw new Exception(message);
+                }
+                catch
+                {
+                    throw new Exception(
+                        "An unexpected error occurred.");
+                }
             }
 
             // Deserialize JSON
@@ -108,7 +149,31 @@ namespace PersonalFinance.Mobile.Services
 
             //Throw error if failed
             if (!response.IsSuccessStatusCode)
-                throw new Exception(result);
+            {
+                var content1 =
+                    await response.Content.ReadAsStringAsync();
+
+                try
+                {
+                    var errorResponse =
+                        JsonSerializer.Deserialize<
+                            ApiResponse<object>>(
+                            content1,
+                            new JsonSerializerOptions
+                            {
+                                PropertyNameCaseInsensitive = true
+                            });
+
+                    throw new Exception(
+                        errorResponse?.Message ??
+                        "An unexpected error occurred.");
+                }
+                catch
+                {
+                    throw new Exception(
+                        "An unexpected error occurred.");
+                }
+            }
         }
 
         //---------------------------------------------Delete
@@ -125,8 +190,29 @@ namespace PersonalFinance.Mobile.Services
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception(
-                    $"Status: {response.StatusCode}\n\n{result}");
+                var content =
+                    await response.Content.ReadAsStringAsync();
+
+                try
+                {
+                    var errorResponse =
+                        JsonSerializer.Deserialize<
+                            ApiResponse<object>>(
+                            content,
+                            new JsonSerializerOptions
+                            {
+                                PropertyNameCaseInsensitive = true
+                            });
+
+                    throw new Exception(
+                        errorResponse?.Message ??
+                        "An unexpected error occurred.");
+                }
+                catch
+                {
+                    throw new Exception(
+                        "An unexpected error occurred.");
+                }
             }
         }
     }

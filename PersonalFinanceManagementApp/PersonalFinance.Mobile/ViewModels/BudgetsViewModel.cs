@@ -147,10 +147,8 @@ namespace PersonalFinance.Mobile.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    ex.Message,
-                    "OK");
+                await AlertHelper.ShowErrorAsync(
+                    ex.Message);
             }
         }
         //---------LOAD BUDGET USAGE
@@ -169,10 +167,8 @@ namespace PersonalFinance.Mobile.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    ex.Message,
-                    "OK");
+                await AlertHelper.ShowErrorAsync(
+                    ex.Message);
             }
         }
 
@@ -195,7 +191,7 @@ namespace PersonalFinance.Mobile.ViewModels
         {
             try
             {
-                bool confirm = await Application.Current.MainPage.DisplayAlert("Delete budget?",
+                bool confirm = await Application.Current.MainPage.DisplayAlert("Delete budget",
                     "Are you sure you want to delete this budget ?",
                     "Delete", "cancel");
                 if (!confirm)
@@ -205,13 +201,10 @@ namespace PersonalFinance.Mobile.ViewModels
                 await LoadBudgets();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                await Application.Current.MainPage
-                    .DisplayAlert(
-                        "Error",
-                        ex.Message,
-                        "OK");
+                await AlertHelper.ShowErrorAsync(
+                    ex.Message);
             }
         }
 
