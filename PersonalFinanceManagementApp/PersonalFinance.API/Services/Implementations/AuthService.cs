@@ -30,9 +30,12 @@ namespace PersonalFinance.API.Services.Implementations
                 throw new AppException("Email already exists");
 
             //Check constraints
+            if (string.IsNullOrWhiteSpace(request.Name))
+                throw new Exception("Name is required");
+            if (string.IsNullOrWhiteSpace(request.SurName))
+                throw new Exception("SurName is required");
             if (string.IsNullOrWhiteSpace(request.Email))
                 throw new Exception("Email is required");
-
             if (string.IsNullOrWhiteSpace(request.Password))
                 throw new Exception("Password is required");
 

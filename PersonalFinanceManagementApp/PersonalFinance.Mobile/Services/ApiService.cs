@@ -1,8 +1,8 @@
 ﻿using PersonalFinance.Mobile.Helpers;
-using PersonalFinance.Shared.DTOs.Common;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using static SkiaSharp.HarfBuzz.SKShaper;
 
 
 namespace PersonalFinance.Mobile.Services
@@ -28,8 +28,6 @@ namespace PersonalFinance.Mobile.Services
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
         }
-
-
         //-----------------------Generic Get
         public async Task<T> GetAsync<T>(string endpoint)
         {
@@ -39,30 +37,23 @@ namespace PersonalFinance.Mobile.Services
 
             var content = await response.Content.ReadAsStringAsync();
 
-            if(!response.IsSuccessStatusCode)
-{
-                var content1 =
-                    await response.Content.ReadAsStringAsync();
-
+            if (!response.IsSuccessStatusCode)
+            {
                 try
                 {
-                    var errorResponse =
-                        JsonSerializer.Deserialize<
-                            ApiResponse<object>>(
-                            content1,
-                            new JsonSerializerOptions
-                            {
-                                PropertyNameCaseInsensitive = true
-                            });
+                    using var document = JsonDocument.Parse(content);
 
-                    throw new Exception(
-                        errorResponse?.Message ??
-                        "An unexpected error occurred.");
+                    var message =
+                        document.RootElement
+                            .GetProperty("message")
+                            .GetString();
+
+                    throw new Exception(message);
                 }
-                catch
+                catch (JsonException)
                 {
                     throw new Exception(
-                        "An unexpected error occurred.");
+                        "An unexpected error occurred When parsing the JSON.");
                 }
             }
 
@@ -92,16 +83,11 @@ namespace PersonalFinance.Mobile.Services
                 await response.Content.ReadAsStringAsync();
 
             // Throw detailed error if failed
-
             if (!response.IsSuccessStatusCode)
             {
-                var content1 =
-                    await response.Content.ReadAsStringAsync();
-
                 try
                 {
-                    using var document =
-                        JsonDocument.Parse(content1);
+                    using var document = JsonDocument.Parse(result);
 
                     var message =
                         document.RootElement
@@ -110,10 +96,10 @@ namespace PersonalFinance.Mobile.Services
 
                     throw new Exception(message);
                 }
-                catch
+                catch (JsonException)
                 {
                     throw new Exception(
-                        "An unexpected error occurred.");
+                        "An unexpected error occurred When parsing the JSON.");
                 }
             }
 
@@ -150,28 +136,21 @@ namespace PersonalFinance.Mobile.Services
             //Throw error if failed
             if (!response.IsSuccessStatusCode)
             {
-                var content1 =
-                    await response.Content.ReadAsStringAsync();
-
                 try
                 {
-                    var errorResponse =
-                        JsonSerializer.Deserialize<
-                            ApiResponse<object>>(
-                            content1,
-                            new JsonSerializerOptions
-                            {
-                                PropertyNameCaseInsensitive = true
-                            });
+                    using var document = JsonDocument.Parse(result);
 
-                    throw new Exception(
-                        errorResponse?.Message ??
-                        "An unexpected error occurred.");
+                    var message =
+                        document.RootElement
+                            .GetProperty("message")
+                            .GetString();
+
+                    throw new Exception(message);
                 }
-                catch
+                catch (JsonException)
                 {
                     throw new Exception(
-                        "An unexpected error occurred.");
+                        "An unexpected error occurred When parsing the JSON.");
                 }
             }
         }
@@ -190,28 +169,21 @@ namespace PersonalFinance.Mobile.Services
 
             if (!response.IsSuccessStatusCode)
             {
-                var content =
-                    await response.Content.ReadAsStringAsync();
-
                 try
                 {
-                    var errorResponse =
-                        JsonSerializer.Deserialize<
-                            ApiResponse<object>>(
-                            content,
-                            new JsonSerializerOptions
-                            {
-                                PropertyNameCaseInsensitive = true
-                            });
+                    using var document = JsonDocument.Parse(result);
 
-                    throw new Exception(
-                        errorResponse?.Message ??
-                        "An unexpected error occurred.");
+                    var message =
+                        document.RootElement
+                            .GetProperty("message")
+                            .GetString();
+
+                    throw new Exception(message);
                 }
-                catch
+                catch (JsonException)
                 {
                     throw new Exception(
-                        "An unexpected error occurred.");
+                        "An unexpected error occurred When parsing the JSON.");
                 }
             }
         }

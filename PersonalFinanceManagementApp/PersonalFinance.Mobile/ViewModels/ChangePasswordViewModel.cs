@@ -1,5 +1,6 @@
 ﻿using PersonalFinance.Mobile.Services;
 using PersonalFinance.Shared.DTOs.Auth;
+using PersonalFinance.Mobile.Helpers;
 using System.Windows.Input;
 
 namespace PersonalFinance.Mobile.ViewModels
@@ -38,27 +39,37 @@ namespace PersonalFinance.Mobile.ViewModels
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Validation",
-                    "Passwords do not match",
+                    "Passwords does not match",
                     "OK");
 
                 return;
             }
 
             //---CALL THE API
-            var request =new ChangePasswordRequestDto{
-                        CurrentPassword = CurrentPassword,
-                        NewPassword = NewPassword,
-                        ConfirmPassword = ConfirmPassword };
+            try
+            {
+                var request = new ChangePasswordRequestDto
+                {
+                    CurrentPassword = CurrentPassword,
+                    NewPassword = NewPassword,
+                    ConfirmPassword = ConfirmPassword
+                };
 
-            await _authService.ChangePasswordAsync(
-                request);
-            await Application.Current.MainPage.DisplayAlert(
-                "Success",
-                "Password changed successfully",
-                "OK");
+                await _authService.ChangePasswordAsync(
+                    request);
+                await Application.Current.MainPage.DisplayAlert(
+                    "Success",
+                    "Password changed successfully",
+                    "OK");
 
-            //----GO BACK
-            await Shell.Current.GoToAsync("..");
+                //----GO BACK
+                await Shell.Current.GoToAsync("..");
+            }
+            catch(Exception ex)
+            {
+                await AlertHelper.ShowErrorAsync(
+                    ex.Message);
+            }
         }
     }
 }

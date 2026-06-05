@@ -24,7 +24,7 @@ namespace PersonalFinance.API
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-            // Register services
+            // Register services   DEPENDANCIES INJECTION
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IProfileService,ProfileService>();
             builder.Services.AddScoped<ITransactionService, TransactionService>();
@@ -150,14 +150,14 @@ namespace PersonalFinance.API
             app.MapGet("/", () => "Welcome");
 
             //Sample data 
-            using (var scope = app.Services.CreateScope())
+            /*using (var scope = app.Services.CreateScope())
             {
                 var context =
                     scope.ServiceProvider
                         .GetRequiredService<AppDbContext>();
 
                 DbSeeder.SeedAsync(context).Wait();
-            }
+            }*/
 
 
             app.Run();

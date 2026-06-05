@@ -1,10 +1,5 @@
 ﻿using PersonalFinance.Shared.DTOs.Common;
 using PersonalFinance.Shared.DTOs.Transactions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PersonalFinance.Mobile.Services
 {
