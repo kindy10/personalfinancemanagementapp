@@ -53,22 +53,15 @@ namespace PersonalFinance.API.Services.Implementations
 
                 result.Add(new BudgetUsageDto
                 {
-                    CategoryName =
-                        budget.Category.Name,
+                    CategoryName =  budget.Category.Name,
+                    CategoryId = budget.CategoryId,
+                    Limit =budget.MonthlyLimit,
 
-                    Limit =
-                        budget.MonthlyLimit,
+                    Spent = spent,
 
-                    Spent =
-                        spent,
+                    Remaining =  budget.MonthlyLimit - spent,
 
-                    Remaining =
-                        budget.MonthlyLimit - spent,
-
-                    PercentageUsed =
-                        budget.MonthlyLimit == 0
-                            ? 0
-                            : (double)(spent / budget.MonthlyLimit )
+                    PercentageUsed =budget.MonthlyLimit == 0? 0: (double)(spent / budget.MonthlyLimit )
                 });
             }
 
@@ -100,16 +93,13 @@ namespace PersonalFinance.API.Services.Implementations
                 result.Add(new BudgetUsageDto
                 {
                     CategoryName = budget.Category.Name,
+                    CategoryId = budget.CategoryId,
                     Limit = budget.MonthlyLimit,
                     Spent = spent,
                     Remaining = budget.MonthlyLimit - spent,
-                    PercentageUsed =
-                        budget.MonthlyLimit == 0
-                            ? 0
-                            : (double)(spent / budget.MonthlyLimit)
+                    PercentageUsed = budget.MonthlyLimit == 0 ? 0: (double)(spent / budget.MonthlyLimit)
                 });
             }
-
             return result;
         }
 

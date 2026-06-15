@@ -57,12 +57,10 @@ namespace PersonalFinance.Mobile.Services
                 }
             }
 
-            return JsonSerializer.Deserialize<T>(content,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return JsonSerializer.Deserialize<T>(content,new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         //-----------------------------------Create post
-
         public async Task<T> PostAsync<T>(string endpoint, object data)
         {
             var json = JsonSerializer.Serialize(data);

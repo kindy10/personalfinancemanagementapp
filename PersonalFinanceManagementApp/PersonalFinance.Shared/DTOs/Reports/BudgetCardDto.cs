@@ -9,6 +9,7 @@ namespace PersonalFinance.Shared.DTOs.Reports
         public Guid Id { get; set; }
 
         public string CategoryName { get; set; }
+        public Guid CategoryId { get; set; }
 
         public decimal Limit { get; set; }
 

@@ -2,25 +2,32 @@ using PersonalFinance.Mobile.Helpers;
 using PersonalFinance.Mobile.ViewModels;
 
 namespace PersonalFinance.Mobile.Views;
-
 public partial class BudgetFormPage : ContentPage
 {
+    private readonly BudgetFormViewModel _vm;
+
     public BudgetFormPage()
     {
         InitializeComponent();
 
-        var vm =
-            new BudgetFormViewModel();
+        _vm = new BudgetFormViewModel();
+        BindingContext = _vm;
+    }
 
-        // Edit mode
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
         if (TemporaryBudgetData.SelectedBudget != null)
         {
-            vm.LoadBudgetAsync(
+            await _vm.LoadBudgetAsync(
                 TemporaryBudgetData.SelectedBudget);
 
             TemporaryBudgetData.SelectedBudget = null;
         }
-
-        BindingContext = vm;
+        else
+        {
+            await _vm.LoadCategoriesAsync();
+        }
     }
 }

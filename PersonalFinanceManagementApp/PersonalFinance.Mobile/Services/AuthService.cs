@@ -46,7 +46,6 @@ namespace PersonalFinance.Mobile.Services
         }
 
         //Register 
-
         public async Task<AuthResponseDto> RegisterAsync(RegisterRequestDto request)
         {
             //Call backend register endpoint

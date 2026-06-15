@@ -68,6 +68,11 @@ namespace PersonalFinance.Mobile.ViewModels
                 _selectedFilter = value;
                 OnPropertyChanged();
 
+                // Notify computed properties
+                OnPropertyChanged(nameof(IsAllSelected));
+                OnPropertyChanged(nameof(IsIncomeSelected));
+                OnPropertyChanged(nameof(IsExpenseSelected));
+
                 ApplyFilters();
             }
         }
@@ -243,7 +248,9 @@ namespace PersonalFinance.Mobile.ViewModels
                     ||
                     t.CategoryName.Contains(
                         SearchText,
-                        StringComparison.OrdinalIgnoreCase));
+                        StringComparison.OrdinalIgnoreCase)
+                    || t.Amount.ToString().Contains( SearchText, StringComparison.OrdinalIgnoreCase)
+                    );
 
             // FILTER BUTTONS
 

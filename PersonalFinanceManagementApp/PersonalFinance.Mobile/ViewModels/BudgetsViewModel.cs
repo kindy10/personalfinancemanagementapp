@@ -104,14 +104,11 @@ namespace PersonalFinance.Mobile.ViewModels
                                     Id = budget.Id,
 
                                     CategoryName = budget.CategoryName,
-
-                                    Icon =
-                    CategoryIconHelper.GetIcon(
-                        budget.CategoryName),
+                                    CategoryId = budget.CategoryId,
+                                    Icon =CategoryIconHelper.GetIcon(budget.CategoryName),
 
                                     Month = budget.Month,
-                                    Limit = usage?.Limit
-                        ?? budget.MonthlyLimit,
+                                    Limit = usage?.Limit?? budget.MonthlyLimit,
 
                                     Spent = usage?.Spent ?? 0,
 
@@ -180,6 +177,7 @@ namespace PersonalFinance.Mobile.ViewModels
                 {
                     Id = budget.Id,
                     CategoryName = budget.CategoryName,
+                    CategoryId = budget.CategoryId,
                     MonthlyLimit = budget.Limit,
                     Month = budget.Month
                 };

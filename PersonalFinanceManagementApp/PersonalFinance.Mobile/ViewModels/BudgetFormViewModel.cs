@@ -101,11 +101,11 @@ public class BudgetFormViewModel : BaseViewModel
             execution continues before the call completes
          */
 
-        _ = LoadCategoriesAsync();
+        //_ = LoadCategoriesAsync();
     }
 
     // Load categories
-    private async Task LoadCategoriesAsync()
+    public async Task LoadCategoriesAsync()
     {
         try
         {
@@ -126,6 +126,8 @@ public class BudgetFormViewModel : BaseViewModel
                 ex.Message);
         }
     }
+
+
 
     // Load existing budget for edit
     public async Task LoadBudgetAsync(BudgetDto budget)

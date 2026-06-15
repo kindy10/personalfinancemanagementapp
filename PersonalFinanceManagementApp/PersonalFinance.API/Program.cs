@@ -10,7 +10,6 @@ using PersonalFinance.API.Services.Implementations;
 using PersonalFinance.API.Services.Interfaces;
 using System.Text;
 
-
 namespace PersonalFinance.API
 {
     public class Program
@@ -23,7 +22,6 @@ namespace PersonalFinance.API
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
             // Register services   DEPENDANCIES INJECTION
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IProfileService,ProfileService>();
@@ -33,7 +31,7 @@ namespace PersonalFinance.API
             builder.Services.AddScoped<IReportService, ReportService>();
 
 
-            // Controllers
+            //Controllers
             /*builder.Services.AddControllers()
                     .AddJsonOptions(options =>
                     {
@@ -41,7 +39,7 @@ namespace PersonalFinance.API
                             new System.Text.Json.Serialization.JsonStringEnumConverter());
                     });*/
 
-            // Swagger
+            // Swagger Configuration:Developers can access: https://localhost:xxxx/swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
             {
@@ -50,7 +48,6 @@ namespace PersonalFinance.API
                     Title = "Personal Finance API",
                     Version = "v1",
                 });
-
                 // Adding JWT Authentication to Swagger
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -59,7 +56,7 @@ namespace PersonalFinance.API
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
-                    Description = "Enter : Bearer  YOUR_TOKEN"
+                    Description = "Enter : YOUR_TOKEN"
                 });
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
@@ -85,6 +82,7 @@ namespace PersonalFinance.API
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
+            //This registers JWT Bearer Authentication .The API expects:Authorization:Bearer eyJhbGciOiJIUzI1Ni ...
             .AddJwtBearer(options =>
             {
                 options.Events = new JwtBearerEvents
@@ -111,10 +109,11 @@ namespace PersonalFinance.API
                     ValidIssuer = jwtSettings["Issuer"],
                     ValidAudience = jwtSettings["Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(jwtSettings["Key"])),
+                       Encoding.UTF8.GetBytes(jwtSettings["Key"])),
                     ClockSkew = TimeSpan.Zero 
                 };
             });
+            //Controls access to protected resources.
             builder.Services.AddAuthorization();
 
             var app = builder.Build();
@@ -124,12 +123,16 @@ namespace PersonalFinance.API
             app.UseSwagger();
             app.UseSwaggerUI();
 
+            //Automatically redirects HTTP requests to HTTPS.
             app.UseHttpsRedirection();
 
+            //Reads JWT tokens from incoming requests.
             app.UseAuthentication();
+
+            //Checks whether the authenticated user is allowed to access the requested endpoint.
             app.UseAuthorization();
 
-            //Global exception
+            //Global exception:Handles all unhandled exceptions globally.
             app.UseMiddleware<ExceptionMiddleware>();
 
 
@@ -137,9 +140,8 @@ namespace PersonalFinance.API
             // app.MapControllers();
 
             //MINIMAL API
-
             // MAP ENDPOINTS
-
+            //Registers all endpoint groups.
             app.MapAuthEndpoints();
             app.MapCategoryEndpoints();
             app.MapBudgetEndpoints();
@@ -147,7 +149,8 @@ namespace PersonalFinance.API
             app.MapReportEndpoints();
             app.MapProfileEndpoints();
 
-            app.MapGet("/", () => "Welcome");
+            app.MapGet("/", () => "Welcome To Our Personal Finance  Management App");
+              
 
             //Sample data 
             /*using (var scope = app.Services.CreateScope())
@@ -159,9 +162,7 @@ namespace PersonalFinance.API
                 DbSeeder.SeedAsync(context).Wait();
             }*/
 
-
             app.Run();
         }
-
     }
 }

@@ -11,6 +11,7 @@ public partial class DashboardPage : ContentPage
 		//Connect ViewModel to page
 		BindingContext = new DashboardViewModel();
 	}
+    //Execute automatically every time the Dasboard Page becomes visible
     protected override async void OnAppearing()
     {
         base.OnAppearing();
