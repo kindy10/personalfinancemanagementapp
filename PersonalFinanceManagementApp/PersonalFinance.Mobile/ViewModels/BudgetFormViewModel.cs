@@ -1,9 +1,10 @@
 ﻿
-using System.Collections.ObjectModel;
-using System.Windows.Input;
+using PersonalFinance.Mobile.Helpers;
 using PersonalFinance.Mobile.Services;
 using PersonalFinance.Shared.DTOs.Budgets;
 using PersonalFinance.Shared.DTOs.Categories;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace PersonalFinance.Mobile.ViewModels;
 public class BudgetFormViewModel : BaseViewModel
@@ -104,7 +105,7 @@ public class BudgetFormViewModel : BaseViewModel
     }
 
     // Load categories
-    private async Task LoadCategoriesAsync()
+    public async Task LoadCategoriesAsync()
     {
         try
         {
@@ -121,13 +122,12 @@ public class BudgetFormViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Application.Current.MainPage
-                .DisplayAlert(
-                    "Error",
-                    ex.Message,
-                    "OK");
+            await AlertHelper.ShowErrorAsync(
+                ex.Message);
         }
     }
+
+
 
     // Load existing budget for edit
     public async Task LoadBudgetAsync(BudgetDto budget)
@@ -219,11 +219,8 @@ public class BudgetFormViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Application.Current.MainPage
-                .DisplayAlert(
-                    "Error",
-                    ex.Message,
-                    "OK");
+            await AlertHelper.ShowErrorAsync(
+                ex.Message);
         }
     }
 }

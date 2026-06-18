@@ -165,7 +165,7 @@
 
                                                 <Label
                                                     Text="{Binding Amount,
-                                                           StringFormat='-{0:C}'}"
+                                                           StringFormat='{0:C}'}"
                                                     FontSize="22"
                                                     FontAttributes="Bold"
                                                     TextColor="{StaticResource DangerColor}"

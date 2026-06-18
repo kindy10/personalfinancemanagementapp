@@ -10,5 +10,6 @@ namespace PersonalFinance.Mobile.Helpers
     public  class ApiSettings
     {
         public static string BaseUrl = "https://localhost:7026/api/";
+        //public static string BaseUrl = "http://10.0.2.2:5149/api/";
     }
 }

@@ -4,6 +4,7 @@ namespace PersonalFinance.Shared.DTOs.Reports
     public class BudgetUsageDto
     {
         public string CategoryName { get; set; }
+        public Guid CategoryId { get; set; }
 
         public decimal Limit { get; set; }
 

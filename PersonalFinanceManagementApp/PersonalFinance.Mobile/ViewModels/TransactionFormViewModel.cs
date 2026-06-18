@@ -98,7 +98,7 @@ namespace PersonalFinance.Mobile.ViewModels
                 new Command(async () => await Save());
 
 
-           // LoadCategoriesAsync();
+           //LoadCategoriesAsync();
 
             
         }
@@ -230,7 +230,7 @@ namespace PersonalFinance.Mobile.ViewModels
                 Console.WriteLine(ex);
 
                 await Application.Current.MainPage.DisplayAlert(
-                    "FULL ERROR",
+                    "ERROR",
                     ex.ToString(),
                     "OK");
             }

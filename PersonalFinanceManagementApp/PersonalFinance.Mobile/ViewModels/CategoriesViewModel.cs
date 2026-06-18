@@ -89,11 +89,8 @@ namespace PersonalFinance.Mobile.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage
-                        .DisplayAlert(
-                            "Error",
-                            ex.Message,
-                            "OK");
+                await AlertHelper.ShowErrorAsync(
+                    ex.Message);
             }
         }
 
@@ -118,13 +115,10 @@ namespace PersonalFinance.Mobile.ViewModels
                 await _categoryService.DeleteCategoryAsync(id);
                 await LoadCategories();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                await Application.Current.MainPage
-                .DisplayAlert(
-                    "Error",
-                    ex.Message,
-                    "OK");
+                await AlertHelper.ShowErrorAsync(
+                    ex.Message);
             }
         }
 

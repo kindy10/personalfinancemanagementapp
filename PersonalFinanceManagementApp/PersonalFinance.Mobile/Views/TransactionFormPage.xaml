@@ -18,7 +18,6 @@
                 Text="{Binding Amount}"
                 Style="{StaticResource AppEntry}" />
 
-
             <!---Description-->
             <Entry
                 Placeholder="Description"

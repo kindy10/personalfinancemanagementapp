@@ -24,7 +24,7 @@ namespace PersonalFinance.Mobile.ViewModels
                 OnPropertyChanged();
             }
         }
-        public string SurnName
+        public string SurName
         {
             get => _surName;
             set
@@ -73,7 +73,7 @@ namespace PersonalFinance.Mobile.ViewModels
                 var request = new RegisterRequestDto
                 {
                     Name = Name,
-                    SurName = SurnName,
+                    SurName = SurName,
                     Email = Email,
                     Password = Password,
                 };
@@ -83,7 +83,7 @@ namespace PersonalFinance.Mobile.ViewModels
 
                 //Navigate to dashboard
 
-                await Shell.Current.GoToAsync("//dashboard");
+                await Shell.Current.GoToAsync("//login");
             }
             catch (Exception ex)
             {

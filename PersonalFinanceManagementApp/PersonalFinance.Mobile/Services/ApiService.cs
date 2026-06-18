@@ -1,11 +1,9 @@
 ﻿using PersonalFinance.Mobile.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+using static SkiaSharp.HarfBuzz.SKShaper;
+
 
 namespace PersonalFinance.Mobile.Services
 {
@@ -30,8 +28,6 @@ namespace PersonalFinance.Mobile.Services
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
         }
-
-
         //-----------------------Generic Get
         public async Task<T> GetAsync<T>(string endpoint)
         {
@@ -42,14 +38,29 @@ namespace PersonalFinance.Mobile.Services
             var content = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception(content);
+            {
+                try
+                {
+                    using var document = JsonDocument.Parse(content);
 
-            return JsonSerializer.Deserialize<T>(content,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    var message =
+                        document.RootElement
+                            .GetProperty("message")
+                            .GetString();
+
+                    throw new Exception(message);
+                }
+                catch (JsonException)
+                {
+                    throw new Exception(
+                        "An unexpected error occurred When parsing the JSON.");
+                }
+            }
+
+            return JsonSerializer.Deserialize<T>(content,new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         //-----------------------------------Create post
-
         public async Task<T> PostAsync<T>(string endpoint, object data)
         {
             var json = JsonSerializer.Serialize(data);
@@ -72,8 +83,22 @@ namespace PersonalFinance.Mobile.Services
             // Throw detailed error if failed
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception(
-                    $"Status: {response.StatusCode}\n\n{result}");
+                try
+                {
+                    using var document = JsonDocument.Parse(result);
+
+                    var message =
+                        document.RootElement
+                            .GetProperty("message")
+                            .GetString();
+
+                    throw new Exception(message);
+                }
+                catch (JsonException)
+                {
+                    throw new Exception(
+                        "An unexpected error occurred When parsing the JSON.");
+                }
             }
 
             // Deserialize JSON
@@ -108,7 +133,24 @@ namespace PersonalFinance.Mobile.Services
 
             //Throw error if failed
             if (!response.IsSuccessStatusCode)
-                throw new Exception(result);
+            {
+                try
+                {
+                    using var document = JsonDocument.Parse(result);
+
+                    var message =
+                        document.RootElement
+                            .GetProperty("message")
+                            .GetString();
+
+                    throw new Exception(message);
+                }
+                catch (JsonException)
+                {
+                    throw new Exception(
+                        "An unexpected error occurred When parsing the JSON.");
+                }
+            }
         }
 
         //---------------------------------------------Delete
@@ -125,8 +167,22 @@ namespace PersonalFinance.Mobile.Services
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception(
-                    $"Status: {response.StatusCode}\n\n{result}");
+                try
+                {
+                    using var document = JsonDocument.Parse(result);
+
+                    var message =
+                        document.RootElement
+                            .GetProperty("message")
+                            .GetString();
+
+                    throw new Exception(message);
+                }
+                catch (JsonException)
+                {
+                    throw new Exception(
+                        "An unexpected error occurred When parsing the JSON.");
+                }
             }
         }
     }

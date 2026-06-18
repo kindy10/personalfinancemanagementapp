@@ -91,8 +91,8 @@ public static class BudgetEndpoints
                             "Success"));
             });
 
+        
         // DELETE
-
         group.MapDelete("/{id:guid}",
             async (
                 Guid id,

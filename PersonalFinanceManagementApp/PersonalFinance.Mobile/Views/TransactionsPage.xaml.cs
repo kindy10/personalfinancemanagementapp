@@ -15,8 +15,7 @@ public partial class TransactionsPage : ContentPage
 	{
 		base.OnAppearing();
 
-		//Reload transactions every time page appears
+		//Reload transactions everytime page appears
 		await _viewModel.LoadTransactions();
-
 	}
 }
